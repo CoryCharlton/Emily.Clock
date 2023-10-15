@@ -1,4 +1,6 @@
-﻿namespace Emily.Clock
+﻿using System.Drawing;
+
+namespace Emily.Clock
 {
     public interface IAlarmService
     {

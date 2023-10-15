@@ -23,10 +23,13 @@ namespace Emily.Clock.UI.Navigation
 
         public void Navigate(NavigationDestination destination)
         {
+            /*
             if (Current is null)
             {
+                // TODO: Make the specific windows handle this.
                 _statusService.SuppressEvents = true;
             }
+            */
 
             SetCurrent(_windowFactory.Create(destination));
         }

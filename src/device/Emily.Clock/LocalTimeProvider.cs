@@ -15,7 +15,7 @@ namespace Emily.Clock
         DateTime Now { get; }
         DateTime UtcNow { get; }
 
-        void Initialize();
+        void Start();
     }
 
     public class LocalTimeProvider : ILocalTimeProvider
@@ -23,7 +23,7 @@ namespace Emily.Clock
         private readonly IConfigurationService _configurationService;
         private readonly AutoResetEvent _generateEvents = new(false);
         private Thread? _generateEventsThread;
-        private bool _initialized;
+        private bool _started;
         private DateTime _lastDate = DateTime.MinValue;
         private DateTime _lastTime = DateTime.MinValue;
         private readonly ILogger _logger;
@@ -77,22 +77,6 @@ namespace Emily.Clock
             }
         }
 
-        public void Initialize()
-        {
-            lock (_syncLock)
-            {
-                if (_initialized)
-                {
-                    return;
-                }
-
-                _initialized = true;
-
-                _generateEventsThread = new Thread(GenerateEventsAsync);
-                _generateEventsThread.Start();
-            }
-        }
-
         private void OnConfigurationUpdated(object sender, EventArgs e)
         {
             if (e is not ObjectEventArgs objectEventArgs || !string.Equals(DateTimeConfiguration.SectionName, objectEventArgs.Data as string))
@@ -101,6 +85,26 @@ namespace Emily.Clock
             }
 
             UpdateConfiguration();
+        }
+
+        public void Start()
+        {
+            // ReSharper disable once InvertIf
+            if (!_started)
+            {
+                lock (_syncLock)
+                {
+                    if (_started)
+                    {
+                        return;
+                    }
+
+                    _started = true;
+
+                    _generateEventsThread = new Thread(GenerateEventsAsync);
+                    _generateEventsThread.Start();
+                }
+            }
         }
 
         private void UpdateConfiguration()

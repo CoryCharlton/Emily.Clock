@@ -13,16 +13,16 @@ namespace Emily.Clock.UI.Windows
 {
     public class ClockWindow: Window, IEventHandler
     {
-        private readonly IAlarmManager _alarmManager;
+        private readonly IAlarmService _alarmService;
         private DateTime _clearProgressAt = DateTime.MinValue;
         private Thread? _clearProgressThread;
         private readonly ILocalTimeProvider _localTimeProvider;
         private readonly INightLightManager _nightLightManager;
         private readonly IMediator _mediator;
 
-        public ClockWindow(IAlarmManager alarmManager, IDisplayManager displayManager, ILocalTimeProvider localTimeProvider, ILogger logger, IMediator mediator, INightLightManager nightLightManager) : base(displayManager, logger)
+        public ClockWindow(IAlarmService alarmService, IDisplayManager displayManager, ILocalTimeProvider localTimeProvider, ILogger logger, IMediator mediator, INightLightManager nightLightManager) : base(displayManager, logger)
         {
-            _alarmManager = alarmManager;
+            _alarmService = alarmService;
             _localTimeProvider = localTimeProvider;
             _nightLightManager = nightLightManager;
             _mediator = mediator;
@@ -59,7 +59,7 @@ namespace Emily.Clock.UI.Windows
             {
                 Controls.DrawButton(screen, Button.One, _nightLightManager.GetEnabledBitmapId());
                 Controls.DrawButton(screen, Button.Two, Resources.BitmapResources.Palette_22);
-                Controls.DrawButton(screen, Button.Three, _alarmManager.GetEnabledBitmapId());
+                Controls.DrawButton(screen, Button.Three, _alarmService.GetEnabledBitmapId());
             });
         }
 
@@ -126,7 +126,7 @@ namespace Emily.Clock.UI.Windows
                         case Button.Three:
                             if (ButtonEventType.Press == buttonEvent.Type)
                             {
-                                _alarmManager.Enabled = !_alarmManager.Enabled;
+                                _alarmService.Enabled = !_alarmService.Enabled;
                             }
                             break;
                         default:

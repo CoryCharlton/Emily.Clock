@@ -1,23 +1,20 @@
-﻿using System;
-using System.Text;
-
-namespace Emily.Clock
+﻿namespace Emily.Clock
 {
-    public interface IAlarmManager
+    public interface IAlarmService
     {
         bool Enabled { get; set; }
     }
 
-    public class AlarmManager : IAlarmManager
+    public class AlarmService : IAlarmService
     {
         public bool Enabled { get; set; }
     }
 
     public static class AlarmManagerExtensions
     {
-        internal static Resources.BitmapResources GetEnabledBitmapId(this IAlarmManager alarmManager)
+        internal static Resources.BitmapResources GetEnabledBitmapId(this IAlarmService alarmService)
         {
-            return alarmManager.Enabled
+            return alarmService.Enabled
                 ? Resources.BitmapResources.Alarm_22
                 : Resources.BitmapResources.Alarm_22_Outline;
         }

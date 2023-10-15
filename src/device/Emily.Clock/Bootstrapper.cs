@@ -65,7 +65,7 @@ namespace Emily.Clock
                 .AddSingleton(typeof(IDeviceStartBehavior), typeof(ApplicationService));
 
             services
-                .AddSingleton(typeof(IAlarmManager), typeof(AlarmManager))
+                .AddSingleton(typeof(IAlarmService), typeof(AlarmService))
                 .AddSingleton(typeof(IGpioProvider), typeof(GpioProvider))
                 .AddSingleton(typeof(ILocalTimeProvider), typeof(LocalTimeProvider))
                 .AddSingleton(typeof(INavigationService), typeof(NavigationService))

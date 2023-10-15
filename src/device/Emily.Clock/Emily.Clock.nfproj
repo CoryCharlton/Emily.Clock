@@ -35,6 +35,7 @@
     <Compile Include="Drawing\ColorConverter.cs" />
     <Compile Include="Drawing\HsbColor.cs" />
     <Compile Include="Drawing\HslColor.cs" />
+    <Compile Include="IO\IFileStorageProvider.cs" />
     <Compile Include="Mediator\AsyncMediator.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
@@ -70,7 +71,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationService.cs" />
+    <Compile Include="ApplicationInitialization.cs" />
     <Compile Include="LocalTimeProvider.cs" />
     <Compile Include="Device\DeviceInitialization.cs" />
     <Compile Include="Networking\WirelessClientManager.cs" />

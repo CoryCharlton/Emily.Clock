@@ -22,6 +22,7 @@
     <Compile Include="Hardware\ButtonManager.cs" />
     <Compile Include="Hardware\DeviceManager.cs" />
     <Compile Include="Hardware\DisplayManager.cs" />
+    <Compile Include="Hardware\FileStorageProvider.cs" />
     <Compile Include="Hardware\NeoPixelManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

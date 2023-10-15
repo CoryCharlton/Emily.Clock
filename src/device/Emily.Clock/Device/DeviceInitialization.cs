@@ -1,5 +1,6 @@
 ﻿using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.NeoPixel;
+using Emily.Clock.IO;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
@@ -13,15 +14,17 @@ namespace Emily.Clock.Device
     {
         private readonly IButtonManager _buttonManager;
         private readonly IDisplayManager _displayManager;
+        private readonly IFileStorageProvider _fileStorageProvider;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
         private readonly INeoPixelManager _neoPixelManager;
 
-        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, ILogger logger, IMediator mediator, INavigationService navigationService, INeoPixelManager neoPixelManager)
+        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageProvider fileStorageProvider, ILogger logger, IMediator mediator, INavigationService navigationService, INeoPixelManager neoPixelManager)
         {
             _buttonManager = buttonManager;
             _displayManager = displayManager;
+            _fileStorageProvider = fileStorageProvider;
             _logger = logger;
             _mediator = mediator;
             _navigationService = navigationService;
@@ -44,6 +47,11 @@ namespace Emily.Clock.Device
                 return false;
             }
 
+            if (!InitializeFileStorage())
+            {
+                _logger.LogError("Failed to initialize file storage");
+            }
+
             if (!_neoPixelManager.Initialize())
             {
                 _logger.LogError("Failed to initialize led strip.");
@@ -51,17 +59,37 @@ namespace Emily.Clock.Device
                 return false;
             }
 
-            // TODO: Initialize SD card
-
-            /*
-            var screen = _displayManager.GetBitmap();
-            screen.Fill(Color.DeepPink);
-            screen.Flush();
-
-            Thread.Sleep(Timeout.Infinite);
-            */
-
             return true;
+        }
+
+        private bool InitializeFileStorage()
+        {
+            PublishStatusEvent("Initializing file storage...");
+
+            var fileStorageInitialized = _fileStorageProvider.Initialize();
+
+            if (!fileStorageInitialized)
+            {
+                PublishStatusEvent("Failed to initialize file storage");
+            }
+            else
+            {
+                PublishStatusEvent("File storage initialized");
+
+                var directories = _fileStorageProvider.GetDirectories(@"D:\");
+                foreach (var directory in directories)
+                {
+                    _logger.LogDebug($"Directory: {directory}");
+                }
+
+                var files = _fileStorageProvider.GetFiles(@"D:\");
+                foreach (var file in files)
+                {
+                    _logger.LogDebug($"File: {file}");
+                }
+            }
+
+            return fileStorageInitialized;
         }
 
         private bool InitializeButtons()

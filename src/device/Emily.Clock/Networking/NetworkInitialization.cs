@@ -23,10 +23,6 @@ namespace Emily.Clock.Networking
 
         public bool DeviceStarting()
         {
-            //_navigationService.Navigate(NavigationDestination.Configuration);
-            //_navigationService.Navigate(NavigationDestination.NetworkFailure);
-            //return false;
-
             if (!_wirelessNetworkManager.Initialize())
             {
                 _navigationService.Navigate(NavigationDestination.NetworkFailure);

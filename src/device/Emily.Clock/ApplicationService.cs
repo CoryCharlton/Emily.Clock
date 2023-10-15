@@ -1,10 +1,8 @@
 ﻿using System;
 using Emily.Clock.Device;
-using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock

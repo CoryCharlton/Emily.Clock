@@ -5,23 +5,22 @@ using Emily.Clock.UI;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
-using nanoFramework.UI;
-using System.Drawing;
-using System.Threading;
 
 namespace Emily.Clock.Device
 {
     public class DeviceInitialization : IDeviceStartBehavior
     {
         private readonly IButtonManager _buttonManager;
+        private readonly IConfigurationService _configurationService;
         private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INeoPixelManager _neoPixelManager;
 
-        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
+        public DeviceInitialization(IButtonManager buttonManager, IConfigurationService configurationService, IDisplayManager displayManager, ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
         {
             _buttonManager = buttonManager;
+            _configurationService = configurationService;
             _displayManager = displayManager;
             _logger = logger;
             _mediator = mediator;
@@ -51,6 +50,8 @@ namespace Emily.Clock.Device
                 return false;
             }
 
+            // TODO: Initialize SD card
+
             /*
             var screen = _displayManager.GetBitmap();
             screen.Fill(Color.DeepPink);
@@ -71,7 +72,10 @@ namespace Emily.Clock.Device
 
             if (_buttonManager.IsPressed(Button.One) || _buttonManager.IsPressed(Button.Two) || _buttonManager.IsPressed(Button.Three))
             {
-                PublishStatusEvent("Bailing due to button press!");
+                // TODO: Show a screen to confirm resettling to defaults
+                _configurationService.ClearAll();
+                
+                PublishStatusEvent("Reset to defaults");
 
                 return false;
             }

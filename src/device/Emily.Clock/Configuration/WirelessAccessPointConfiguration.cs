@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Emily.Clock.Configuration
+﻿namespace Emily.Clock.Configuration
 {
     public class WirelessAccessPointConfiguration
     {

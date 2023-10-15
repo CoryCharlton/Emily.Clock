@@ -13,5 +13,6 @@ namespace Emily.Clock.Device
         DateTime StartedAt { get; set; }
 
         void Reboot();
+        void ResetToDefaults();
     }
 }

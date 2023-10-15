@@ -2,6 +2,7 @@
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
+using Emily.Clock.UI.Navigation;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
@@ -11,19 +12,19 @@ namespace Emily.Clock.Device
     public class DeviceInitialization : IDeviceStartBehavior
     {
         private readonly IButtonManager _buttonManager;
-        private readonly IConfigurationService _configurationService;
         private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
+        private readonly INavigationService _navigationService;
         private readonly INeoPixelManager _neoPixelManager;
 
-        public DeviceInitialization(IButtonManager buttonManager, IConfigurationService configurationService, IDisplayManager displayManager, ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
+        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, ILogger logger, IMediator mediator, INavigationService navigationService, INeoPixelManager neoPixelManager)
         {
             _buttonManager = buttonManager;
-            _configurationService = configurationService;
             _displayManager = displayManager;
             _logger = logger;
             _mediator = mediator;
+            _navigationService = navigationService;
             _neoPixelManager = neoPixelManager;
         }
 
@@ -72,10 +73,7 @@ namespace Emily.Clock.Device
 
             if (_buttonManager.IsPressed(Button.One) || _buttonManager.IsPressed(Button.Two) || _buttonManager.IsPressed(Button.Three))
             {
-                // TODO: Show a screen to confirm resettling to defaults
-                _configurationService.ClearAll();
-                
-                PublishStatusEvent("Reset to defaults");
+                _navigationService.Navigate(NavigationDestination.ResetToDefaults);
 
                 return false;
             }

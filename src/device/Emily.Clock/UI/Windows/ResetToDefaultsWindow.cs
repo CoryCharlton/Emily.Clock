@@ -1,24 +1,21 @@
 ﻿using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
-using Emily.Clock.Networking;
 using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows
 {
-    public class NetworkFailureWindow : Window, IEventHandler
+    public class ResetToDefaultsWindow : Window, IEventHandler
     {
         private readonly IDeviceManager _deviceManager;
         private readonly IMediator _mediator;
-        private readonly IWirelessNetworkManager _networkManager;
 
-        // TODO: Add a timer to automatically reboot in client mode if no response. Timer should tick down and display in the status bar
-        public NetworkFailureWindow(IDeviceManager deviceManager, IDisplayManager displayManager, ILogger logger, IMediator mediator, IWirelessNetworkManager networkManager) : base(displayManager, logger)
+        // TODO: Add a timer to automatically reboot if no response. Timer should tick down and display in the status bar
+        public ResetToDefaultsWindow(IDeviceManager deviceManager, IDisplayManager displayManager, ILogger logger, IMediator mediator) : base(displayManager, logger)
         {
             _deviceManager = deviceManager;
             _mediator = mediator;
-            _networkManager = networkManager;
         }
 
         private void Draw()
@@ -26,12 +23,12 @@ namespace Emily.Clock.UI.Windows
             var screen = GetBitmap();
             screen.Clear();
 
-            Controls.DrawTitle(screen, "Connection Failed");
-            Controls.DrawContent(screen, "Reboot or Setup");
-            Controls.DrawLogo(screen, Resources.BitmapResources.Wireless_48);
+            Controls.DrawTitle(screen, "Reset to Defaults");
+            Controls.DrawContent(screen, "Are you sure?");
+            Controls.DrawLogo(screen, Resources.BitmapResources.Warning_48);
 
-            Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Restart_22);
-            Controls.DrawButton(screen, Button.Three, Resources.BitmapResources.Settings_22);
+            Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Check_22);
+            Controls.DrawButton(screen, Button.Three, Resources.BitmapResources.Close_22);
 
             screen.Flush();
         }
@@ -51,10 +48,10 @@ namespace Emily.Clock.UI.Windows
             switch (buttonEvent.Button)
             {
                 case Button.One:
-                    _networkManager.SetMode(WirelessMode.Client);
+                    _deviceManager.ResetToDefaults();
                     break;
                 case Button.Three:
-                    _networkManager.SetMode(WirelessMode.AccessPoint);
+                    _deviceManager.Reboot();
                     break;
             }
         }

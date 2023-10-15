@@ -35,8 +35,6 @@
     <Compile Include="Drawing\ColorConverter.cs" />
     <Compile Include="Drawing\HsbColor.cs" />
     <Compile Include="Drawing\HslColor.cs" />
-    <Compile Include="IO\FileStorageServiceBase.cs" />
-    <Compile Include="IO\IFileStorageService.cs" />
     <Compile Include="Mediator\AsyncMediator.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
@@ -93,6 +91,7 @@
     <Compile Include="System\Drawing\Rectangle.cs" />
     <Compile Include="System\Drawing\Size.cs" />
     <Compile Include="UI\Theme.cs" />
+    <Compile Include="UI\Windows\ResetToDefaultsWindow.cs" />
     <Compile Include="UI\Windows\NetworkFailureWindow.cs" />
     <Compile Include="UI\Windows\ConfigurationWindow.cs" />
     <Compile Include="UI\Windows\ClockWindow.cs" />
@@ -242,6 +241,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icons\Palette_22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\Check_22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\Close_22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icons\Warning_48.jpg" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <ProjectExtensions>

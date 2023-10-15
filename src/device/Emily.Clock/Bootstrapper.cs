@@ -80,7 +80,8 @@ namespace Emily.Clock
             services
                 .AddTransient(typeof(ClockWindow))
                 .AddTransient(typeof(ConfigurationWindow))
-                .AddTransient(typeof(NetworkFailureWindow));
+                .AddTransient(typeof(NetworkFailureWindow))
+                .AddTransient(typeof(ResetToDefaultsWindow));
 
             return services;
         }

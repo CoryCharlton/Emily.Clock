@@ -6,6 +6,7 @@ using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
+using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Mediator;
 using nanoFramework.Hardware.Esp32;
 using nanoFramework.Runtime.Native;
@@ -15,14 +16,16 @@ namespace Emily.Clock.App.Hardware
 {
     public class DeviceManager: IDeviceManager
     {
+        private readonly IConfigurationService _configurationService;
         private readonly IDisplayManager _displayManager;
         private readonly IMediator _mediator;
         private readonly INeoPixelManager _neoPixelManager;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
         private string _serialNumber;
 
-        public DeviceManager(IDisplayManager displayManager, IMediator mediator, INeoPixelManager neoPixelManager, INetworkInterfaceProvider networkInterfaceProvider)
+        public DeviceManager(IConfigurationService configurationService, IDisplayManager displayManager, IMediator mediator, INeoPixelManager neoPixelManager, INetworkInterfaceProvider networkInterfaceProvider)
         {
+            _configurationService = configurationService;
             _displayManager = displayManager;
             _mediator = mediator;
             _neoPixelManager = neoPixelManager;
@@ -70,6 +73,7 @@ namespace Emily.Clock.App.Hardware
         {
             _mediator.Publish(new StatusEvent("Rebooting..."));
 
+            // TODO: Change this to an event so I don't need to handle all the logic here?
             if (_displayManager.IsInitialized)
             {
                 _displayManager.Clear();
@@ -82,6 +86,13 @@ namespace Emily.Clock.App.Hardware
             }
 
             Power.RebootDevice();
+        }
+
+        public void ResetToDefaults()
+        {
+            _configurationService.ClearAll();
+
+            Reboot();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Emily.Clock.UI.Windows
                 NavigationDestination.Clock => _serviceProvider.GetRequiredService(typeof(ClockWindow)),
                 NavigationDestination.Configuration => _serviceProvider.GetRequiredService(typeof(ConfigurationWindow)),
                 NavigationDestination.NetworkFailure => _serviceProvider.GetRequiredService(typeof(NetworkFailureWindow)),
+                NavigationDestination.ResetToDefaults => _serviceProvider.GetRequiredService(typeof(ResetToDefaultsWindow)),
                 _ => throw new ArgumentOutOfRangeException(nameof(destination))
             } as IWindow;
         }

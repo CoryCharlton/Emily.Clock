@@ -124,6 +124,12 @@
   <data name="Alarm_22_Outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Icons\Alarm_22_Outline.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Check_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Icons\Check_22.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Close_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Icons\Close_22.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Consolas_Regular_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Fonts\Consolas_Regular_10.tinyfnt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -156,6 +162,9 @@
   </data>
   <data name="Settings_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Icons\Settings_22.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Warning_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Icons\Warning_48.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Wireless_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Icons\Wireless_48.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

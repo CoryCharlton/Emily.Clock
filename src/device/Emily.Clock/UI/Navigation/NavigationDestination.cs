@@ -5,6 +5,7 @@ namespace Emily.Clock.UI.Navigation
     {
         Clock,
         Configuration,
-        NetworkFailure
+        NetworkFailure,
+        ResetToDefaults
     }
 }

@@ -24,7 +24,7 @@ namespace Emily.Clock.UI.Windows
             screen.Clear();
 
             Controls.DrawTitle(screen, "Reset to Defaults");
-            Controls.DrawContent(screen, "Are you sure?");
+            Controls.DrawContent(screen, "Confirm reset to defaults");
             Controls.DrawLogo(screen, Resources.BitmapResources.Warning_48);
 
             Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Check_22);

@@ -1,0 +1,3 @@
+[submodule "CCSWE.nanoFramework.Mediator"]
+	path = CCSWE.nanoFramework.Mediator
+	url = https://github.com/CoryCharlton/CCSWE.nanoFramework.Mediator.git

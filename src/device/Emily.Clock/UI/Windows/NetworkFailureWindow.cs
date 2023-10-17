@@ -1,13 +1,13 @@
-﻿using Emily.Clock.Device;
+﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
-using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows
 {
-    public class NetworkFailureWindow : Window, IEventHandler
+    public class NetworkFailureWindow : Window, IMediatorSubscriber
     {
         private readonly IDeviceManager _deviceManager;
         private readonly IMediator _mediator;
@@ -36,7 +36,7 @@ namespace Emily.Clock.UI.Windows
             screen.Flush();
         }
 
-        public void Handle(IEvent mediatorEvent)
+        public void HandleEvent(IMediatorEvent mediatorEvent)
         {
             if (mediatorEvent is not ButtonEvent buttonEvent)
             {

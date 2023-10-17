@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Threading;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Networking;
 

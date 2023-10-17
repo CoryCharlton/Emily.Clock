@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Text;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device;
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using nanoFramework.Hardware.Esp32;
 using nanoFramework.Runtime.Native;
 using GC = nanoFramework.Runtime.Native.GC;

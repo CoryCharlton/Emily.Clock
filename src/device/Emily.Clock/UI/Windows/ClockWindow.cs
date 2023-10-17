@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Drawing;
-using MakoIoT.Device.Services.Mediator;
 using nanoFramework.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
 using System.Threading;
+using CCSWE.nanoFramework.Mediator;
 
 #nullable enable
 namespace Emily.Clock.UI.Windows
 {
-    public class ClockWindow: Window, IEventHandler
+    public class ClockWindow: Window, IMediatorSubscriber
     {
         private readonly IAlarmService _alarmService;
         private DateTime _clearProgressAt = DateTime.MinValue;
@@ -95,9 +95,9 @@ namespace Emily.Clock.UI.Windows
             });
         }
 
-        public void Handle(IEvent @event)
+        public void HandleEvent(IMediatorEvent mediatorEvent)
         {
-            switch (@event)
+            switch (mediatorEvent)
             {
                 case ButtonEvent buttonEvent:
                 {

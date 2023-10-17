@@ -1,9 +1,9 @@
 ﻿using System;
-using MakoIoT.Device.Services.Mediator;
+using CCSWE.nanoFramework.Mediator;
 
 namespace Emily.Clock.Mediator.Events
 {
-    public class StatusEvent : IEvent
+    public class StatusEvent : IMediatorEvent
     {
         public static TimeSpan DefaultTimeout { get; } = System.Threading.Timeout.InfiniteTimeSpan;
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using Emily.Clock.Configuration;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using System.Net.NetworkInformation;
 using Iot.Device.DhcpServer;
 using System.Net;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Mediator.Events;
 using MakoIoT.Device.Utilities.Invoker;
 using AuthenticationType = System.Net.NetworkInformation.AuthenticationType;

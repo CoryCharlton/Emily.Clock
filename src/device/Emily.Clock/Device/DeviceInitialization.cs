@@ -1,11 +1,11 @@
-﻿using Emily.Clock.Device.Gpio;
+﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.IO;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.Device
@@ -75,6 +75,14 @@ namespace Emily.Clock.Device
             else
             {
                 PublishStatusEvent("File storage initialized");
+
+                var fileExists1 = _fileStorageProvider.FileExists(@"D:\Variation-CLJ013901.wav");
+                var fileExists2 = _fileStorageProvider.FileExists(@"D:/Variation-CLJ013901.wav");
+                var fileExists3 = _fileStorageProvider.FileExists(@"\Variation-CLJ013901.wav");
+                var fileExists4 = _fileStorageProvider.FileExists(@"/Variation-CLJ013901.wav");
+                var fileExists5 = _fileStorageProvider.FileExists(@"I:/Variation-CLJ013901.wav");
+
+                _logger.LogDebug($"1: {fileExists1}, 2: {fileExists2}, 3: {fileExists3}, 4: {fileExists4}, 5: {fileExists5}");
 
                 var directories = _fileStorageProvider.GetDirectories(@"D:\");
                 foreach (var directory in directories)

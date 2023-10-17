@@ -1,9 +1,9 @@
-﻿using MakoIoT.Device.Services.Mediator;
-using System;
+﻿using System;
+using CCSWE.nanoFramework.Mediator;
 
 namespace Emily.Clock.Mediator.Events
 {
-    public class TimeChangedEvent : IEvent
+    public class TimeChangedEvent : IMediatorEvent
     {
         public TimeChangedEvent(DateTime time)
         {

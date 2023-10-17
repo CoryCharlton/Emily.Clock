@@ -1,5 +1,4 @@
-﻿using System;
-using nanoFramework.TestFramework;
+﻿using nanoFramework.TestFramework;
 
 namespace Emily.Clock.UnitTests
 {

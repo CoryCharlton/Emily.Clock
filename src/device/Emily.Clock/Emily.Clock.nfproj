@@ -30,13 +30,15 @@
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\StaticContentController.cs" />
     <Compile Include="Device\NeoPixel\INeoPixelManager.cs" />
     <Compile Include="Device\NeoPixel\NeoPixelManagerBase.cs" />
     <Compile Include="Drawing\ColorConverter.cs" />
     <Compile Include="Drawing\HsbColor.cs" />
     <Compile Include="Drawing\HslColor.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Http\MimeType.cs" />
     <Compile Include="IO\IFileStorageProvider.cs" />
-    <Compile Include="Mediator\AsyncMediator.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
     <Compile Include="Mediator\Events\StatusEvent.cs" />
@@ -52,8 +54,6 @@
     <Compile Include="Device\Gpio\GpioProvider.cs" />
     <Compile Include="Device\Gpio\IButtonManager.cs" />
     <Compile Include="Device\IDeviceManager.cs" />
-    <Compile Include="Mediator\MediatorOptions.cs" />
-    <Compile Include="Mediator\MediatorOptionsSubscriber.cs" />
     <Compile Include="UI\HorizontalAlignment.cs" />
     <Compile Include="UI\IDisplayManager.cs" />
     <Compile Include="IO\FileUtils.cs" />
@@ -100,6 +100,12 @@
     <Compile Include="UI\Windows\WindowFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CCSWE.nanoFramework.Mediator">
+      <HintPath>..\libraries\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.Mediator.AsyncMediator">
+      <HintPath>..\libraries\CCSWE.nanoFramework.Mediator.AsyncMediator.dll</HintPath>
+    </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.329\lib\Iot.Device.Button.dll</HintPath>
     </Reference>
@@ -120,9 +126,6 @@
     </Reference>
     <Reference Include="MakoIoT.Device.Services.Interface">
       <HintPath>..\packages\MakoIoT.Device.Services.Interface.1.0.36.21434\lib\MakoIoT.Device.Services.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="MakoIoT.Device.Services.Mediator">
-      <HintPath>..\packages\MakoIoT.Device.Services.Mediator.1.0.31.54540\lib\MakoIoT.Device.Services.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Services.Server">
       <HintPath>..\packages\MakoIoT.Device.Services.Server.1.0.33.42549\lib\MakoIoT.Device.Services.Server.dll</HintPath>
@@ -176,7 +179,7 @@
       <HintPath>..\packages\nanoFramework.System.Device.Gpio.1.1.28\lib\System.Device.Gpio.dll</HintPath>
     </Reference>
     <Reference Include="System.Device.Wifi">
-      <HintPath>..\packages\nanoFramework.System.Device.Wifi.1.5.54\lib\System.Device.Wifi.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Device.Wifi.1.5.65\lib\System.Device.Wifi.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.FileSystem">
       <HintPath>..\packages\nanoFramework.System.IO.FileSystem.1.1.23\lib\System.IO.FileSystem.dll</HintPath>

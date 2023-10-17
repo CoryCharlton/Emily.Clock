@@ -53,9 +53,6 @@
     <Reference Include="MakoIoT.Device.Services.Interface">
       <HintPath>..\packages\MakoIoT.Device.Services.Interface.1.0.36.21434\lib\MakoIoT.Device.Services.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="MakoIoT.Device.Services.Mediator">
-      <HintPath>..\packages\MakoIoT.Device.Services.Mediator.1.0.31.54540\lib\MakoIoT.Device.Services.Mediator.dll</HintPath>
-    </Reference>
     <Reference Include="MakoIoT.Device.Services.Server">
       <HintPath>..\packages\MakoIoT.Device.Services.Server.1.0.33.42549\lib\MakoIoT.Device.Services.Server.dll</HintPath>
     </Reference>

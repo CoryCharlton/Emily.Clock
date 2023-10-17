@@ -1,9 +1,9 @@
-﻿using Emily.Clock.Configuration;
+﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
 using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Logging;
-using Emily.Clock.Mediator;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
@@ -13,12 +13,10 @@ using Emily.Clock.UI.Windows;
 using MakoIoT.Device.Services.Configuration.Extensions;
 using MakoIoT.Device.Services.FileStorage.Extensions;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using MakoIoT.Device.Services.Server.Extensions;
 using MakoIoT.Device.Services.Server.WebServer;
 using Microsoft.Extensions.Logging;
 using nanoFramework.DependencyInjection;
-using MediatorOptions = Emily.Clock.Mediator.MediatorOptions;
 
 namespace Emily.Clock
 {
@@ -105,25 +103,13 @@ namespace Emily.Clock
 
         private static IDeviceBuilder AddMediator(this IDeviceBuilder builder)
         {
-            var options = new MediatorOptions();
-            options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
-            builder.Services.AddSingleton(typeof(MediatorOptions), options);
-            builder.Services.AddSingleton(typeof(IMediator), typeof(AsyncMediator));
-
-            return builder;
-        }
-
-        /*
-        private static IDeviceBuilder AddMediator(this IDeviceBuilder builder)
-        {
-            builder.AddMediator(options =>
+            builder.Services.AddMediator(options =>
             {
                 options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
             });
 
             return builder;
         }
-        */
 
         private static IDeviceBuilder AddWebServer(this IDeviceBuilder builder)
         {
@@ -134,6 +120,7 @@ namespace Emily.Clock
 
                 options.AddController(typeof(ConfigurationController));
                 options.AddController(typeof(DeviceController));
+                options.AddController(typeof(StaticContentController));
             });
 
             return builder;

@@ -3,9 +3,9 @@ using MakoIoT.Device.Utilities.TimeZones;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
-using MakoIoT.Device.Services.Mediator;
 
 #nullable enable
 namespace Emily.Clock

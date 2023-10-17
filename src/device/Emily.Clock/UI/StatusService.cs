@@ -1,5 +1,5 @@
-﻿using Emily.Clock.Mediator.Events;
-using MakoIoT.Device.Services.Mediator;
+﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Mediator.Events;
 using Microsoft.Extensions.Logging;
 using nanoFramework.UI;
 
@@ -10,7 +10,7 @@ namespace Emily.Clock.UI
         bool SuppressEvents { get; set; }
     }
 
-    public class StatusService : IStatusService, IEventHandler
+    public class StatusService : IStatusService, IMediatorSubscriber
     {
         private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;
@@ -23,7 +23,7 @@ namespace Emily.Clock.UI
 
         public bool SuppressEvents { get; set; }
 
-        public void Handle(IEvent mediatorEvent)
+        public void HandleEvent(IMediatorEvent mediatorEvent)
         {
             if (mediatorEvent is not StatusEvent statusMessageEvent)
             {

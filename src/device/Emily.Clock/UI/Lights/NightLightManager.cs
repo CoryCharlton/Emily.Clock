@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Mediator;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Lights
@@ -20,7 +20,7 @@ namespace Emily.Clock.UI.Lights
         void Toggle();
     }
 
-    public class NightNightLightManager : INightLightManager, IEventHandler
+    public class NightNightLightManager : INightLightManager, IMediatorSubscriber
     {
         private NightLightConfiguration _configuration;
         private readonly IConfigurationService _configurationService;
@@ -155,9 +155,9 @@ namespace Emily.Clock.UI.Lights
             return currentTime.Hour is > 6 and < 20 ? PanelLight.Sun : PanelLight.Moon;
         }
 
-        public void Handle(IEvent @event)
+        public void HandleEvent(IMediatorEvent mediatorEvent)
         {
-            if (@event is not TimeChangedEvent)
+            if (mediatorEvent is not TimeChangedEvent)
             {
                 return;
             }

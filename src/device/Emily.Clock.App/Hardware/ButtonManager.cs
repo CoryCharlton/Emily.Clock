@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Device.Gpio;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Gpio;
-using MakoIoT.Device.Services.Mediator;
 
 namespace Emily.Clock.App.Hardware
 {

@@ -1,9 +1,9 @@
-﻿using Emily.Clock.Device.Gpio;
-using MakoIoT.Device.Services.Mediator;
+﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device.Gpio;
 
 namespace Emily.Clock.Mediator.Events
 {
-    public class ButtonEvent : IEvent
+    public class ButtonEvent : IMediatorEvent
     {
         public ButtonEvent(Button button, ButtonEventType type)
         {

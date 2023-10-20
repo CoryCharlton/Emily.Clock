@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows
 {
-    public class NetworkFailureWindow : Window, IMediatorSubscriber
+    public class NetworkFailureWindow : Window, IMediatorEventHandler
     {
         private readonly IDeviceManager _deviceManager;
         private readonly IMediator _mediator;

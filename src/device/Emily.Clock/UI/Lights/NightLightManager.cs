@@ -20,7 +20,7 @@ namespace Emily.Clock.UI.Lights
         void Toggle();
     }
 
-    public class NightNightLightManager : INightLightManager, IMediatorSubscriber
+    public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     {
         private NightLightConfiguration _configuration;
         private readonly IConfigurationService _configurationService;

@@ -11,7 +11,7 @@ using CCSWE.nanoFramework.Mediator;
 #nullable enable
 namespace Emily.Clock.UI.Windows
 {
-    public class ClockWindow: Window, IMediatorSubscriber
+    public class ClockWindow: Window, IMediatorEventHandler
     {
         private readonly IAlarmService _alarmService;
         private DateTime _clearProgressAt = DateTime.MinValue;

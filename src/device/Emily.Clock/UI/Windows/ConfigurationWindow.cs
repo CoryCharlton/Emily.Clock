@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows
 {
-    public class ConfigurationWindow: Window, IMediatorSubscriber
+    public class ConfigurationWindow: Window, IMediatorEventHandler
     {
         private readonly IMediator _mediator;
         private readonly IWirelessNetworkManager _networkManager;
@@ -23,7 +23,7 @@ namespace Emily.Clock.UI.Windows
             screen.Clear();
 
             Controls.DrawTitle(screen, "Configuration Mode");
-            Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"Address: http://{_networkManager.IpAddress}");
+            Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"Address: {_networkManager.IpAddress}");
             Controls.DrawLogo(screen, Resources.BitmapResources.Wireless_48);
 
             Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Restart_22);

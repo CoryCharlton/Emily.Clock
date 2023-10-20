@@ -10,7 +10,7 @@ namespace Emily.Clock.UI
         bool SuppressEvents { get; set; }
     }
 
-    public class StatusService : IStatusService, IMediatorSubscriber
+    public class StatusService : IStatusService, IMediatorEventHandler
     {
         private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;

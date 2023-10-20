@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows
 {
-    public class ResetToDefaultsWindow : Window, IMediatorSubscriber
+    public class ResetToDefaultsWindow : Window, IMediatorEventHandler
     {
         private readonly IDeviceManager _deviceManager;
         private readonly IMediator _mediator;

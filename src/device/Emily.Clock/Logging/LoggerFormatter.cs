@@ -19,10 +19,11 @@ namespace Emily.Clock.Logging
                 _ => string.Empty,
             };
 
+            var time = $"[{DateTime.UtcNow.TimeOfDay}]";
             var logger = string.IsNullOrEmpty(loggerName) ? string.Empty : $" ({loggerName})";
             var message = exception == null ? state : $"{state} {exception}";
 
-            return $"{level}{logger}: {message}";
+            return $"{time} {level}{logger}: {message}";
         }
 
         public static void Initialize()

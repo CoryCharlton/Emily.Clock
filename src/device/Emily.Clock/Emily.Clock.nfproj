@@ -23,6 +23,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Configuration\ConfigurationServiceExtensions.cs" />
     <Compile Include="Configuration\ConfigurationTypeFactory.cs" />
+    <Compile Include="Configuration\ConfigurationValidatorFactory.cs" />
+    <Compile Include="Configuration\ConfigurationValidationResults.cs" />
     <Compile Include="Configuration\NightLightConfiguration.cs" />
     <Compile Include="Configuration\WirelessAccessPointConfiguration.cs" />
     <Compile Include="Configuration\DateTimeConfiguration.cs" />

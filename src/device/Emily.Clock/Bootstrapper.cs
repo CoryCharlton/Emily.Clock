@@ -49,8 +49,10 @@ namespace Emily.Clock
                 service.WriteDefault(WirelessClientConfiguration.SectionName, new WirelessClientConfiguration());
             });
 
-            builder.Services.AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory));
-            
+            builder.Services
+                .AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory))
+                .AddSingleton(typeof(IConfigurationValidatorFactory), typeof(ConfigurationValidatorFactory));
+
             return builder;
         }
 
@@ -104,8 +106,9 @@ namespace Emily.Clock
         {
             builder.Services.AddMediator(options =>
             {
-                //options.DelayedStart = true;
                 options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
+
+                options.LogLevel = LogLevel.Debug;
             });
 
             return builder;

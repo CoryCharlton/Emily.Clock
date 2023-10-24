@@ -10,11 +10,13 @@ namespace Emily.Clock.Controllers
     {
         private readonly IConfigurationService _configurationService;
         private readonly IConfigurationTypeFactory _configurationTypeFactory;
+        private readonly IConfigurationValidatorFactory _configurationValidator;
 
-        public ConfigurationController(IConfigurationService configurationService, IConfigurationTypeFactory configurationTypeFactory)
+        public ConfigurationController(IConfigurationService configurationService, IConfigurationTypeFactory configurationTypeFactory, IConfigurationValidatorFactory configurationValidator)
         {
             _configurationService = configurationService;
             _configurationTypeFactory = configurationTypeFactory;
+            _configurationValidator = configurationValidator;
         }
 
         [Route("configuration/sections")]
@@ -44,7 +46,15 @@ namespace Emily.Clock.Controllers
                 var sectionType = _configurationTypeFactory.GetType(name);
                 var configuration = JsonConvert.DeserializeObject(e.Context.Request.InputStream, sectionType);
 
-                _configurationService.UpdateConfigSection(name, configuration);
+                var validationResults = _configurationValidator.ValidateConfiguration(name, configuration);
+                if (validationResults.IsValid)
+                {
+                    _configurationService.UpdateConfigSection(name, configuration);
+                }
+                else
+                {
+                    BadRequest(e.Context.Response, validationResults);
+                }
             }
             catch (DeserializationException)
             {

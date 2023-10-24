@@ -22,22 +22,6 @@ namespace Emily.Clock
 {
     public static class Bootstrapper
     {
-        private static IDeviceBuilder AddConfigurations(this IDeviceBuilder builder)
-        {
-            builder.AddConfiguration(service =>
-            {
-                // TODO: Make sure these are not overwriting
-                service.WriteDefault(DateTimeConfiguration.SectionName, DateTimeConfiguration.Default, true);
-                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default);
-                service.WriteDefault(WirelessAccessPointConfiguration.SectionName, WirelessAccessPointConfiguration.Default);
-                service.WriteDefault(WirelessClientConfiguration.SectionName, WirelessClientConfiguration.Default);
-            });
-
-            builder.Services.AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory));
-            
-            return builder;
-        }
-
         public static IDeviceBuilder AddCore(this IDeviceBuilder builder)
         {
             nanoFramework.Json.Configuration.Settings.CaseSensitive = false;
@@ -51,6 +35,22 @@ namespace Emily.Clock
                 .AddMediator()
                 .AddWebServer();
 
+            return builder;
+        }
+
+        private static IDeviceBuilder AddConfigurations(this IDeviceBuilder builder)
+        {
+            builder.AddConfiguration(service =>
+            {
+                // TODO: Make sure these are not overwriting
+                service.WriteDefault(DateTimeConfiguration.SectionName, new DateTimeConfiguration());
+                service.WriteDefault(NightLightConfiguration.SectionName, new NightLightConfiguration());
+                service.WriteDefault(WirelessAccessPointConfiguration.SectionName, new WirelessAccessPointConfiguration());
+                service.WriteDefault(WirelessClientConfiguration.SectionName, new WirelessClientConfiguration());
+            });
+
+            builder.Services.AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory));
+            
             return builder;
         }
 
@@ -93,7 +93,6 @@ namespace Emily.Clock
 #endif
 
             builder.Services.AddSingleton(typeof(ILogger), typeof(DebugLogger));
-            //builder.Services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
             builder.Services.AddSingleton(typeof(LoggerOptions), loggerConfig);
 
             LoggerFormatter.Initialize();

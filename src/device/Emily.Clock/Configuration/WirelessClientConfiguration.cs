@@ -2,7 +2,6 @@
 {
     public class WirelessClientConfiguration
     {
-        public static WirelessClientConfiguration Default { get; } = new();
         public const string SectionName = "WirelessClient";
 
         /// <summary>

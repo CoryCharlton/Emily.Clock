@@ -8,7 +8,7 @@ namespace Emily.Clock.App.Hardware
     {
         private const int Pin = 19;
 
-        public override int Count => 3;
+        public override int Count => 47;
 
         protected override Ws28xx InitializeNeoPixel() => new Ws2812c(Pin, Count);
     }

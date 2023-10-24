@@ -28,7 +28,7 @@ namespace Emily.Clock
             {
                 // TODO: Make sure these are not overwriting
                 service.WriteDefault(DateTimeConfiguration.SectionName, DateTimeConfiguration.Default);
-                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default);
+                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default, true);
                 service.WriteDefault(WirelessAccessPointConfiguration.SectionName, WirelessAccessPointConfiguration.Default);
                 service.WriteDefault(WirelessClientConfiguration.SectionName, WirelessClientConfiguration.Default);
             });
@@ -105,6 +105,7 @@ namespace Emily.Clock
         {
             builder.Services.AddMediator(options =>
             {
+                //options.DelayedStart = true;
                 options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
             });
 

@@ -16,6 +16,7 @@ namespace Emily.Clock.Configuration
         public ConfigurationTypeFactory()
         {
             AddType(DateTimeConfiguration.SectionName, typeof(DateTimeConfiguration));    
+            AddType(NightLightConfiguration.SectionName, typeof(NightLightConfiguration));
             AddType(WirelessAccessPointConfiguration.SectionName, typeof(WirelessAccessPointConfiguration));    
             AddType(WirelessClientConfiguration.SectionName, typeof(WirelessClientConfiguration));
         }

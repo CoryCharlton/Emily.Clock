@@ -9,6 +9,11 @@ namespace Emily.Clock.Configuration
             return (DateTimeConfiguration) configurationService.GetConfigSection(DateTimeConfiguration.SectionName, typeof(DateTimeConfiguration));
         }
 
+        public static NightLightConfiguration GetNightLightConfiguration(this IConfigurationService configurationService)
+        {
+            return (NightLightConfiguration) configurationService.GetConfigSection(NightLightConfiguration.SectionName, typeof(NightLightConfiguration));
+        }
+
         public static WirelessAccessPointConfiguration GetWirelessAccessPointConfiguration(this IConfigurationService configurationService)
         {
             return (WirelessAccessPointConfiguration) configurationService.GetConfigSection(WirelessAccessPointConfiguration.SectionName, typeof(WirelessAccessPointConfiguration));

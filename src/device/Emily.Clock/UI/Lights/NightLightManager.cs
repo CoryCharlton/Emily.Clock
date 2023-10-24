@@ -30,14 +30,14 @@ namespace Emily.Clock.UI.Lights
         private readonly Color _moonColor = NightLightConverter.ToColor(NightLightColor.Blue);
         private readonly INeoPixelManager _neoPixelManager;
         private PanelLight _panelMode;
-        private readonly Color _sunColor = NightLightConverter.ToColor(NightLightColor.Yellow);
+        private readonly Color _sunColor = NightLightConverter.ToColor(NightLightColor.Orange);
 
         public NightNightLightManager(IConfigurationService configurationService, ILocalTimeProvider localTimeProvider , ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
         {
             _configurationService = configurationService;
             _localTimeProvider = localTimeProvider;
             _configurationService.ConfigurationUpdated += OnConfigurationUpdated;
-            _configuration = GetConfiguration();
+            _configuration = _configurationService.GetNightLightConfiguration();
             _logger = logger;
             _mediator = mediator;
             _neoPixelManager = neoPixelManager;
@@ -142,18 +142,7 @@ namespace Emily.Clock.UI.Lights
             };
         }
 
-        private NightLightConfiguration GetConfiguration()
-        {
-            return (NightLightConfiguration) _configurationService.GetConfigSection(NightLightConfiguration.SectionName, typeof(NightLightConfiguration));
-        }
-
-        private PanelLight GetPanelMode()
-        {
-            var currentTime = _localTimeProvider.Now.Time();
-
-            // Make the wake / sleep time configurable
-            return currentTime.Hour is > 6 and < 20 ? PanelLight.Sun : PanelLight.Moon;
-        }
+        private PanelLight GetPanelMode() => _localTimeProvider.IsBedTime ? PanelLight.Moon : PanelLight.Sun;
 
         public void HandleEvent(IMediatorEvent mediatorEvent)
         {
@@ -196,7 +185,7 @@ namespace Emily.Clock.UI.Lights
                 return;
             }
 
-            _configuration = GetConfiguration();
+            _configuration = _configurationService.GetNightLightConfiguration();
 
             UpdateAllPixels();
         }

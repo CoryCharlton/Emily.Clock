@@ -12,6 +12,7 @@ namespace Emily.Clock
 {
     public interface ILocalTimeProvider
     {
+        bool IsBedTime { get; }
         DateTime Now { get; }
         DateTime UtcNow { get; }
 
@@ -20,6 +21,7 @@ namespace Emily.Clock
 
     public class LocalTimeProvider : ILocalTimeProvider
     {
+        private TimeSpan _bedTime;
         private readonly IConfigurationService _configurationService;
         private readonly AutoResetEvent _generateEvents = new(false);
         private Thread? _generateEventsThread;
@@ -30,7 +32,9 @@ namespace Emily.Clock
         private readonly IMediator _mediator;
         private readonly object _syncLock = new ();
         private TimeZone? _timeZone;
+        private TimeSpan _wakeTime;
 
+        public bool IsBedTime => Now.TimeOfDay >= _bedTime || Now.TimeOfDay <= _wakeTime;
 
         // ReSharper disable once MergeConditionalExpression
         public DateTime Now => _timeZone is not null ? _timeZone.GetLocalTime(UtcNow) : DateTime.UtcNow;
@@ -109,7 +113,10 @@ namespace Emily.Clock
 
         private void UpdateConfiguration()
         {
-            var configuration = (DateTimeConfiguration)_configurationService.GetConfigSection(DateTimeConfiguration.SectionName, typeof(DateTimeConfiguration));
+            var configuration = _configurationService.GetDateTimeConfiguration();
+
+            _bedTime = configuration.BedTime;
+            _wakeTime = configuration.WakeTime;
 
             try
             {

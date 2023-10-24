@@ -27,8 +27,8 @@ namespace Emily.Clock
             builder.AddConfiguration(service =>
             {
                 // TODO: Make sure these are not overwriting
-                service.WriteDefault(DateTimeConfiguration.SectionName, DateTimeConfiguration.Default);
-                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default, true);
+                service.WriteDefault(DateTimeConfiguration.SectionName, DateTimeConfiguration.Default, true);
+                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default);
                 service.WriteDefault(WirelessAccessPointConfiguration.SectionName, WirelessAccessPointConfiguration.Default);
                 service.WriteDefault(WirelessClientConfiguration.SectionName, WirelessClientConfiguration.Default);
             });

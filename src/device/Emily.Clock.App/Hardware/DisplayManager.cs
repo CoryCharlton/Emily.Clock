@@ -73,6 +73,11 @@ namespace Emily.Clock.App.Hardware
             _initialized = true;
             _gpioProvider.OpenPin(SCREEN_BACKLIGHT, PinMode.Output);
 
+            _gpioProvider.OpenPin(32, PinMode.OutputOpenDrain);
+            _gpioProvider.Write(32, PinValue.Low);
+            System.Threading.Thread.Sleep(100);
+            _gpioProvider.Write(32, PinValue.High);
+
             SetPinFunction(SCREEN_MISO, DeviceFunction.SPI1_MISO);
             SetPinFunction(SCREEN_MOSI, DeviceFunction.SPI1_MOSI);
             SetPinFunction(SCREEN_CLOCK, DeviceFunction.SPI1_CLOCK);

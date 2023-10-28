@@ -1,8 +1,8 @@
-﻿using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Utilities.TimeZones;
+﻿using MakoIoT.Device.Utilities.TimeZones;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
@@ -22,7 +22,7 @@ namespace Emily.Clock
     public class LocalTimeProvider : ILocalTimeProvider
     {
         private TimeSpan _bedTime;
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationManager _configurationManager;
         private readonly AutoResetEvent _generateEvents = new(false);
         private Thread? _generateEventsThread;
         private bool _started;
@@ -40,14 +40,14 @@ namespace Emily.Clock
         public DateTime Now => _timeZone is not null ? _timeZone.GetLocalTime(UtcNow) : DateTime.UtcNow;
         public DateTime UtcNow => DateTime.UtcNow;
 
-        public LocalTimeProvider(IConfigurationService configurationService, ILogger logger, IMediator mediator)
+        public LocalTimeProvider(IConfigurationManager configurationManager, ILogger logger, IMediator mediator)
         {
-            _configurationService = configurationService;
-            _configurationService.ConfigurationUpdated += OnConfigurationUpdated;
+            _configurationManager = configurationManager;
+            _configurationManager.ConfigurationChanged += OnConfigurationChanged;
             _logger = logger;
             _mediator = mediator;
 
-            UpdateConfiguration();
+            UpdateConfiguration((DateTimeConfiguration) _configurationManager.Get(DateTimeConfiguration.Section));
         }
 
         private void GenerateEventsAsync()
@@ -81,14 +81,14 @@ namespace Emily.Clock
             }
         }
 
-        private void OnConfigurationUpdated(object sender, EventArgs e)
+        private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {
-            if (e is not ObjectEventArgs objectEventArgs || !string.Equals(DateTimeConfiguration.SectionName, objectEventArgs.Data as string))
+            if (e.Section != DateTimeConfiguration.Section)
             {
                 return;
             }
 
-            UpdateConfiguration();
+            UpdateConfiguration((DateTimeConfiguration) e.Configuration);
         }
 
         public void Start()
@@ -111,10 +111,8 @@ namespace Emily.Clock
             }
         }
 
-        private void UpdateConfiguration()
+        private void UpdateConfiguration(DateTimeConfiguration configuration)
         {
-            var configuration = _configurationService.GetDateTimeConfiguration();
-
             _bedTime = configuration.BedTime;
             _wakeTime = configuration.WakeTime;
 

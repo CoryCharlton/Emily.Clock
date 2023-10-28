@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Text;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device;
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
-using MakoIoT.Device.Services.Interface;
 using nanoFramework.Hardware.Esp32;
 using nanoFramework.Runtime.Native;
 using GC = nanoFramework.Runtime.Native.GC;
@@ -16,14 +16,14 @@ namespace Emily.Clock.App.Hardware
 {
     public class DeviceManager: IDeviceManager
     {
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationManager _configurationService;
         private readonly IDisplayManager _displayManager;
         private readonly IMediator _mediator;
         private readonly INeoPixelManager _neoPixelManager;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
         private string _serialNumber;
 
-        public DeviceManager(IConfigurationService configurationService, IDisplayManager displayManager, IMediator mediator, INeoPixelManager neoPixelManager, INetworkInterfaceProvider networkInterfaceProvider)
+        public DeviceManager(IConfigurationManager configurationService, IDisplayManager displayManager, IMediator mediator, INeoPixelManager neoPixelManager, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationService = configurationService;
             _displayManager = displayManager;
@@ -90,7 +90,7 @@ namespace Emily.Clock.App.Hardware
 
         public void ResetToDefaults()
         {
-            _configurationService.ClearAll();
+            _configurationService.Clear();
 
             Reboot();
         }

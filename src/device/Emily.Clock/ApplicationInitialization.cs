@@ -32,13 +32,13 @@ namespace Emily.Clock
             if (!_nightLightManager.Initialize())
             {
                 _logger.LogError("Failed to initialize lights");
-                // TODO: Show screen to indicate light failure
+                // TODO: Show screen to indicate light failure ??
                 return false;
             }
 
-            _navigationService.Navigate(NavigationDestination.Clock);
-
             // TODO: Start alarm service
+
+            _navigationService.Navigate(NavigationDestination.Clock);
 
             return true;
         }

@@ -1,4 +1,6 @@
-﻿using CCSWE.nanoFramework.Mediator;
+﻿using System.Collections;
+using CCSWE.nanoFramework.Configuration;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
 using Emily.Clock.Device;
@@ -10,7 +12,6 @@ using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
-using MakoIoT.Device.Services.Configuration.Extensions;
 using MakoIoT.Device.Services.FileStorage.Extensions;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Server.Extensions;
@@ -29,29 +30,10 @@ namespace Emily.Clock
             builder.Services.AddCore();
 
             builder
-                .AddConfigurations()
                 .AddFileStorage()
                 .AddLogging()
                 .AddMediator()
                 .AddWebServer();
-
-            return builder;
-        }
-
-        private static IDeviceBuilder AddConfigurations(this IDeviceBuilder builder)
-        {
-            builder.AddConfiguration(service =>
-            {
-                // TODO: Make sure these are not overwriting
-                service.WriteDefault(DateTimeConfiguration.SectionName, new DateTimeConfiguration());
-                service.WriteDefault(NightLightConfiguration.SectionName, new NightLightConfiguration());
-                service.WriteDefault(WirelessAccessPointConfiguration.SectionName, new WirelessAccessPointConfiguration());
-                service.WriteDefault(WirelessClientConfiguration.SectionName, new WirelessClientConfiguration());
-            });
-
-            builder.Services
-                .AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory))
-                .AddSingleton(typeof(IConfigurationValidatorFactory), typeof(ConfigurationValidatorFactory));
 
             return builder;
         }
@@ -82,6 +64,13 @@ namespace Emily.Clock
                 .AddTransient(typeof(ConfigurationWindow))
                 .AddTransient(typeof(NetworkFailureWindow))
                 .AddTransient(typeof(ResetToDefaultsWindow));
+
+            services
+                .AddConfigurationManager(options => { options.LogLevel = LogLevel.Debug; })
+                .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
+                .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration())
+                .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration())
+                .BindConfiguration(WirelessClientConfiguration.Section, new WirelessClientConfiguration());
 
             return services;
         }
@@ -127,6 +116,32 @@ namespace Emily.Clock
             });
 
             return builder;
+        }
+    }
+
+    public class TestConfiguration
+    {
+        public const string Name = nameof(TestConfiguration);
+
+        public ArrayList Configurations { get; set; } = new ArrayList();
+
+        public static TestConfiguration Create()
+        {
+            var test = new TestConfiguration();
+
+            for (var i = 0; i < 10; i++)
+            {
+                var list = new ArrayList();
+                
+                for (var j = 0; j < 10; j++)
+                {
+                    list.Add(j);
+                }
+
+                test.Configurations.Add(list);
+            }
+
+            return test;
         }
     }
 }

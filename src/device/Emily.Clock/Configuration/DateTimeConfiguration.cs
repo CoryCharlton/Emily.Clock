@@ -1,12 +1,13 @@
 ﻿using MakoIoT.Device.Utilities.TimeZones;
-using Microsoft.Extensions.Logging;
 using System;
+using System.Collections;
+using CCSWE.nanoFramework.Configuration;
 
 namespace Emily.Clock.Configuration
 {
     public class DateTimeConfiguration
     {
-        public const string SectionName = "DateTime";
+        public const string Section = "DateTime";
 
         public TimeSpan BedTime { get; set; } = TimeSpan.FromHours(20);
 
@@ -19,7 +20,7 @@ namespace Emily.Clock.Configuration
     }
 
     // TODO: Add unit tests
-    public class DateTimeConfigurationValidator : IConfigurationValidator
+    public class DateTimeConfigurationValidator : IValidateConfiguration
     {
         private static bool IsValidTimeOfDay(TimeSpan timeOfDay)
         {
@@ -40,31 +41,31 @@ namespace Emily.Clock.Configuration
             }
         }
 
-        public ConfigurationValidationResults ValidateConfiguration(object configuration)
+        public ValidateConfigurationResult Validate(object configuration)
         {
             if (configuration is not DateTimeConfiguration dateTimeConfiguration)
             {
-                return new ConfigurationValidationResults();
+                return ValidateConfigurationResult.Fail("Configuration object is not the correct type");
             }
 
-            var validationResults = new ConfigurationValidationResults();
+            var failures = new ArrayList();
 
             if (!IsValidTimeOfDay(dateTimeConfiguration.BedTime))
             {
-                validationResults.AddFailure($"Bed time must be between 0:00 and 23:59 [{dateTimeConfiguration.BedTime}]");
+                failures.Add($"Bed time must be between 0:00 and 23:59 [{dateTimeConfiguration.BedTime}]");
             }
 
             if (!IsValidTimeZone(dateTimeConfiguration.TimeZone))
             {
-                validationResults.AddFailure($"Invalid time zone [{dateTimeConfiguration.TimeZone}]");
+                failures.Add($"Invalid time zone [{dateTimeConfiguration.TimeZone}]");
             }
 
             if (!IsValidTimeOfDay(dateTimeConfiguration.WakeTime))
             {
-                validationResults.AddFailure($"Wake time must be between 0:00 and 23:59 [{dateTimeConfiguration.WakeTime}]");
+                failures.Add($"Wake time must be between 0:00 and 23:59 [{dateTimeConfiguration.WakeTime}]");
             }
 
-            return validationResults;
+            return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray()) : ValidateConfigurationResult.Success;
         }
     }
 }

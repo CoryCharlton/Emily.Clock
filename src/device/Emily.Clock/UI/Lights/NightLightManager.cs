@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device.NeoPixel;
 using Emily.Clock.Mediator.Events;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Lights
@@ -23,7 +23,7 @@ namespace Emily.Clock.UI.Lights
     public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     {
         private NightLightConfiguration _configuration;
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationManager _configurationManager;
         private readonly ILocalTimeProvider _localTimeProvider;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
@@ -32,17 +32,18 @@ namespace Emily.Clock.UI.Lights
         private PanelLight _panelMode;
         private readonly Color _sunColor = NightLightConverter.ToColor(NightLightColor.Orange);
 
-        public NightNightLightManager(IConfigurationService configurationService, ILocalTimeProvider localTimeProvider , ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
+        public NightNightLightManager(IConfigurationManager configurationManager, ILocalTimeProvider localTimeProvider , ILogger logger, IMediator mediator, INeoPixelManager neoPixelManager)
         {
-            _configurationService = configurationService;
+            _configurationManager = configurationManager;
             _localTimeProvider = localTimeProvider;
-            _configurationService.ConfigurationUpdated += OnConfigurationUpdated;
-            _configuration = _configurationService.GetNightLightConfiguration();
+            _configurationManager.ConfigurationChanged += OnConfigurationChanged;
+            _configuration = (NightLightConfiguration)_configurationManager.Get(NightLightConfiguration.Section);
             _logger = logger;
             _mediator = mediator;
             _neoPixelManager = neoPixelManager;
         }
 
+        // TODO: Stop ready/writing direct to the configuration so that "UpdateConfiguration" can set the individual properties
         public double Brightness
         {
             get => NormalizeBrightness(_configuration.Brightness);
@@ -56,6 +57,7 @@ namespace Emily.Clock.UI.Lights
 
                 _configuration.Brightness = brightness;
 
+                UpdateAllPixels();
                 WriteConfiguration();
             }
         }
@@ -72,6 +74,7 @@ namespace Emily.Clock.UI.Lights
 
                 _configuration.Color = value;
 
+                UpdateStripPixels(true);
                 WriteConfiguration();
             }
         }
@@ -159,6 +162,8 @@ namespace Emily.Clock.UI.Lights
             _mediator.Subscribe(typeof(TimeChangedEvent), this);
             _panelMode = GetPanelMode();
 
+            BenchmarkSetPixel();
+
             UpdateAllPixels();
 
             return true;
@@ -178,14 +183,16 @@ namespace Emily.Clock.UI.Lights
             };
         }
 
-        private void OnConfigurationUpdated(object sender, System.EventArgs e)
+        private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {
-            if (e is not ObjectEventArgs objectEventArgs || !string.Equals(NightLightConfiguration.SectionName, objectEventArgs.Data as string))
+            if (e.Section != NightLightConfiguration.Section)
             {
                 return;
             }
 
-            _configuration = _configurationService.GetNightLightConfiguration();
+            _logger.LogDebug("Configuration updated");
+
+            _configuration = (NightLightConfiguration) e.Configuration;
 
             UpdateAllPixels();
         }
@@ -194,7 +201,6 @@ namespace Emily.Clock.UI.Lights
 
         private void UpdateAllPixels()
         {
-
             _neoPixelManager.Brightness = Brightness;
 
             UpdateStripPixels(false);
@@ -207,20 +213,25 @@ namespace Emily.Clock.UI.Lights
         {
             _logger.LogDebug($"UpdateStripPixels: {NightLightConverter.ToString(Color)} {Brightness}");
 
-            var color = NightLightConverter.ToColor(Color);
+            var color = ColorConverter.ScaleBrightness(NightLightConverter.ToColor(Color), Brightness);
 
             for (var i = 0; i < _neoPixelManager.Count; i++)
             {
                 if (i != MoonPixel && i != SunPixel)
                 {
-                    _neoPixelManager.SetPixel(i, color);
+                    _neoPixelManager.SetPixelFast(i, color);
                 }
             }
+
+            _logger.LogDebug($"UpdateStripPixels: {NightLightConverter.ToString(Color)} {Brightness} - Starting update");
 
             if (update)
             {
                 _neoPixelManager.Update();
             }
+
+            _logger.LogDebug($"UpdateStripPixels: {NightLightConverter.ToString(Color)} {Brightness} - Update completed");
+
         }
 
         private void UpdateSunAndMoonPixels(bool update = false)
@@ -253,11 +264,50 @@ namespace Emily.Clock.UI.Lights
 
         private void WriteConfiguration()
         {
-            _configurationService.UpdateConfigSection(NightLightConfiguration.SectionName, _configuration);
+            _logger.LogDebug("Writing configuration");
+
+            _configurationManager.SaveAsync(NightLightConfiguration.Section, _configuration);
+        }
+
+        private void BenchmarkSetPixel(int loops = 10)
+        {
+            return;
+
+            var color = NightLightConverter.ToColor(Color);
+
+            for (var loop = 0; loop < loops; loop++)
+            {
+                var startTime = DateTime.UtcNow;
+                for (var i = 0; i < _neoPixelManager.Count; i++)
+                {
+                    if (i != MoonPixel && i != SunPixel)
+                    {
+                        _neoPixelManager.SetPixel(i, color);
+                    }
+                }
+
+                _logger.LogDebug($"SetPixel took {DateTime.UtcNow - startTime}");
+            }
+
+            var scaledColor = ColorConverter.ScaleBrightness(color, Brightness);
+
+            for (var loop = 0; loop < loops; loop++)
+            {
+                var startTime = DateTime.UtcNow;
+                for (var i = 0; i < _neoPixelManager.Count; i++)
+                {
+                    if (i != MoonPixel && i != SunPixel)
+                    {
+                        _neoPixelManager.SetPixelFast(i, scaledColor);
+                    }
+                }
+
+                _logger.LogDebug($"SetPixelFast took {DateTime.UtcNow - startTime}");
+            }
         }
     }
 
-    public static class LightManagerExtensions
+    public static class NightLightManagerExtensions
     {
         internal static Resources.BitmapResources GetEnabledBitmapId(this INightLightManager nightLightManager)
         {

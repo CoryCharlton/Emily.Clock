@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Text;
 using Emily.Clock.IO;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Hardware.Esp32;
@@ -9,6 +11,8 @@ namespace Emily.Clock.App.Hardware
 {
     internal class FileStorageProvider: IFileStorageProvider, IDisposable
     {
+        private const string Root = @"D:";
+
         private bool _disposed;
         private readonly ILogger _logger;
         private SDCard _sdCard;
@@ -60,9 +64,11 @@ namespace Emily.Clock.App.Hardware
             _disposed = true;
         }
 
-        public string[] GetDirectories(string path) => Directory.GetDirectories(path);
+        public bool FileExists(string path) => File.Exists(NormalizePath(path));
 
-        public string[] GetFiles(string path) => Directory.GetFiles(path);
+        public string[] GetDirectories(string path) => Directory.GetDirectories(NormalizePath(path));
+
+        public string[] GetFiles(string path) => Directory.GetFiles(NormalizePath(path));
 
         public bool Initialize()
         {
@@ -94,10 +100,43 @@ namespace Emily.Clock.App.Hardware
             return IsMounted;
         }
 
+        // TODO: Optimize this (can we implement a SpanString?)
+        // This isn't very efficient
+        private string NormalizePath(string path)
+        {
+            if (path.StartsWith(Root))
+            {
+                return path.Contains("/") ? path.Replace("/", @"\") : path;
+            }
+
+            var colonIndex = path.IndexOf(':');
+            var normalizedPath = new StringBuilder(colonIndex == -1 ? path : path.Substring(colonIndex + 1, path.Length - 1 - colonIndex));
+
+            normalizedPath.Insert(0, Root + @"\", 1);
+            normalizedPath.Replace("/", @"\");
+            normalizedPath.Replace(@"\\", @"\");
+
+            var normalizedPathString = normalizedPath.ToString();
+            Debug.WriteLine(normalizedPathString);
+            return normalizedPathString;
+        }
+
+
+        public StreamReader OpenText(string path) =>
+            new(new FileStream(NormalizePath(path), FileMode.Open, FileAccess.Read));
+
+        public string ReadAllText(string path)
+        {
+            using var streamReader = OpenText(path);
+            return streamReader.ReadToEnd();
+        }
+
         private static void SetPinFunction(int pin, DeviceFunction function)
         {
             nanoFramework.Hardware.Esp32.Configuration.SetPinFunction(pin, function);
         }
+
+
 
         private void Unmount()
         {

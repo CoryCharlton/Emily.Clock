@@ -38,10 +38,17 @@ namespace Emily.Clock.Device.NeoPixel
         bool Initialize();
 
         /// <summary>Sets pixel at specific position.</summary>
+        /// <remarks>The color will be adjusted for brightness.</remarks>
         /// <param name="pixel">The index of the pixel.</param>
         /// <param name="color">Color to set the pixel to.</param>
         /// <param name="brightness">Brightness of the pixel between 0.0 and 1.0.</param>
         void SetPixel(int pixel, Color color, double brightness = -1.0);
+
+        /// <summary>Sets pixel at specific position.</summary>
+        /// <remarks>The specified color should be adjusted for brightness.</remarks>
+        /// <param name="pixel">The index of the pixel.</param>
+        /// <param name="color">Color to set the pixel to.</param>
+        void SetPixelFast(int pixel, Color color);
 
         /// <summary>Sends backing image to the LED driver.</summary>
         void Update();

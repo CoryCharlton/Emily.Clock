@@ -47,6 +47,10 @@ namespace Emily.Clock.Device
                 return false;
             }
 
+            // TODO: Initialize Audio provider (I2S or Piezo)
+
+            // TODO: Initialize RTC and restore time if valid
+
             if (!InitializeFileStorage())
             {
                 _logger.LogError("Failed to initialize file storage");
@@ -58,6 +62,20 @@ namespace Emily.Clock.Device
 
                 return false;
             }
+
+            /*
+            var internalFiles = Directory.GetFiles(@"I:\");
+            foreach (var internalFile in internalFiles)
+            {
+                Debug.WriteLine($"Checking {internalFile}");
+
+                if (internalFile.ToLower().EndsWith(".cfg") || internalFile.ToLower().EndsWith(".config"))
+                {
+                    Debug.WriteLine($"Deleting {internalFile}");
+                    //File.Delete(internalFile);
+                }
+            }
+            */
 
             return true;
         }

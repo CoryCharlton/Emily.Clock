@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 using System.Threading;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Networking;
 
@@ -27,16 +27,16 @@ namespace Emily.Clock.Networking
     public class WirelessClientManager : IWirelessClientManager
     {
         private WirelessClientConfiguration _configuration;
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationManager _configurationManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
 
-        public WirelessClientManager(IConfigurationService configurationService, ILogger logger, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
+        public WirelessClientManager(IConfigurationManager configurationManager, ILogger logger, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
-            _configurationService = configurationService;
-            _configurationService.ConfigurationUpdated += OnConfigurationUpdated;
-            _configuration = GetConfiguration();
+            _configurationManager = configurationManager;
+            _configurationManager.ConfigurationChanged += OnConfigurationChanged;
+            _configuration = (WirelessClientConfiguration) _configurationManager.Get(WirelessClientConfiguration.Section);
             _logger = logger;
             _mediator = mediator;
             _networkInterfaceProvider = networkInterfaceProvider;
@@ -101,23 +101,18 @@ namespace Emily.Clock.Networking
             configuration.SaveConfiguration();
         }
 
-        private WirelessClientConfiguration GetConfiguration()
-        {
-            return (WirelessClientConfiguration) _configurationService.GetConfigSection(WirelessClientConfiguration.SectionName, typeof(WirelessClientConfiguration));
-        }
-
         private Wireless80211Configuration GetNetworkConfiguration() => Wireless80211Configuration.GetAllWireless80211Configurations()[GetNetworkInterface().SpecificConfigId];
 
         private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.GetInterface(NetworkInterfaceType.Wireless80211);
 
-        private void OnConfigurationUpdated(object sender, EventArgs e)
+        private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {
-            if (e is not ObjectEventArgs objectEventArgs || !string.Equals(WirelessClientConfiguration.SectionName, objectEventArgs.Data as string))
+            if (WirelessClientConfiguration.Section != e.Section)
             {
                 return;
             }
 
-            _configuration = GetConfiguration();
+            _configuration = (WirelessClientConfiguration) e.Configuration;
         }
 
         private void PublishStatusEvent(string message)

@@ -2,7 +2,7 @@
 {
     public class WirelessAccessPointConfiguration
     {
-        public const string SectionName = "WirelessAccessPoint";
+        public const string Section = "WirelessAccessPoint";
 
         public string IpAddress { get; set; } = "192.168.4.1";
 

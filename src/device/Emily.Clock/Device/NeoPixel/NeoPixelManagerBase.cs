@@ -81,6 +81,8 @@ namespace Emily.Clock.Device.NeoPixel
             LedStrip.Image.SetPixel(pixel, 0, ScaleBrightness(color, brightness));
         }
 
+        public void SetPixelFast(int pixel, Color color) => LedStrip.Image.SetPixel(pixel, 0, color);
+
         public void Update()
         {
             LedStrip.Update();

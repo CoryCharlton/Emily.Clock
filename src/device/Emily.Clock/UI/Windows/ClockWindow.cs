@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using nanoFramework.UI;
 using Emily.Clock.UI.Lights;
@@ -76,12 +77,16 @@ namespace Emily.Clock.UI.Windows
 
         private void DrawProgressBar(Bitmap screen, bool flush = false)
         {
+            Debug.WriteLine($"{DateTime.UtcNow.TimeOfDay} Drawing progress bar");
+
             _clearProgressAt = _localTimeProvider.UtcNow.AddSeconds(2);
 
             Controls.PerformDrawingAndFlush(screen, flush, () =>
             {
                 ProgressRectangle = Controls.DrawProgressBar(screen, _nightLightManager.Brightness, flush);
             });
+
+            Debug.WriteLine($"{DateTime.UtcNow.TimeOfDay} Drawing progress bar - Completed");
         }
 
         private void DrawTime(Bitmap screen, DateTime time, bool flush = false)

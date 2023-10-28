@@ -4,7 +4,7 @@ namespace Emily.Clock.Configuration
 {
     public class NightLightConfiguration
     {
-        public const string SectionName = "NightLight";
+        public const string Section = "NightLight";
 
         public double Brightness { get; set; } = 0.5;
 

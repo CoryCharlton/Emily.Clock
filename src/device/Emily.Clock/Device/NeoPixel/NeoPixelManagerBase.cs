@@ -17,9 +17,9 @@ namespace Emily.Clock.Device.NeoPixel
 
         public abstract int Count { get; }
 
-        protected Ws28xx LedStrip { get; private set; }
-
         public bool IsInitialized { get; private set; }
+
+        protected Ws28xx LedStrip { get; private set; }
 
         public void Clear()
         {

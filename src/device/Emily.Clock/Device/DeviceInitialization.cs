@@ -69,10 +69,10 @@ namespace Emily.Clock.Device
             {
                 Debug.WriteLine($"Checking {internalFile}");
 
-                if (internalFile.ToLower().EndsWith(".cfg") || internalFile.ToLower().EndsWith(".config"))
+                if (internalFile.ToLower().EndsWith("ccswe-nightlight.config"))
                 {
                     Debug.WriteLine($"Deleting {internalFile}");
-                    //File.Delete(internalFile);
+                    File.Delete(internalFile);
                 }
             }
             */
@@ -86,34 +86,7 @@ namespace Emily.Clock.Device
 
             var fileStorageInitialized = _fileStorageProvider.Initialize();
 
-            if (!fileStorageInitialized)
-            {
-                PublishStatusEvent("Failed to initialize file storage");
-            }
-            else
-            {
-                PublishStatusEvent("File storage initialized");
-
-                var fileExists1 = _fileStorageProvider.FileExists(@"D:\Variation-CLJ013901.wav");
-                var fileExists2 = _fileStorageProvider.FileExists(@"D:/Variation-CLJ013901.wav");
-                var fileExists3 = _fileStorageProvider.FileExists(@"\Variation-CLJ013901.wav");
-                var fileExists4 = _fileStorageProvider.FileExists(@"/Variation-CLJ013901.wav");
-                var fileExists5 = _fileStorageProvider.FileExists(@"I:/Variation-CLJ013901.wav");
-
-                _logger.LogDebug($"1: {fileExists1}, 2: {fileExists2}, 3: {fileExists3}, 4: {fileExists4}, 5: {fileExists5}");
-
-                var directories = _fileStorageProvider.GetDirectories(@"D:\");
-                foreach (var directory in directories)
-                {
-                    _logger.LogDebug($"Directory: {directory}");
-                }
-
-                var files = _fileStorageProvider.GetFiles(@"D:\");
-                foreach (var file in files)
-                {
-                    _logger.LogDebug($"File: {file}");
-                }
-            }
+            PublishStatusEvent(fileStorageInitialized ? "File storage initialized" : "Failed to initialize file storage");
 
             return fileStorageInitialized;
         }

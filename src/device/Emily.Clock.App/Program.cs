@@ -7,6 +7,7 @@ namespace Emily.Clock.App
     {
         public static void Main()
         {
+            // TODO: Replace MakoIoT.Device with nanoFramework.Hosting / new DeviceHost / DeviceHostBuilder
             var builder = DeviceBuilder.Create()
                 .ConfigureDependencyInjection()
                 .AddCore();

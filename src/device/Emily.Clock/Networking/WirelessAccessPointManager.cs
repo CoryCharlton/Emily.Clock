@@ -1,9 +1,9 @@
 ﻿using System;
 using Emily.Clock.Configuration;
-using MakoIoT.Device.Services.Interface;
 using System.Net.NetworkInformation;
 using Iot.Device.DhcpServer;
 using System.Net;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Mediator.Events;
 using MakoIoT.Device.Utilities.Invoker;
@@ -26,16 +26,17 @@ namespace Emily.Clock.Networking
     public class WirelessAccessPointManager : IWirelessAccessPointManager
     {
         private WirelessAccessPointConfiguration _configuration;
-        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationManager _configurationManager;
         private DhcpServer _dhcpServer;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
 
-        public WirelessAccessPointManager(IConfigurationService configurationService, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
+        // TODO: Find and replace
+        public WirelessAccessPointManager(IConfigurationManager configurationManager, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
-            _configurationService = configurationService;
-            _configurationService.ConfigurationUpdated += OnConfigurationUpdated;
-            _configuration = GetConfiguration();
+            _configurationManager = configurationManager;
+            _configurationManager.ConfigurationChanged += OnConfigurationChanged;
+            _configuration = (WirelessAccessPointConfiguration) _configurationManager.Get(WirelessAccessPointConfiguration.Section);
             _mediator = mediator;
             _networkInterfaceProvider = networkInterfaceProvider;
         }
@@ -89,23 +90,18 @@ namespace Emily.Clock.Networking
             networkConfiguration.SaveConfiguration();
         }
 
-        private WirelessAccessPointConfiguration GetConfiguration()
-        {
-            return (WirelessAccessPointConfiguration) _configurationService.GetConfigSection(WirelessAccessPointConfiguration.SectionName, typeof(WirelessAccessPointConfiguration));
-        }
-
         private WirelessAPConfiguration GetNetworkConfiguration() => WirelessAPConfiguration.GetAllWirelessAPConfigurations()[GetNetworkInterface().SpecificConfigId];
 
         private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.GetInterface(NetworkInterfaceType.WirelessAP);
 
-        private void OnConfigurationUpdated(object sender, EventArgs e)
+        private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {
-            if (e is not ObjectEventArgs objectEventArgs || !string.Equals(WirelessAccessPointConfiguration.SectionName, objectEventArgs.Data as string))
+            if (WirelessAccessPointConfiguration.Section != e.Section)
             {
                 return;
             }
 
-            _configuration = GetConfiguration();
+            _configuration = (WirelessAccessPointConfiguration) e.Configuration;
         }
 
         private void PublishStatusEvent(string message)

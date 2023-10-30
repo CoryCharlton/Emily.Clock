@@ -2,8 +2,7 @@
 {
     public class WirelessClientConfiguration
     {
-        public static WirelessClientConfiguration Default { get; } = new();
-        public const string SectionName = "WirelessClient";
+        public const string Section = "WirelessClient";
 
         /// <summary>
         /// Connection timeout in seconds

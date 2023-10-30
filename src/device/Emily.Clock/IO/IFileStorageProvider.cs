@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.IO;
 
 namespace Emily.Clock.IO
 {
@@ -7,8 +6,11 @@ namespace Emily.Clock.IO
     {
         bool IsMounted { get; }
 
+        bool FileExists(string path);
         string[] GetDirectories(string path);
         string[] GetFiles(string path);
         bool Initialize();
+        StreamReader OpenText(string path);
+        string ReadAllText(string path);
     }
 }

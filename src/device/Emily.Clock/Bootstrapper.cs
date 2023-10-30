@@ -1,4 +1,6 @@
-﻿using CCSWE.nanoFramework.Mediator;
+﻿using System.Collections;
+using CCSWE.nanoFramework.Configuration;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
 using Emily.Clock.Device;
@@ -10,7 +12,6 @@ using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
-using MakoIoT.Device.Services.Configuration.Extensions;
 using MakoIoT.Device.Services.FileStorage.Extensions;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Server.Extensions;
@@ -22,22 +23,6 @@ namespace Emily.Clock
 {
     public static class Bootstrapper
     {
-        private static IDeviceBuilder AddConfigurations(this IDeviceBuilder builder)
-        {
-            builder.AddConfiguration(service =>
-            {
-                // TODO: Make sure these are not overwriting
-                service.WriteDefault(DateTimeConfiguration.SectionName, DateTimeConfiguration.Default, true);
-                service.WriteDefault(NightLightConfiguration.SectionName, NightLightConfiguration.Default);
-                service.WriteDefault(WirelessAccessPointConfiguration.SectionName, WirelessAccessPointConfiguration.Default);
-                service.WriteDefault(WirelessClientConfiguration.SectionName, WirelessClientConfiguration.Default);
-            });
-
-            builder.Services.AddSingleton(typeof(IConfigurationTypeFactory), typeof(ConfigurationTypeFactory));
-            
-            return builder;
-        }
-
         public static IDeviceBuilder AddCore(this IDeviceBuilder builder)
         {
             nanoFramework.Json.Configuration.Settings.CaseSensitive = false;
@@ -45,7 +30,6 @@ namespace Emily.Clock
             builder.Services.AddCore();
 
             builder
-                .AddConfigurations()
                 .AddFileStorage()
                 .AddLogging()
                 .AddMediator()
@@ -81,6 +65,13 @@ namespace Emily.Clock
                 .AddTransient(typeof(NetworkFailureWindow))
                 .AddTransient(typeof(ResetToDefaultsWindow));
 
+            services
+                .AddConfigurationManager(options => { options.LogLevel = LogLevel.Debug; })
+                .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
+                .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration())
+                .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration())
+                .BindConfiguration(WirelessClientConfiguration.Section, new WirelessClientConfiguration());
+
             return services;
         }
 
@@ -93,7 +84,6 @@ namespace Emily.Clock
 #endif
 
             builder.Services.AddSingleton(typeof(ILogger), typeof(DebugLogger));
-            //builder.Services.AddSingleton(typeof(ILoggerFactory), typeof(DebugLoggerFactory));
             builder.Services.AddSingleton(typeof(LoggerOptions), loggerConfig);
 
             LoggerFormatter.Initialize();
@@ -105,8 +95,9 @@ namespace Emily.Clock
         {
             builder.Services.AddMediator(options =>
             {
-                //options.DelayedStart = true;
                 options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
+
+                options.LogLevel = LogLevel.Debug;
             });
 
             return builder;
@@ -125,6 +116,32 @@ namespace Emily.Clock
             });
 
             return builder;
+        }
+    }
+
+    public class TestConfiguration
+    {
+        public const string Name = nameof(TestConfiguration);
+
+        public ArrayList Configurations { get; set; } = new ArrayList();
+
+        public static TestConfiguration Create()
+        {
+            var test = new TestConfiguration();
+
+            for (var i = 0; i < 10; i++)
+            {
+                var list = new ArrayList();
+                
+                for (var j = 0; j < 10; j++)
+                {
+                    list.Add(j);
+                }
+
+                test.Configurations.Add(list);
+            }
+
+            return test;
         }
     }
 }

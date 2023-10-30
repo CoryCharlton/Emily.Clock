@@ -1,47 +1,87 @@
-﻿using nanoFramework.Json;
+﻿using System.IO;
+using nanoFramework.Json;
 using System.Net;
 using System.Text;
+using Emily.Clock.Http;
 using MakoIoT.Device.Services.Server.Extensions;
 
+#nullable enable // TODO: Enable this for the project
 namespace Emily.Clock.Controllers
 {
     public abstract class ControllerBase
     {
-        private static void AddJsonOutput(HttpListenerResponse response, object body)
-        {
-            if (body is null)
-            {
-                return;
-            }
+        private const int BufferSize = 1024;
 
+        private static void WriteOutput(HttpListenerResponse response, object? body)
+        {
             var bytes = Encoding.UTF8.GetBytes(body as string ?? JsonConvert.SerializeObject(body));
 
-            response.ContentLength64 = bytes.Length;
-            response.ContentType = "application/json";
-            response.OutputStream.Write(bytes, 0, bytes.Length);
+            WriteOutput(response, bytes);
         }
 
-        protected static void StatusCode(HttpListenerResponse response, HttpStatusCode statusCode, object body = null)
+        private static void WriteOutput(HttpListenerResponse response, byte[] bytes, string contentType = MimeType.Application.Json)
         {
-            if (response is null)
-            {
-                return;
-            }
+            response.ContentLength64 = bytes.Length;
+            response.ContentType = contentType;
+            response.SendChunked = response.ContentLength64 > BufferSize; // Is this good?
 
+            for (var bytesSent = 0L; bytesSent < bytes.Length;)
+            {
+                var bytesToSend = bytes.Length - bytesSent;
+                bytesToSend = bytesToSend < BufferSize ? bytesToSend : BufferSize;
+
+                response.OutputStream.Write(bytes, (int) bytesSent, (int) bytesToSend);
+                bytesSent += bytesToSend;
+            }
+        }
+
+        private static void WriteOutput(HttpListenerResponse response, Stream stream, string contentType = MimeType.Application.Octet)
+        {
+            response.ContentLength64 = stream.Length;
+            response.ContentType = contentType;
+            response.SendChunked = response.ContentLength64 > BufferSize; // Is this good?
+
+            var buffer = new byte[BufferSize];
+            var bytesSent = 0L;
+            int bytesToSend;
+
+            while ((bytesToSend = stream.Read(buffer)) > 0)
+            {
+                response.OutputStream.Write(buffer, (int) bytesSent, (int) bytesToSend);
+                bytesSent += bytesToSend;
+            }
+        }
+
+        protected static void StatusCode(HttpListenerResponse response, HttpStatusCode statusCode, object? body = null, string contentType = MimeType.Application.Json)
+        {
             response.AddCors();
             response.StatusCode = (int) statusCode;
 
-            if (body is not null)
+            switch (body)
             {
-                AddJsonOutput(response, body);
+                case byte[] bytes:
+                    WriteOutput(response, bytes, contentType);
+                    break;
+                case Stream stream:
+                    WriteOutput(response, stream);
+                    break;
+                default:
+                {
+                    if (body is not null)
+                    {
+                        WriteOutput(response, body);
+                    }
+
+                    break;
+                }
             }
         }
 
-        public void Ok(HttpListenerResponse response, object body = null) => StatusCode(response, HttpStatusCode.OK, body); // 200
+        protected void Ok(HttpListenerResponse response, object? body = null, string contentType = MimeType.Application.Json) => StatusCode(response, HttpStatusCode.OK, body, contentType); // 200
 
-        public void BadRequest(HttpListenerResponse response, object body = null) => StatusCode(response, HttpStatusCode.BadRequest, body); // 400
-        public void NotFound(HttpListenerResponse response, object body = null) => StatusCode(response, HttpStatusCode.NotFound, body); // 404
+        protected void BadRequest(HttpListenerResponse response, object? body = null, string contentType = MimeType.Application.Json) => StatusCode(response, HttpStatusCode.BadRequest, body, contentType); // 400
+        protected void NotFound(HttpListenerResponse response, object? body = null, string contentType = MimeType.Application.Json) => StatusCode(response, HttpStatusCode.NotFound, body, contentType); // 404
 
-        public void InternalServerError(HttpListenerResponse response, object body = null) => StatusCode(response, HttpStatusCode.InternalServerError, body); // 500
+        protected void InternalServerError(HttpListenerResponse response, object? body = null, string contentType = MimeType.Application.Json) => StatusCode(response, HttpStatusCode.InternalServerError, body, contentType); // 500
     }
 }

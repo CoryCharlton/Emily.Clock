@@ -14,6 +14,7 @@ namespace Emily.Clock.Networking
         void SetMode(WirelessMode mode);
     }
 
+    // TODO: Replace IStorageService with something else more generic
     public class WirelessNetworkManager : IWirelessNetworkManager
     {
         private const string WirelessModeFileName = "wireless_mode.sys";

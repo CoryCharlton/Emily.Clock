@@ -15,6 +15,7 @@
     <RootNamespace>Emily.Clock.App</RootNamespace>
     <AssemblyName>Emily.Clock.App</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
@@ -28,8 +29,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.4.0\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.Configuration">
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.2.4\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.Core">
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.2\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.1.3\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.2.1\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.Threading">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.1.2\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.329\lib\Iot.Device.Button.dll</HintPath>
@@ -39,9 +52,6 @@
     </Reference>
     <Reference Include="MakoIoT.Device">
       <HintPath>..\packages\MakoIoT.Device.1.0.38.15761\lib\MakoIoT.Device.dll</HintPath>
-    </Reference>
-    <Reference Include="MakoIoT.Device.Services.Configuration">
-      <HintPath>..\packages\MakoIoT.Device.Services.Configuration.1.0.31.51806\lib\MakoIoT.Device.Services.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Services.FileStorage">
       <HintPath>..\packages\MakoIoT.Device.Services.FileStorage.1.0.30.57507\lib\MakoIoT.Device.Services.FileStorage.dll</HintPath>
@@ -78,6 +88,9 @@
     </Reference>
     <Reference Include="nanoFramework.Hardware.Esp32.Rmt">
       <HintPath>..\packages\nanoFramework.Hardware.Esp32.Rmt.2.0.1\lib\nanoFramework.Hardware.Esp32.Rmt.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Hosting">
+      <HintPath>..\packages\nanoFramework.Hosting.1.0.25\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Json">
       <HintPath>..\packages\nanoFramework.Json.2.2.101\lib\nanoFramework.Json.dll</HintPath>
@@ -127,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.lock.json" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <ProjectExtensions>

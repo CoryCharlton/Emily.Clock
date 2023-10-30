@@ -4,15 +4,14 @@ namespace Emily.Clock.Configuration
 {
     public class NightLightConfiguration
     {
-        public static NightLightConfiguration Default { get; } = new() {Brightness = 0.5, Color = NightLightColor.Violet, SunPixel = 1, MoonPixel = 0};
-        public const string SectionName = "NightLight";
+        public const string Section = "NightLight";
 
-        public double Brightness { get; set; }
+        public double Brightness { get; set; } = 0.5;
 
-        public NightLightColor Color { get; set; }
+        public NightLightColor Color { get; set; } = NightLightColor.Violet;
 
-        public int MoonPixel { get; set; }
+        public int MoonPixel { get; set; } = 0;
 
-        public int SunPixel { get; set; }
+        public int SunPixel { get; set; } = 1;
     }
 }

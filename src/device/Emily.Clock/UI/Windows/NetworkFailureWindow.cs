@@ -1,5 +1,4 @@
 ﻿using CCSWE.nanoFramework.Mediator;
-using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
@@ -9,14 +8,13 @@ namespace Emily.Clock.UI.Windows
 {
     public class NetworkFailureWindow : Window, IMediatorEventHandler
     {
-        private readonly IDeviceManager _deviceManager;
         private readonly IMediator _mediator;
         private readonly IWirelessNetworkManager _networkManager;
 
         // TODO: Add a timer to automatically reboot in client mode if no response. Timer should tick down and display in the status bar
-        public NetworkFailureWindow(IDeviceManager deviceManager, IDisplayManager displayManager, ILogger logger, IMediator mediator, IWirelessNetworkManager networkManager) : base(displayManager, logger)
+        // TODO: If RTC exists and has valid time the reboot is not necessary
+        public NetworkFailureWindow(IDisplayManager displayManager, ILogger logger, IMediator mediator, IWirelessNetworkManager networkManager) : base(displayManager, logger)
         {
-            _deviceManager = deviceManager;
             _mediator = mediator;
             _networkManager = networkManager;
         }

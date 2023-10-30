@@ -15,6 +15,7 @@
     <RootNamespace>Emily.Clock.App</RootNamespace>
     <AssemblyName>Emily.Clock.App</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
@@ -29,16 +30,16 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.1.2\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.4.0\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.1.13\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.2.4\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.1.4\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.2\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.1.8\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.2.1\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
       <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.1.2\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
@@ -139,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.lock.json" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <ProjectExtensions>

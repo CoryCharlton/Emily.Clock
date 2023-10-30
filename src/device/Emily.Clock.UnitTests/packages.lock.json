@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETnanoFramework,Version=v1.0": {
+      "MakoIoT.Device": {
+        "type": "Direct",
+        "requested": "[1.0.38.15761, 1.0.38.15761]",
+        "resolved": "1.0.38.15761",
+        "contentHash": "vBlMiMFT6vOfkYK0+nRGYnNcigoE/cqHooLFPIRDtSAWg9XXAEM0KKRpQRba7MhnfiH5cHroTyXNfepCUf3t7w=="
+      }
+    }
+  }
+}

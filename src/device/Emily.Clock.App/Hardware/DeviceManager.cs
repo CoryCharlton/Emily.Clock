@@ -4,7 +4,7 @@ using System.Text;
 using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device;
-using Emily.Clock.Device.NeoPixel;
+using Emily.Clock.Device.Led;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
@@ -18,17 +18,17 @@ namespace Emily.Clock.App.Hardware
     {
         private readonly IConfigurationManager _configurationService;
         private readonly IDisplayManager _displayManager;
+        private readonly ILedManager _ledManager;
         private readonly IMediator _mediator;
-        private readonly INeoPixelManager _neoPixelManager;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
         private string _serialNumber;
 
-        public DeviceManager(IConfigurationManager configurationService, IDisplayManager displayManager, IMediator mediator, INeoPixelManager neoPixelManager, INetworkInterfaceProvider networkInterfaceProvider)
+        public DeviceManager(IConfigurationManager configurationService, IDisplayManager displayManager, ILedManager ledManager, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationService = configurationService;
             _displayManager = displayManager;
+            _ledManager = ledManager;
             _mediator = mediator;
-            _neoPixelManager = neoPixelManager;
             _networkInterfaceProvider = networkInterfaceProvider;
         }
 
@@ -80,9 +80,9 @@ namespace Emily.Clock.App.Hardware
                 _displayManager.SetBackLight(false);
             }
 
-            if (_neoPixelManager.IsInitialized)
+            if (_ledManager.IsInitialized)
             {
-                _neoPixelManager.Clear();
+                _ledManager.Clear();
             }
 
             Power.RebootDevice();

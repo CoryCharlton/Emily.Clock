@@ -6,7 +6,7 @@ using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
-using Emily.Clock.Device.NeoPixel;
+using Emily.Clock.Device.Led;
 using Emily.Clock.Mediator.Events;
 
 namespace Emily.Clock.UI.Lights
@@ -24,28 +24,25 @@ namespace Emily.Clock.UI.Lights
 
     public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     {
-        private static readonly Color MoonColor = NightLightConverter.ToColor(NightLightColor.Blue);
-        private static readonly Color SunColor = NightLightConverter.ToColor(NightLightColor.Orange);
+        private static readonly Color MoonColor = NightLightColorConverter.ToColor(NightLightColor.Blue);
+        private static readonly Color SunColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
 
         private NightLightConfiguration _configuration;
         private readonly IConfigurationManager _configurationManager;
+        private readonly ILedManager _ledManager;
         private readonly ILocalTimeProvider _localTimeProvider;
         private readonly IMediator _mediator;
-        private Color _moonColor = MoonColor;
-        private readonly INeoPixelManager _neoPixelManager;
         private PanelLight _panelMode;
-        private Color _stripColor;
-        private Color _sunColor = SunColor;
-        private readonly ConsumerThreadPool _updatePixelsThread;
+        private readonly ConsumerThreadPool _updateLedsThread;
 
-        public NightNightLightManager(IConfigurationManager configurationManager, ILocalTimeProvider localTimeProvider, IMediator mediator, INeoPixelManager neoPixelManager)
+        public NightNightLightManager(IConfigurationManager configurationManager, ILedManager ledManager, ILocalTimeProvider localTimeProvider, IMediator mediator)
         {
             _configurationManager = configurationManager;
+            _ledManager = ledManager;
             _localTimeProvider = localTimeProvider;
             _configurationManager.ConfigurationChanged += OnConfigurationChanged;
             _mediator = mediator;
-            _neoPixelManager = neoPixelManager;
-            _updatePixelsThread = new ConsumerThreadPool(1, UpdatePixelsThread);
+            _updateLedsThread = new ConsumerThreadPool(1, UpdateLedsThread);
 
             UpdateConfiguration((NightLightConfiguration)_configurationManager.Get(NightLightConfiguration.Section));
         }
@@ -61,13 +58,13 @@ namespace Emily.Clock.UI.Lights
                     return;
                 }
 
-                _configuration.Brightness = brightness;
+                /* TODO: Pass previous and target brightness to fade?
+                var currentBrightness = _configuration.Brightness;
+                var targetBrightness = value;
+                */
 
-                _moonColor = ColorConverter.ScaleBrightness(MoonColor, brightness);
-                _stripColor = ColorConverter.ScaleBrightness(NightLightConverter.ToColor(Color), brightness);
-                _sunColor = ColorConverter.ScaleBrightness(SunColor, brightness);
-                
-                _updatePixelsThread.Enqueue(UpdatePixels.All);
+                _configuration.Brightness = value;
+                _updateLedsThread.Enqueue(UpdateLeds.All);
 
                 WriteConfiguration();
             }
@@ -84,8 +81,7 @@ namespace Emily.Clock.UI.Lights
                 }
 
                 _configuration.Color = value;
-                _stripColor = ColorConverter.ScaleBrightness(NightLightConverter.ToColor(Color), Brightness);
-                _updatePixelsThread.Enqueue(UpdatePixels.Strip);
+                _updateLedsThread.Enqueue(UpdateLeds.Nightlight);
 
                 WriteConfiguration();
             }
@@ -96,8 +92,6 @@ namespace Emily.Clock.UI.Lights
             get => _configuration.Brightness > 0;
             set => Brightness = value ? 1.0 : 0.0;
         }
-
-        private int MoonPixel => _configuration.MoonPixel;
 
         private PanelLight PanelMode
         {
@@ -110,11 +104,9 @@ namespace Emily.Clock.UI.Lights
                 }
 
                 _panelMode = value;
-                _updatePixelsThread.Enqueue(UpdatePixels.SunAndMoon);
+                _updateLedsThread.Enqueue(UpdateLeds.SunAndMoon);
             }
         }
-
-        private int SunPixel => _configuration.SunPixel;
 
         public void CycleBrightness()
         {
@@ -159,7 +151,7 @@ namespace Emily.Clock.UI.Lights
         {
             _mediator.Subscribe(typeof(TimeChangedEvent), this);
             _panelMode = GetPanelMode();
-            _updatePixelsThread.Enqueue(UpdatePixels.All);
+            _updateLedsThread.Enqueue(UpdateLeds.All);
 
             return true;
         }
@@ -188,38 +180,6 @@ namespace Emily.Clock.UI.Lights
             UpdateConfiguration((NightLightConfiguration) e.Configuration);
         }
 
-        private void SetStripPixels()
-        {
-            for (var i = 0; i < _neoPixelManager.Count; i++)
-            {
-                if (i != MoonPixel && i != SunPixel)
-                {
-                    _neoPixelManager.SetPixelFast(i, _stripColor);
-                }
-            }
-        }
-
-        private void SetSunAndMoonPixels()
-        {
-            switch (PanelMode)
-            {
-                case PanelLight.Off:
-                    _neoPixelManager.SetPixelFast(MoonPixel, System.Drawing.Color.Black);
-                    _neoPixelManager.SetPixelFast(SunPixel, System.Drawing.Color.Black);
-                    break;
-                case PanelLight.Sun:
-                    _neoPixelManager.SetPixelFast(MoonPixel, System.Drawing.Color.Black);
-                    _neoPixelManager.SetPixelFast(SunPixel, _sunColor);
-                    break;
-                case PanelLight.Moon:
-                    _neoPixelManager.SetPixelFast(MoonPixel, _moonColor);
-                    _neoPixelManager.SetPixelFast(SunPixel, System.Drawing.Color.Black);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
         public void Toggle() => Enabled = !Enabled;
 
         private void UpdateConfiguration(NightLightConfiguration configuration)
@@ -230,68 +190,49 @@ namespace Emily.Clock.UI.Lights
             {
                 _configuration = configuration;
 
-                _moonColor = ColorConverter.ScaleBrightness(MoonColor, _configuration.Brightness);
-                _stripColor = ColorConverter.ScaleBrightness(NightLightConverter.ToColor(Color), _configuration.Brightness);
-                _sunColor = ColorConverter.ScaleBrightness(SunColor, _configuration.Brightness);
-
                 return;
             }
-
-            var updatePixels = false;
-
-            if (Math.Abs(configuration.Brightness - _configuration.Brightness) < double.Epsilon)
-            {
-                updatePixels = true;
-            }
-
-            if (configuration.Color != _configuration.Color)
-            {
-                updatePixels = true;
-            }
-
-            if (configuration.MoonPixel != _configuration.MoonPixel)
-            {
-                updatePixels = true;
-            }
-
-            if (configuration.SunPixel != _configuration.SunPixel)
-            {
-                updatePixels = true;
-            }
-
+            
             _configuration = configuration;
+
+            var updatePixels = Math.Abs(configuration.Brightness - _configuration.Brightness) < double.Epsilon || configuration.Color != _configuration.Color;
             
             if (updatePixels)
             {
-                _updatePixelsThread.Enqueue(UpdatePixels.All);
+                _updateLedsThread.Enqueue(UpdateLeds.All);
             }
         }
 
-        private void UpdatePixelsThread(object item)
+        private void UpdateLedsThread(object item)
         {
-            if (item is not UpdatePixels workItem)
+            if (item is not UpdateLeds workItem)
             {
                 return;
             }
 
-            Debug.WriteLine($"UpdatePixelsThread start");
+            Debug.WriteLine($"UpdateLedsThread start");
             var startTime = DateTime.UtcNow;
 
-            _neoPixelManager.Brightness = Brightness;
-
-            if (workItem.UpdateStrip)
+            // TODO: This may be passed in the item for fading...
+            var brightness = Brightness;
+            // TODO: This may be passed in the item for fading...
+            var nightlightColor = NightLightColorConverter.ToColor(Color);
+            var panelMode = PanelMode;
+            
+            if (workItem.UpdateNightLight)
             {
-                SetStripPixels();
+                _ledManager.SetNightlightLeds(nightlightColor, brightness);
             }
 
             if (workItem.UpdateSunAndMoon)
             {
-                SetSunAndMoonPixels();
+                _ledManager.SetMoonLed(PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black, brightness);
+                _ledManager.SetSunLed(PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black, brightness);
             }
 
-            _neoPixelManager.Update();
+            _ledManager.Update();
 
-            Debug.WriteLine($"UpdatePixelsThread took {(DateTime.UtcNow - startTime)}");
+            Debug.WriteLine($"UpdateLedsThread took {(DateTime.UtcNow - startTime)}");
         }
 
         private void WriteConfiguration()
@@ -312,19 +253,19 @@ namespace Emily.Clock.UI.Lights
         }
     }
 
-    internal class UpdatePixels
+    internal class UpdateLeds
     {
-        private UpdatePixels(bool updateStrip, bool updateSunAndMoon)
+        private UpdateLeds(bool updateNightLight, bool updateSunAndMoon)
         {
-            UpdateStrip = updateStrip;
+            UpdateNightLight = updateNightLight;
             UpdateSunAndMoon = updateSunAndMoon;
         }
 
-        public bool UpdateStrip { get; }
+        public bool UpdateNightLight { get; }
         public bool UpdateSunAndMoon { get; }
 
-        public static UpdatePixels All { get; } = new(true, true);
-        public static UpdatePixels Strip { get; } = new(true, false);
-        public static UpdatePixels SunAndMoon { get; } = new(false, true);
+        public static UpdateLeds All { get; } = new(true, true);
+        public static UpdateLeds Nightlight { get; } = new(true, false);
+        public static UpdateLeds SunAndMoon { get; } = new(false, true);
     }
 }

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Emily.Clock.UI.Lights
 {
-    public static class NightLightConverter
+    public static class NightLightColorConverter
     {
         // ReSharper disable InconsistentNaming
         private static readonly Color COLOR_RED = Color.FromArgb(255, 255, 0, 0);

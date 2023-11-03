@@ -9,9 +9,5 @@ namespace Emily.Clock.Configuration
         public double Brightness { get; set; } = 0.5;
 
         public NightLightColor Color { get; set; } = NightLightColor.Violet;
-
-        public int MoonPixel { get; set; } = 0;
-
-        public int SunPixel { get; set; } = 1;
     }
 }

@@ -42,7 +42,7 @@
       <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.2.5\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.NeoPixel">
-      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.0.1.6\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.0.2.0\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
       <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.2.4\lib\CCSWE.nanoFramework.Threading.dll</HintPath>

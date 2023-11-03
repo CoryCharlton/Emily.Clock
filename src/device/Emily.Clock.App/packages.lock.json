@@ -28,9 +28,9 @@
       },
       "CCSWE.nanoFramework.NeoPixel": {
         "type": "Direct",
-        "requested": "[0.1.6, 0.1.6]",
-        "resolved": "0.1.6",
-        "contentHash": "V2T/HmT6+FdeIFXoKnxeX+sfXGrOFhSw9XnradwAkKOqLn1jVkNua0NRkOIqFS+I4LESYDyYf1K4p9GIAh7ZYA=="
+        "requested": "[0.2.0, 0.2.0]",
+        "resolved": "0.2.0",
+        "contentHash": "cH0ghXWYczzZXw43z8jeQ+rN+sBemAm3JZRKEzFlBrj7QtKXyFgVelf2bkqF/c6iTd4ev4PuQf/HbOy+ewtNEQ=="
       },
       "CCSWE.nanoFramework.Threading": {
         "type": "Direct",

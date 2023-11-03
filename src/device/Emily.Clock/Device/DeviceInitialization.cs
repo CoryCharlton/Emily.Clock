@@ -1,6 +1,6 @@
 ﻿using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Gpio;
-using Emily.Clock.Device.NeoPixel;
+using Emily.Clock.Device.Led;
 using Emily.Clock.IO;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
@@ -15,20 +15,20 @@ namespace Emily.Clock.Device
         private readonly IButtonManager _buttonManager;
         private readonly IDisplayManager _displayManager;
         private readonly IFileStorageProvider _fileStorageProvider;
+        private readonly ILedManager _ledManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
-        private readonly INeoPixelManager _neoPixelManager;
 
-        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageProvider fileStorageProvider, ILogger logger, IMediator mediator, INavigationService navigationService, INeoPixelManager neoPixelManager)
+        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageProvider fileStorageProvider, ILedManager ledManager, ILogger logger, IMediator mediator, INavigationService navigationService)
         {
             _buttonManager = buttonManager;
             _displayManager = displayManager;
             _fileStorageProvider = fileStorageProvider;
+            _ledManager = ledManager;
             _logger = logger;
             _mediator = mediator;
             _navigationService = navigationService;
-            _neoPixelManager = neoPixelManager;
         }
 
         public bool DeviceStarting()
@@ -56,9 +56,9 @@ namespace Emily.Clock.Device
                 _logger.LogError("Failed to initialize file storage");
             }
 
-            if (!_neoPixelManager.Initialize())
+            if (!_ledManager.Initialize())
             {
-                _logger.LogError("Failed to initialize led strip.");
+                _logger.LogError("Failed to initialize LEDs.");
 
                 return false;
             }

@@ -11,7 +11,7 @@ This is a fun little nightlight clock project I created for my daughter.
 - REST API for configuration
 - etc...
  
-### Project Structure
+### Structure
 
 One of the goals of the application was to design it in such a way that someone else, with different hardware, would be able to quickly and easily reuse the majority of my code 
 
@@ -22,7 +22,20 @@ One of the goals of the application was to design it in such a way that someone 
 **Emily.Clock.App**
 
 - Implements device specific functionality is implemented (GPIO pin configuration, hardware specific implementations (display, LED chipset, etc.)
- 
+
+## Hardware
+
+The 3D models and source code were designed around the following hardware:
+
+- [LILYGO® TTGO T4 V1.3 2.4 inch](https://amzn.to/47eONBK)
+- [MAX98357A I2S Audio Amplifier](https://amzn.to/3FKNz5n)
+- [DS3231SN Real Time Clock](https://amzn.to/3st1r17)
+- [4 Ohm 3 Watt Speaker](https://amzn.to/3siM7UU)
+
+*Some of these links may be affiliate links, so I may earn a small commission when you make a purchase through these links at no additional cost to you.*
+
+You can swap out any of the hardware and adjust the Fusion 360 model or design your own case.
+
 ## TODO
 
 The more I worked on this the more I wanted to do with it. Currently the following features on the roadmap (in no particular order)

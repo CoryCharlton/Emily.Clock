@@ -5,7 +5,7 @@ using Emily.Clock.Device.Led;
 using Emily.Clock.IO;
 using Emily.Clock.UI;
 using MakoIoT.Device.Services.Interface;
-using nanoFramework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Emily.Clock.App
 {

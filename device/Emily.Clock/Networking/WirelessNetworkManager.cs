@@ -18,6 +18,7 @@ namespace Emily.Clock.Networking
     public class WirelessNetworkManager : IWirelessNetworkManager
     {
         private const string WirelessModeFileName = "wireless_mode.sys";
+        //private const string WirelessModeFileName = @"I:\wireless_mode.sys";
 
         private readonly IDeviceManager _deviceManager;
         private readonly IStorageService _storageService;
@@ -30,13 +31,6 @@ namespace Emily.Clock.Networking
             _storageService = storageService;
             _wirelessAccessPointManager = wirelessAccessPointManager;
             _wirelessClientManager = wirelessClientManager;
-
-#if DEBUG
-            if (_storageService.FileExists(WirelessModeFileName))
-            {
-                //_storageService.DeleteFile(WirelessModeFileName);
-            }
-#endif
         }
 
         public string IpAddress => GetMode() == WirelessMode.AccessPoint ? _wirelessAccessPointManager.IpAddress : _wirelessClientManager.IpAddress;

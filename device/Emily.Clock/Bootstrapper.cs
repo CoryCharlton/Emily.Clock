@@ -16,8 +16,8 @@ using MakoIoT.Device.Services.FileStorage.Extensions;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Server.Extensions;
 using MakoIoT.Device.Services.Server.WebServer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using nanoFramework.DependencyInjection;
 
 namespace Emily.Clock
 {

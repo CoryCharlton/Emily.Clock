@@ -1,6 +1,6 @@
 ﻿using System;
 using Emily.Clock.UI.Navigation;
-using nanoFramework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Emily.Clock.UI.Windows
 {

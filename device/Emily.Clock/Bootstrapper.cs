@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using CCSWE.nanoFramework.Configuration;
+using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
@@ -12,7 +13,6 @@ using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
-using MakoIoT.Device.Services.FileStorage.Extensions;
 using MakoIoT.Device.Services.Interface;
 using MakoIoT.Device.Services.Server.Extensions;
 using MakoIoT.Device.Services.Server.WebServer;
@@ -30,7 +30,6 @@ namespace Emily.Clock
             builder.Services.AddCore();
 
             builder
-                .AddFileStorage()
                 .AddLogging()
                 .AddMediator()
                 .AddWebServer();
@@ -40,6 +39,9 @@ namespace Emily.Clock
 
         private static IServiceCollection AddCore(this IServiceCollection services)
         {
+            services
+                .AddFileStorage();
+
             // These execute in order
             services
                 .AddSingleton(typeof(IDeviceStartBehavior), typeof(DeviceInitialization))

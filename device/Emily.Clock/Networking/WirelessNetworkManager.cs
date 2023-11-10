@@ -1,6 +1,6 @@
 ﻿using System;
+using CCSWE.nanoFramework.FileStorage;
 using Emily.Clock.Device;
-using MakoIoT.Device.Services.Interface;
 
 namespace Emily.Clock.Networking
 {
@@ -14,18 +14,16 @@ namespace Emily.Clock.Networking
         void SetMode(WirelessMode mode);
     }
 
-    // TODO: Replace IStorageService with something else more generic
     public class WirelessNetworkManager : IWirelessNetworkManager
     {
-        private const string WirelessModeFileName = "wireless_mode.sys";
-        //private const string WirelessModeFileName = @"I:\wireless_mode.sys";
+        private const string WirelessModeFileName = @"I:\wireless_mode.sys";
 
         private readonly IDeviceManager _deviceManager;
-        private readonly IStorageService _storageService;
+        private readonly IFileStorage _storageService;
         private readonly IWirelessAccessPointManager _wirelessAccessPointManager;
         private readonly IWirelessClientManager _wirelessClientManager;
 
-        public WirelessNetworkManager(IDeviceManager deviceManager, IStorageService storageService, IWirelessAccessPointManager wirelessAccessPointManager, IWirelessClientManager wirelessClientManager)
+        public WirelessNetworkManager(IDeviceManager deviceManager, IFileStorage storageService, IWirelessAccessPointManager wirelessAccessPointManager, IWirelessClientManager wirelessClientManager)
         {
             _deviceManager = deviceManager;
             _storageService = storageService;
@@ -39,12 +37,12 @@ namespace Emily.Clock.Networking
 
         public WirelessMode GetMode()
         {
-            if (!_storageService.FileExists(WirelessModeFileName))
+            if (!_storageService.Exists(WirelessModeFileName))
             {
                 return WirelessMode.Client;
             }
 
-            var modeString = _storageService.ReadFile(WirelessModeFileName);
+            var modeString = _storageService.ReadAllText(WirelessModeFileName);
             if (string.IsNullOrEmpty(modeString))
             {
                 return WirelessMode.Client;
@@ -126,7 +124,7 @@ namespace Emily.Clock.Networking
                     throw new ArgumentOutOfRangeException(nameof(mode));
             }
 
-            _storageService.WriteToFile(WirelessModeFileName, mode.ToString());
+            _storageService.WriteAllText(WirelessModeFileName, mode.ToString());
             _deviceManager.Reboot();
         }
     }

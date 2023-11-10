@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using Emily.Clock.UI;
+﻿using Emily.Clock.UI;
 using nanoFramework.Presentation;
+using nanoFramework.UI;
 
 // ReSharper disable once CheckNamespace
-namespace nanoFramework.UI
+namespace System.Drawing
 {
     // TODO: Should I move the content alignment out of this layer? Maybe into controls and just allow this class to focus on core methods
     public static class BitmapExtensions
@@ -14,7 +14,7 @@ namespace nanoFramework.UI
             {
                 return;
             }
-
+            
             using var image = BitmapFactory.Create(region);
             bitmap.DrawImage(region.Location, image);
         }
@@ -32,7 +32,9 @@ namespace nanoFramework.UI
             var imageSize = image.GetSize();
 
             var rectangle = bitmapSize.AlignContent(imageSize, alignment);
-            return bitmap.DrawImage(rectangle.Location, image);
+            bitmap.DrawImage(rectangle.Location, image);
+
+            return rectangle;
         }
 
         public static void DrawImage(this Bitmap bitmap, int x, int y, Bitmap image)

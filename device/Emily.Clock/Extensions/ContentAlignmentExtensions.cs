@@ -1,48 +1,8 @@
-﻿using System;
-using nanoFramework.Presentation;
+﻿using nanoFramework.Presentation;
 
-namespace Emily.Clock.UI
+// ReSharper disable once CheckNamespace
+namespace System.Drawing
 {
-    public enum ContentAlignment
-    {
-        /// <summary>
-        /// Content is vertically aligned at the top, and horizontally aligned on the left.
-        /// </summary>
-        TopLeft = 0x001,
-        /// <summary>
-        /// Content is vertically aligned at the top, and horizontally aligned at the center.
-        /// </summary>
-        TopCenter = 0x002,
-        /// <summary>
-        /// Content is vertically aligned at the top, and horizontally aligned on the right.
-        /// </summary>
-        TopRight = 0x004,
-        /// <summary>
-        /// Content is vertically aligned in the middle, and horizontally aligned on the left.
-        /// </summary>
-        MiddleLeft = 0x010,
-        /// <summary>
-        /// Content is vertically aligned in the middle, and horizontally aligned at the center.
-        /// </summary>
-        MiddleCenter = 0x020,
-        /// <summary>
-        /// Content is vertically aligned in the middle, and horizontally aligned on the right.
-        /// </summary>
-        MiddleRight = 0x040,
-        /// <summary>
-        /// Content is vertically aligned at the bottom, and horizontally aligned on the left.
-        /// </summary>
-        BottomLeft = 0x100,
-        /// <summary>
-        /// Content is vertically aligned at the bottom, and horizontally aligned at the center.
-        /// </summary>
-        BottomCenter = 0x200,
-        /// <summary>
-        /// Content is vertically aligned at the bottom, and horizontally aligned on the right.
-        /// </summary>
-        BottomRight = 0x400,
-    }
-
     public static class ContentAlignmentExtensions
     {
         public static void GetAlignments(this ContentAlignment alignment, out HorizontalAlignment horizontal, out VerticalAlignment vertical)
@@ -85,4 +45,5 @@ namespace Emily.Clock.UI
             };
         }
     }
+
 }

@@ -56,9 +56,6 @@
     <Reference Include="MakoIoT.Device">
       <HintPath>..\packages\MakoIoT.Device.1.0.42.40216\lib\MakoIoT.Device.dll</HintPath>
     </Reference>
-    <Reference Include="MakoIoT.Device.Services.FileStorage">
-      <HintPath>..\packages\MakoIoT.Device.Services.FileStorage.1.0.34.63839\lib\MakoIoT.Device.Services.FileStorage.dll</HintPath>
-    </Reference>
     <Reference Include="MakoIoT.Device.Services.Interface">
       <HintPath>..\packages\MakoIoT.Device.Services.Interface.1.0.40.57355\lib\MakoIoT.Device.Services.Interface.dll</HintPath>
     </Reference>

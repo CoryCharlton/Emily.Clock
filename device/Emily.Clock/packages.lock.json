@@ -44,12 +44,6 @@
         "resolved": "1.0.42.40216",
         "contentHash": "Goj9PoKi5vGxfAJuLQ/2kGQ9tJLfZmBMOro8XSczgJhEzFL9XgnynGhBEjsBimefLJazAoMULwhExCBF4nRtsw=="
       },
-      "MakoIoT.Device.Services.FileStorage": {
-        "type": "Direct",
-        "requested": "[1.0.34.63839, 1.0.34.63839]",
-        "resolved": "1.0.34.63839",
-        "contentHash": "O0csomJ0RfRK2/xyODs1Ega7KJNAjsp4EIaH/cXH47OYiw5aOnSAaVY46iwjfEPlDUWsYGvTFEBSZZF1DuYcCg=="
-      },
       "MakoIoT.Device.Services.Interface": {
         "type": "Direct",
         "requested": "[1.0.40.57355, 1.0.40.57355]",

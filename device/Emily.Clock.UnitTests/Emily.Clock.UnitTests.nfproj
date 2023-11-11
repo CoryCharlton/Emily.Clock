@@ -43,16 +43,16 @@
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.436\lib\Iot.Device.Button.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device">
-      <HintPath>..\packages\MakoIoT.Device.1.0.42.40216\lib\MakoIoT.Device.dll</HintPath>
+      <HintPath>..\packages\MakoIoT.Device.1.0.43.29125\lib\MakoIoT.Device.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Services.Interface">
       <HintPath>..\packages\MakoIoT.Device.Services.Interface.1.0.40.57355\lib\MakoIoT.Device.Services.Interface.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Services.Server">
-      <HintPath>..\packages\MakoIoT.Device.Services.Server.1.0.37.51704\lib\MakoIoT.Device.Services.Server.dll</HintPath>
+      <HintPath>..\packages\MakoIoT.Device.Services.Server.1.0.39.37862\lib\MakoIoT.Device.Services.Server.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Utilities.String">
-      <HintPath>..\packages\MakoIoT.Device.Utilities.String.1.0.31.17475\lib\MakoIoT.Device.Utilities.String.dll</HintPath>
+      <HintPath>..\packages\MakoIoT.Device.Utilities.String.1.0.33.52014\lib\MakoIoT.Device.Utilities.String.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>

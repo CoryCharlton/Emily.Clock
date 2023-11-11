@@ -31,7 +31,6 @@ namespace Emily.Clock.Networking
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
 
-        // TODO: Find and replace
         public WirelessAccessPointManager(IConfigurationManager configurationManager, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationManager = configurationManager;

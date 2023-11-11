@@ -42,9 +42,6 @@
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.436\lib\Iot.Device.Button.dll</HintPath>
     </Reference>
-    <Reference Include="Iot.Device.Ws28xx.Esp32">
-      <HintPath>..\packages\nanoFramework.Iot.Device.Ws28xx.Esp32.1.2.436\lib\Iot.Device.Ws28xx.Esp32.dll</HintPath>
-    </Reference>
     <Reference Include="MakoIoT.Device">
       <HintPath>..\packages\MakoIoT.Device.1.0.42.40216\lib\MakoIoT.Device.dll</HintPath>
     </Reference>

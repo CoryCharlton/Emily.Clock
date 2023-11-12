@@ -49,7 +49,6 @@
     <Compile Include="Device\Gpio\GpioProvider.cs" />
     <Compile Include="Device\Gpio\IButtonManager.cs" />
     <Compile Include="Device\IDeviceManager.cs" />
-    <Compile Include="UI\HorizontalAlignment.cs" />
     <Compile Include="UI\IDisplayManager.cs" />
     <Compile Include="IO\FileUtils.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="UI\BitmapFactory.cs" />
     <Compile Include="UI\Lights\NightLightColor.cs" />
     <Compile Include="UI\Lights\NightLightColorConverter.cs" />
-    <Compile Include="UI\VerticalAlignment.cs" />
     <Compile Include="UI\Layout\LayoutUtils.cs" />
     <Compile Include="UI\Lights\NightLightManager.cs" />
     <Compile Include="UI\StatusService.cs" />

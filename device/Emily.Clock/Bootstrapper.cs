@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using CCSWE.nanoFramework.Configuration;
+﻿using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.Mediator;
+using CCSWE.nanoFramework.WebServer;
+using CCSWE.nanoFramework.WebServer.Evaluate;
 using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
 using Emily.Clock.Device;
@@ -14,8 +15,6 @@ using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Server.Extensions;
-using MakoIoT.Device.Services.Server.WebServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -107,7 +106,7 @@ namespace Emily.Clock
 
         private static IDeviceBuilder AddWebServer(this IDeviceBuilder builder)
         {
-            builder.AddWebServer(options =>
+            builder.Services.AddWebServer(options =>
             {
                 options.Port = 80;
                 options.Protocol = HttpProtocol.Http;

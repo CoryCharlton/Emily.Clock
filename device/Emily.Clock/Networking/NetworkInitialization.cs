@@ -1,8 +1,8 @@
 ﻿using CCSWE.nanoFramework.Mediator;
+using CCSWE.nanoFramework.WebServer.Evaluate.Services;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI.Navigation;
 using MakoIoT.Device.Services.Interface;
-using MakoIoT.Device.Services.Server.Services;
 
 namespace Emily.Clock.Networking
 {

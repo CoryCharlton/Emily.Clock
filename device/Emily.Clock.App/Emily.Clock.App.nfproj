@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.5.5\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.5.7\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
       <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.3.5\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
@@ -58,12 +58,6 @@
     </Reference>
     <Reference Include="MakoIoT.Device.Services.Interface">
       <HintPath>..\packages\MakoIoT.Device.Services.Interface.1.0.40.57355\lib\MakoIoT.Device.Services.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="MakoIoT.Device.Services.Server">
-      <HintPath>..\packages\MakoIoT.Device.Services.Server.1.0.39.37862\lib\MakoIoT.Device.Services.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="MakoIoT.Device.Utilities.String">
-      <HintPath>..\packages\MakoIoT.Device.Utilities.String.1.0.33.52014\lib\MakoIoT.Device.Utilities.String.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Utilities.TimeZones">
       <HintPath>..\packages\MakoIoT.Device.Utilities.TimeZones.1.0.11.47189\lib\MakoIoT.Device.Utilities.TimeZones.dll</HintPath>

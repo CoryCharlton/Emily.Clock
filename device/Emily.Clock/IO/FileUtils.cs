@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Emily.Clock.IO
+﻿namespace Emily.Clock.IO
 {
     internal class FileUtils
     {

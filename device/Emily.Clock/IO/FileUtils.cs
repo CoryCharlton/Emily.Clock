@@ -8,16 +8,6 @@ namespace Emily.Clock.IO
         private const uint Megabyte = 1024 * 1024;
         private const uint Gigabyte = 1024 * 1024 * 1024;
 
-        public static string GetFileExtension(string fileName)
-        {
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentException();
-            }
-
-            return fileName.Substring(fileName.LastIndexOf('.')).ToLower();
-        } 
-
         // ReSharper disable SimplifyStringInterpolation
         public static string ToSizeString(uint sizeInByes)
         {

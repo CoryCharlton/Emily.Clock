@@ -36,13 +36,13 @@
       <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.3.5\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.15\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.16\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Math">
       <HintPath>..\packages\CCSWE.nanoFramework.Math.0.1.8\lib\CCSWE.nanoFramework.Math.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.1\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.4\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.NeoPixel">
       <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.0.3.2\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>

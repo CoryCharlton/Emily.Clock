@@ -26,18 +26,13 @@
     <Compile Include="Configuration\DateTimeConfiguration.cs" />
     <Compile Include="Configuration\WirelessClientConfiguration.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\StaticContentController.cs" />
     <Compile Include="Device\Led\ILedManager.cs" />
-    <Compile Include="Drawing\ColorConverter.cs" />
-    <Compile Include="Drawing\HsbColor.cs" />
-    <Compile Include="Drawing\HslColor.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Extensions\SizeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Http\MimeType.cs" />
     <Compile Include="IO\IFileStorageProvider.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
@@ -104,16 +99,19 @@
       <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.3.5\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.15\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.16\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.FileStorage">
       <HintPath>..\packages\CCSWE.nanoFramework.FileStorage.0.2.3\lib\CCSWE.nanoFramework.FileStorage.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.1\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.4\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
       <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.3.9\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.WebServer">
+      <HintPath>..\packages\CCSWE.nanoFramework.WebServer.0.1.2\lib\CCSWE.nanoFramework.WebServer.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.436\lib\Iot.Device.Button.dll</HintPath>
@@ -194,7 +192,7 @@
       <HintPath>..\packages\nanoFramework.System.Net.1.10.64\lib\System.Net.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\packages\nanoFramework.System.Net.Http.1.5.113\lib\System.Net.Http.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Net.Http.Server.1.5.113\lib\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.RegularExpressions">
       <HintPath>..\packages\nanoFramework.System.Text.RegularExpressions.1.1.51\lib\System.Text.RegularExpressions.dll</HintPath>

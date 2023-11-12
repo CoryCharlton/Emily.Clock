@@ -1,5 +1,6 @@
 ﻿using System;
 using CCSWE.nanoFramework.Configuration;
+using CCSWE.nanoFramework.WebServer;
 using MakoIoT.Device.Services.Server.WebServer;
 using nanoFramework.Json;
 

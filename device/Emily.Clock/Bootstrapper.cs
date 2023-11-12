@@ -120,30 +120,4 @@ namespace Emily.Clock
             return builder;
         }
     }
-
-    public class TestConfiguration
-    {
-        public const string Name = nameof(TestConfiguration);
-
-        public ArrayList Configurations { get; set; } = new ArrayList();
-
-        public static TestConfiguration Create()
-        {
-            var test = new TestConfiguration();
-
-            for (var i = 0; i < 10; i++)
-            {
-                var list = new ArrayList();
-                
-                for (var j = 0; j < 10; j++)
-                {
-                    list.Add(j);
-                }
-
-                test.Configurations.Add(list);
-            }
-
-            return test;
-        }
-    }
 }

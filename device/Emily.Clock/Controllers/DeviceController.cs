@@ -20,6 +20,13 @@ namespace Emily.Clock.Controllers
             Ok(e.Context.Response, _deviceManager);
         }
 
+        [Route("device/ping")]
+        [Method("GET")]
+        public void PingDevice(WebServerEventArgs e)
+        {
+            Ok(e.Context.Response, "Pong!");
+        }
+
         [Route("device/reboot")]
         [Method("POST")]
         public void RebootDevice(WebServerEventArgs e)

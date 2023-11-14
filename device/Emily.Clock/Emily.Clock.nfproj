@@ -94,7 +94,7 @@
       <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.5.7\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.3.5\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.0.3.7\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
       <HintPath>..\packages\CCSWE.nanoFramework.Core.0.2.16\lib\CCSWE.nanoFramework.Core.dll</HintPath>
@@ -103,13 +103,10 @@
       <HintPath>..\packages\CCSWE.nanoFramework.FileStorage.0.2.5\lib\CCSWE.nanoFramework.FileStorage.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.4\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.0.3.5\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.3.9\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
-    </Reference>
-    <Reference Include="CCSWE.nanoFramework.WebServer">
-      <HintPath>..\packages\CCSWE.nanoFramework.WebServer.0.1.4\lib\CCSWE.nanoFramework.WebServer.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.0.3.10\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.436\lib\Iot.Device.Button.dll</HintPath>
@@ -247,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.lock.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\nanoFramework\CCSWE.nanoFramework.WebServer\CCSWE.nanoFramework.WebServer\CCSWE.nanoFramework.WebServer.nfproj" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <ProjectExtensions>

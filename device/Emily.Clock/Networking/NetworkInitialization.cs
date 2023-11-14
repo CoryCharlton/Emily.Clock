@@ -1,5 +1,5 @@
 ﻿using CCSWE.nanoFramework.Mediator;
-using CCSWE.nanoFramework.WebServer.Evaluate.Services;
+using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI.Navigation;
 using MakoIoT.Device.Services.Interface;
@@ -10,14 +10,14 @@ namespace Emily.Clock.Networking
     {
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
-        private readonly IServer _server;
+        private readonly IWebServer _webServer;
         private readonly IWirelessNetworkManager _wirelessNetworkManager;
 
-        public NetworkInitialization(IMediator mediator, INavigationService navigationService, IServer server, IWirelessNetworkManager wirelessNetworkManager)
+        public NetworkInitialization(IMediator mediator, INavigationService navigationService, IWebServer webServer, IWirelessNetworkManager wirelessNetworkManager)
         {
             _mediator = mediator;
             _navigationService = navigationService;
-            _server = server;
+            _webServer = webServer;
             _wirelessNetworkManager = wirelessNetworkManager;
         }
 
@@ -37,8 +37,8 @@ namespace Emily.Clock.Networking
 
             _mediator.Publish(new StatusEvent(string.Empty));
             
-            _server.Initialize();
-            _server.Start();
+            _webServer.Initialize();
+            _webServer.Start();
 
             return _wirelessNetworkManager.GetMode() != WirelessMode.AccessPoint;
         }

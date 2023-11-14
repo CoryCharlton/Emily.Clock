@@ -39,11 +39,11 @@ namespace Emily.Clock.Controllers
         [Method("GET")]
         public void GetSections(WebServerEventArgs e) => Ok(e.Context.Response, _configurationManager.GetSections());
 
-        [Route("configuration/{name}")]
+        [Route("configuration/{section}")]
         [Method("POST")]
-        public void SaveConfiguration(string name, WebServerEventArgs e)
+        public void SaveConfiguration(string section, WebServerEventArgs e)
         {
-            if (!_configurationManager.Contains(name))
+            if (!_configurationManager.Contains(section))
             {
                 NotFound(e.Context.Response);
                 return;
@@ -51,10 +51,10 @@ namespace Emily.Clock.Controllers
 
             try
             {
-                var type = _configurationManager.GetType(name);
+                var type = _configurationManager.GetType(section);
                 var configuration = JsonConvert.DeserializeObject(e.Context.Request.InputStream, type);
 
-                _configurationManager.Save(name, configuration);
+                _configurationManager.Save(section, configuration);
             }
             catch (DeserializationException)
             {

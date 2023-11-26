@@ -4,15 +4,15 @@
     ".NETnanoFramework,Version=v1.0": {
       "MakoIoT.Device": {
         "type": "Direct",
-        "requested": "[1.0.43.29125, 1.0.43.29125]",
-        "resolved": "1.0.43.29125",
-        "contentHash": "QLFANvItRNxi6zDz1lQM0/nXubJ784OICjgXsYooNt+o6SQO2+7q4Ofbj2WCqAA56Ar+WbwIKU317aCRs1Tx4Q=="
+        "requested": "[1.0.45.15740, 1.0.45.15740]",
+        "resolved": "1.0.45.15740",
+        "contentHash": "pKcdKAxvnJk4RT4ZDjUXHbBucEjuPYidQwTHQMr7scB9gisFPbWyj+MHr51oQep/kBDuC3UgVF/8sGHr1wu2fg=="
       },
       "MakoIoT.Device.Services.Interface": {
         "type": "Direct",
-        "requested": "[1.0.40.57355, 1.0.40.57355]",
-        "resolved": "1.0.40.57355",
-        "contentHash": "fl87oubEF34gTvXpZ1TMY+SW8+An/9+/js+1x+oQvHq2qyswhlMtXFklbRzR1wsFCzC73IOzGJv1OddQR9FtBg=="
+        "requested": "[1.0.42.48151, 1.0.42.48151]",
+        "resolved": "1.0.42.48151",
+        "contentHash": "AZycBC2ewx/0l5YhMbs8ZiZrlN9Po/fILLMtKa0U7F3+7c3MHeFQsJ5E4twUZZxVUA0nNZ+XSu6X2oBT6dDriQ=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",
@@ -58,9 +58,9 @@
       },
       "nanoFramework.Logging": {
         "type": "Direct",
-        "requested": "[1.1.74, 1.1.74]",
-        "resolved": "1.1.74",
-        "contentHash": "zlzB9kh1mgjTza67vVnbn5hBD2w9RJoHq1x4hB2brSX7/YrT0rZeqJQgg5OTWWOKBAxNL3HG8XpsYypFjcp9pA=="
+        "requested": "[1.1.76, 1.1.76]",
+        "resolved": "1.1.76",
+        "contentHash": "vmVqO62JmCzP4wHdUuqmP7aiDLzTakcJ1CMeb9dJxcONwrxXGuK6YeOIrIhvqhBsIjz6ebv4FW8o4CP9ttGh0g=="
       },
       "nanoFramework.ResourceManager": {
         "type": "Direct",

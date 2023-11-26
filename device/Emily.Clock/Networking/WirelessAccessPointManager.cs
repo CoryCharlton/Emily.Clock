@@ -1,12 +1,13 @@
 ﻿using System;
 using Emily.Clock.Configuration;
 using System.Net.NetworkInformation;
-using Iot.Device.DhcpServer;
 using System.Net;
 using CCSWE.nanoFramework.Configuration;
+using CCSWE.nanoFramework.DhcpServer;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Mediator.Events;
 using MakoIoT.Device.Utilities.Invoker;
+using Microsoft.Extensions.Logging;
 using AuthenticationType = System.Net.NetworkInformation.AuthenticationType;
 
 namespace Emily.Clock.Networking
@@ -27,15 +28,17 @@ namespace Emily.Clock.Networking
     {
         private WirelessAccessPointConfiguration _configuration;
         private readonly IConfigurationManager _configurationManager;
+        private readonly ILogger _logger;
         private DhcpServer _dhcpServer;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
 
-        public WirelessAccessPointManager(IConfigurationManager configurationManager, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
+        public WirelessAccessPointManager(IConfigurationManager configurationManager, ILogger logger, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationManager = configurationManager;
             _configurationManager.ConfigurationChanged += OnConfigurationChanged;
             _configuration = (WirelessAccessPointConfiguration) _configurationManager.Get(WirelessAccessPointConfiguration.Section);
+            _logger = logger;
             _mediator = mediator;
             _networkInterfaceProvider = networkInterfaceProvider;
         }
@@ -112,13 +115,13 @@ namespace Emily.Clock.Networking
         {
             PublishStatusEvent($"Starting access point {_configuration.Ssid}...");
 
-            _dhcpServer ??= new DhcpServer { CaptivePortalUrl = $"http://{_configuration.IpAddress}" };
+            _dhcpServer ??= new DhcpServer(IPAddress.Parse(_configuration.IpAddress), _logger) { CaptivePortalUrl = $"http://{_configuration.IpAddress}/" };
 
             var started = false;
 
             Invoker.Retry(() =>
             {
-                started = _dhcpServer.Start(IPAddress.Parse(_configuration.IpAddress), new IPAddress(new byte[] { 255, 255, 255, 0 }));
+                started = _dhcpServer.Start();
                 if (!started)
                 {
                     throw new Exception("DHCP failed to start");

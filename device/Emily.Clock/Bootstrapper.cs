@@ -67,7 +67,7 @@ namespace Emily.Clock
                 .AddTransient(typeof(ResetToDefaultsWindow));
 
             services
-                .AddConfigurationManager(options => { options.LogLevel = LogLevel.Debug; })
+                .AddConfigurationManager()
                 .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
                 .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration())
                 .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration())
@@ -79,7 +79,7 @@ namespace Emily.Clock
         private static IDeviceBuilder AddLogging(this IDeviceBuilder builder)
         {
 #if DEBUG
-            var loggerConfig = new LoggerOptions(LogLevel.Debug);
+            var loggerConfig = new LoggerOptions(LogLevel.Trace);
 #else
             var loggerConfig = new LoggerOptions(LogLevel.Warning);
 #endif

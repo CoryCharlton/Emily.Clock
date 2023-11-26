@@ -61,7 +61,7 @@ namespace Emily.Clock.Logging
             string msg;
             if (format == null)
             {
-                msg = exception == null ? state : $"{state} {exception}";
+                msg = exception is null ? state : $"{state} {exception}";
             }
             else
             {

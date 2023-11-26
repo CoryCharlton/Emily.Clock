@@ -19,13 +19,14 @@ namespace Emily.Clock.UI.Windows
 
         protected Window(IDisplayManager displayManager, ILogger logger)
         {
+            CancellationToken = CancellationTokenSource.Token;
             DisplayManager = displayManager;
             Logger = logger;
         }
 
         ~Window() => Dispose(false);
 
-        protected CancellationToken CancellationToken => CancellationTokenSource.Token;
+        protected CancellationToken CancellationToken { get; }
 
         protected CancellationTokenSource CancellationTokenSource { get; } = new();
 

@@ -21,7 +21,7 @@ namespace Emily.Clock.Logging
 
             var time = $"[{DateTime.UtcNow.TimeOfDay}]";
             var logger = string.IsNullOrEmpty(loggerName) ? string.Empty : $" ({loggerName})";
-            var message = exception == null ? state : $"{state} {exception}";
+            var message = exception is null ? state : $"{state} {exception}";
 
             return $"{time} {level}{logger}: {message}";
         }

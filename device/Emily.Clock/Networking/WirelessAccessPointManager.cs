@@ -115,7 +115,11 @@ namespace Emily.Clock.Networking
         {
             PublishStatusEvent($"Starting access point {_configuration.Ssid}...");
 
-            _dhcpServer ??= new DhcpServer(IPAddress.Parse(_configuration.IpAddress), _logger) { CaptivePortalUrl = $"http://{_configuration.IpAddress}/" };
+            _dhcpServer ??= new DhcpServer(IPAddress.Parse(_configuration.IpAddress), _logger)
+            {
+                CaptivePortalUrl = $"http://{_configuration.IpAddress}/api.json",
+                DnsServer = IPAddress.Parse(_configuration.IpAddress),
+            };
 
             var started = false;
 

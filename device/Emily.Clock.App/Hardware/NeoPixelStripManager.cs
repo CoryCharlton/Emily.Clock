@@ -2,6 +2,7 @@
 using CCSWE.nanoFramework.NeoPixel;
 using CCSWE.nanoFramework.NeoPixel.Drivers;
 using Emily.Clock.Device.Led;
+using nanoFramework.Runtime.Native;
 using ColorConverter = CCSWE.nanoFramework.NeoPixel.ColorConverter;
 
 namespace Emily.Clock.App.Hardware
@@ -41,10 +42,22 @@ namespace Emily.Clock.App.Hardware
             _neoPixelStrip.Clear();
             _neoPixelStrip.Update();
 
+            Power.OnRebootEvent += OnReboot;
+
             return true;
         }
 
-        public void SetMoonLed(Color color, double brightness)
+        private void OnReboot()
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+
+            Clear();
+        }
+
+        public void SetMoonLed(Color color, float brightness)
         {
             // TODO: Come back to this
             if (Color.Black.Equals(color))
@@ -57,7 +70,7 @@ namespace Emily.Clock.App.Hardware
             }
         }
 
-        public void SetNightlightLeds(Color color, double brightness)
+        public void SetNightlightLeds(Color color, float brightness)
         {
             var scaledColor = ColorConverter.ScaleBrightness(color, brightness);
 
@@ -70,7 +83,7 @@ namespace Emily.Clock.App.Hardware
             }
         }
 
-        public void SetSunLed(Color color, double brightness)
+        public void SetSunLed(Color color, float brightness)
         {
             // TODO: Come back to this
             if (Color.Black.Equals(color))

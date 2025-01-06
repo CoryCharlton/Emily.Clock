@@ -26,21 +26,21 @@ namespace Emily.Clock.Device.Led
         /// </summary>
         /// <param name="color">The <see cref="Color"/> to adjust.</param>
         /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-        public void SetMoonLed(Color color, double brightness);
+        public void SetMoonLed(Color color, float brightness);
 
         /// <summary>
         /// Sets the <see cref="Color"/> and brightness of the nightlight LEDs.
         /// </summary>
         /// <param name="color">The <see cref="Color"/> to adjust.</param>
         /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-        public void SetNightlightLeds(Color color, double brightness);
+        public void SetNightlightLeds(Color color, float brightness);
 
         /// <summary>
         /// Sets the <see cref="Color"/> and brightness of the sun LED.
         /// </summary>
         /// <param name="color">The <see cref="Color"/> to adjust.</param>
         /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-        public void SetSunLed(Color color, double brightness);
+        public void SetSunLed(Color color, float brightness);
 
         /// <summary>
         /// Send the data to the LED driver.

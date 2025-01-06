@@ -6,7 +6,7 @@ namespace Emily.Clock.Configuration
     {
         public const string Section = "NightLight";
 
-        public double Brightness { get; set; } = 0.5;
+        public float Brightness { get; set; } = 0.5f;
 
         public NightLightColor Color { get; set; } = NightLightColor.Violet;
     }

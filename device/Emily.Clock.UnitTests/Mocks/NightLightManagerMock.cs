@@ -4,7 +4,7 @@ namespace Emily.Clock.UnitTests.Mocks
 {
     internal class NightLightManagerMock: INightLightManager
     {
-        public double Brightness { get; set; }
+        public float Brightness { get; set; }
         public bool Enabled { get; set; }
 
         public void CycleBrightness()

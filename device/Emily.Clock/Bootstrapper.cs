@@ -1,5 +1,6 @@
 ﻿using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.FileStorage;
+using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using CCSWE.nanoFramework.WebServer.Evaluate;
@@ -14,19 +15,20 @@ using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using nanoFramework.Hosting;
+using nanoFramework.Json;
 
 namespace Emily.Clock
 {
     public static class Bootstrapper
     {
-        public static IDeviceBuilder AddCore(this IDeviceBuilder builder)
+        public static IHostBuilder AddCore(this IHostBuilder builder)
         {
-            nanoFramework.Json.Configuration.Settings.CaseSensitive = false;
+            JsonSerializerOptions.Default.PropertyNameCaseInsensitive = true;
 
-            builder.Services.AddCore();
+            builder.ConfigureServices(services => services.AddCore());
 
             builder
                 .AddLogging()
@@ -43,9 +45,9 @@ namespace Emily.Clock
 
             // These execute in order
             services
-                .AddSingleton(typeof(IDeviceStartBehavior), typeof(DeviceInitialization))
-                .AddSingleton(typeof(IDeviceStartBehavior), typeof(NetworkInitialization))
-                .AddSingleton(typeof(IDeviceStartBehavior), typeof(ApplicationInitialization));
+                .AddSingleton(typeof(IDeviceInitializer), typeof(DeviceInitialization))
+                .AddSingleton(typeof(IDeviceInitializer), typeof(NetworkInitialization))
+                .AddSingleton(typeof(IDeviceInitializer), typeof(ApplicationInitialization));
 
             services
                 .AddSingleton(typeof(IAlarmService), typeof(AlarmService))
@@ -76,7 +78,7 @@ namespace Emily.Clock
             return services;
         }
 
-        private static IDeviceBuilder AddLogging(this IDeviceBuilder builder)
+        private static IHostBuilder AddLogging(this IHostBuilder builder)
         {
 #if DEBUG
             var loggerConfig = new LoggerOptions(LogLevel.Trace);
@@ -84,36 +86,45 @@ namespace Emily.Clock
             var loggerConfig = new LoggerOptions(LogLevel.Warning);
 #endif
 
-            builder.Services.AddSingleton(typeof(ILogger), typeof(DebugLogger));
-            builder.Services.AddSingleton(typeof(LoggerOptions), loggerConfig);
+            builder.ConfigureServices(services =>
+            {
+                services.AddSingleton(typeof(ILogger), typeof(DebugLogger));
+                services.AddSingleton(typeof(LoggerOptions), loggerConfig);
+            });
 
             LoggerFormatter.Initialize();
 
             return builder;
         }
 
-        private static IDeviceBuilder AddMediator(this IDeviceBuilder builder)
+        private static IHostBuilder AddMediator(this IHostBuilder builder)
         {
-            builder.Services.AddMediator(options =>
+            builder.ConfigureServices(services =>
             {
-                options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
+                services.AddMediator(options =>
+                {
+                    options.AddSubscriber(typeof(StatusEvent), typeof(IStatusService));
 
-                options.LogLevel = LogLevel.Debug;
+                    options.LogLevel = LogLevel.Debug;
+                });
             });
 
             return builder;
         }
 
-        private static IDeviceBuilder AddWebServer(this IDeviceBuilder builder)
+        private static IHostBuilder AddWebServer(this IHostBuilder builder)
         {
-            builder.Services.AddWebServer(options =>
+            builder.ConfigureServices(services =>
             {
-                options.Port = 80;
-                options.Protocol = HttpProtocol.Http;
+                services.AddWebServer(options =>
+                {
+                    options.Port = 80;
+                    options.Protocol = HttpProtocol.Http;
 
-                options.AddController(typeof(ConfigurationController));
-                options.AddController(typeof(DeviceController));
-                options.AddController(typeof(StaticContentController));
+                    options.AddController(typeof(ConfigurationController));
+                    options.AddController(typeof(DeviceController));
+                    options.AddController(typeof(StaticContentController));
+                });
             });
 
             return builder;

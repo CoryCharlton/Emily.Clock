@@ -8,7 +8,6 @@ using Emily.Clock.Device.Led;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.UI;
-using nanoFramework.Hardware.Esp32;
 using nanoFramework.Runtime.Native;
 using GC = nanoFramework.Runtime.Native.GC;
 
@@ -17,17 +16,13 @@ namespace Emily.Clock.App.Hardware
     public class DeviceManager: IDeviceManager
     {
         private readonly IConfigurationManager _configurationService;
-        private readonly IDisplayManager _displayManager;
-        private readonly ILedManager _ledManager;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
         private string _serialNumber;
 
-        public DeviceManager(IConfigurationManager configurationService, IDisplayManager displayManager, ILedManager ledManager, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
+        public DeviceManager(IConfigurationManager configurationService, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationService = configurationService;
-            _displayManager = displayManager;
-            _ledManager = ledManager;
             _mediator = mediator;
             _networkInterfaceProvider = networkInterfaceProvider;
         }
@@ -39,8 +34,8 @@ namespace Emily.Clock.App.Hardware
                 return GC.Run(false);
 
                 // TODO: This reports less than GC.Run(false) and not sure why
-                NativeMemory.GetMemoryInfo(NativeMemory.MemoryType.All, out _, out var freeMemory, out _);
-                return freeMemory;
+                //NativeMemory.GetMemoryInfo(NativeMemory.MemoryType.All, out _, out var freeMemory, out _);
+                //return freeMemory;
             }
         }
 
@@ -72,18 +67,6 @@ namespace Emily.Clock.App.Hardware
         public void Reboot()
         {
             _mediator.Publish(new StatusEvent("Rebooting..."));
-
-            // TODO: Change this to an event so I don't need to handle all the logic here?
-            if (_displayManager.IsInitialized)
-            {
-                _displayManager.Clear();
-                _displayManager.SetBackLight(false);
-            }
-
-            if (_ledManager.IsInitialized)
-            {
-                _ledManager.Clear();
-            }
 
             Power.RebootDevice();
         }

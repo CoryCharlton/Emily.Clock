@@ -22,7 +22,7 @@ namespace Emily.Clock.UnitTests
             var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
             // Act
-            var result = sut.DeviceStarting();
+            var result = sut.Initialize();
 
             // Assert
             Assert.IsFalse(result);
@@ -42,7 +42,7 @@ namespace Emily.Clock.UnitTests
             var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
             // Act
-            var result = sut.DeviceStarting();
+            var result = sut.Initialize();
 
             // Assert
             Assert.IsTrue(result);
@@ -63,7 +63,7 @@ namespace Emily.Clock.UnitTests
             var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
             // Act
-            var result = sut.DeviceStarting();
+            var result = sut.Initialize();
 
             // Assert
             Assert.IsTrue(result);
@@ -83,7 +83,7 @@ namespace Emily.Clock.UnitTests
             var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
             // Act
-            var result = sut.DeviceStarting();
+            var result = sut.Initialize();
 
             // Assert
             Assert.IsTrue(result);

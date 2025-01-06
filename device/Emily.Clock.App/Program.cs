@@ -1,5 +1,5 @@
-using System.Threading;
-using MakoIoT.Device;
+using CCSWE.nanoFramework.Hosting;
+using nanoFramework.Hosting;
 
 namespace Emily.Clock.App
 {
@@ -7,16 +7,13 @@ namespace Emily.Clock.App
     {
         public static void Main()
         {
-            // TODO: Replace MakoIoT.Device with nanoFramework.Hosting / new DeviceHost / DeviceHostBuilder
-            var builder = DeviceBuilder.Create()
-                .ConfigureDependencyInjection()
+            var builder = DeviceHost.CreateDefaultBuilder()
+                .ConfigureHardware()
                 .AddCore();
 
-            var device = builder.Build();
+            using var host = builder.Build();
 
-            device.Start();
-
-            Thread.Sleep(Timeout.Infinite);
+            host.Run();
         }
     }
 }

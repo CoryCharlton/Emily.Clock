@@ -45,10 +45,11 @@ namespace Emily.Clock.UI
             PerformDrawingAndFlush(screen, flush, () =>
             {
                 var color = Theme.SecondaryText;
-                var font = Theme.MediumFont;
+                var fontLine1 = Theme.MediumFont;
+                var fontLine2 = Theme.MediumFont;
                 var padding = Theme.ContentPadding;
 
-                using var source = new Bitmap(screen.Width, (font.Height + padding.Vertical) * 2);
+                using var source = new Bitmap(screen.Width, (fontLine1.Height + padding.Vertical) + (fontLine2.Height + padding.Vertical));
 
                 if (!string.IsNullOrEmpty(line1))
                 {
@@ -56,12 +57,12 @@ namespace Emily.Clock.UI
                         ? ContentAlignment.MiddleCenter
                         : ContentAlignment.TopCenter;
 
-                    source.DrawText(line1, font, color, alignment, padding);
+                    source.DrawText(line1, fontLine1, color, alignment, padding);
                 }
 
                 if (!string.IsNullOrEmpty(line2))
                 {
-                    source.DrawText(line2, font, color, ContentAlignment.BottomCenter, padding);
+                    source.DrawText(line2, fontLine2, color, ContentAlignment.BottomCenter, padding);
                 }
 
                 screen.DrawImage(0, (int)(screen.Height * 0.70 - (source.Height / 2.0) + (LogoSize / 2.0)), source);

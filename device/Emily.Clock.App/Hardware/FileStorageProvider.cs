@@ -76,7 +76,7 @@ namespace Emily.Clock.App.Hardware
             SetPinFunction(15, DeviceFunction.SPI2_MOSI);
             SetPinFunction(14, DeviceFunction.SPI2_CLOCK);
 
-            _sdCard ??= new SDCard(new SDCard.SDCardSpiParameters { spiBus = 2, chipSelectPin = 13, enableCardDetectPin = false });
+            _sdCard ??= new SDCard(new SDCardSpiParameters { spiBus = 2, chipSelectPin = 13 });
 
             return Mount();
         }

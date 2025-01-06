@@ -1,13 +1,13 @@
 ﻿using System;
+using CCSWE.nanoFramework.Hosting;
 using Emily.Clock.Device;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock
 {
-    public class ApplicationInitialization : IDeviceStartBehavior
+    public class ApplicationInitialization : IDeviceInitializer
     {
         private readonly IDeviceManager _deviceManager;
         private readonly ILocalTimeProvider _localTimeProvider;
@@ -24,7 +24,7 @@ namespace Emily.Clock
             _nightLightManager = nightLightManager;
         }
 
-        public bool DeviceStarting()
+        public bool Initialize()
         {
             _deviceManager.StartedAt = DateTime.UtcNow;
             _localTimeProvider.Start();

@@ -4,19 +4,19 @@ using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.IO;
 using Emily.Clock.UI;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.DependencyInjection;
+using nanoFramework.Hosting;
 
 namespace Emily.Clock.App
 {
     public static class Bootstrapper
     {
-        public static IDeviceBuilder ConfigureDependencyInjection(this IDeviceBuilder builder)
+        public static IHostBuilder ConfigureHardware(this IHostBuilder builder)
         {
-            return builder.ConfigureDI(services => services.ConfigureDependencyInjection());
+            return builder.ConfigureServices(services => services.ConfigureHardware());
         }
 
-        public static IServiceCollection ConfigureDependencyInjection(this IServiceCollection services)
+        private static IServiceCollection ConfigureHardware(this IServiceCollection services)
         {
             services
                 .AddSingleton(typeof(IButtonManager), typeof(ButtonManager))

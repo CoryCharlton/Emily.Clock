@@ -1,16 +1,16 @@
-﻿using CCSWE.nanoFramework.Mediator;
+﻿using CCSWE.nanoFramework.Hosting;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.IO;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
-using MakoIoT.Device.Services.Interface;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.Device
 {
-    public class DeviceInitialization : IDeviceStartBehavior
+    public class DeviceInitialization : IDeviceInitializer
     {
         private readonly IButtonManager _buttonManager;
         private readonly IDisplayManager _displayManager;
@@ -31,7 +31,7 @@ namespace Emily.Clock.Device
             _navigationService = navigationService;
         }
 
-        public bool DeviceStarting()
+        public bool Initialize()
         {
             if (!InitializeDisplay())
             {
@@ -120,7 +120,7 @@ namespace Emily.Clock.Device
             Controls.DrawTitle(screen, "Emily.Clock");
             Controls.DrawContent(screen, $"Powered by nanoFramework", $" ");
             // TODO: Fix for smaller text (pass font?)
-            //Drawing.DrawContent(screen, $"Powered by nanoFramework", $"https://github.com/CoryCharlton/Emily.Clock");
+            //Controls.DrawContent(screen, $"Powered by nanoFramework", $"https://github.com/CoryCharlton/Emily.Clock");
 
             Controls.DrawLogo(screen, Resources.BitmapResources.Loading_48);
             screen.Flush();

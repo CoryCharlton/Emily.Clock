@@ -13,7 +13,7 @@ namespace Emily.Clock.UI.Lights
 {
     public interface INightLightManager
     {
-        double Brightness { get; set; }
+        float Brightness { get; set; }
         bool Enabled { get; set; }
 
         void CycleBrightness();
@@ -47,7 +47,7 @@ namespace Emily.Clock.UI.Lights
             UpdateConfiguration((NightLightConfiguration)_configurationManager.Get(NightLightConfiguration.Section));
         }
 
-        public double Brightness
+        public float Brightness
         {
             get => _configuration.Brightness;
             set
@@ -90,7 +90,7 @@ namespace Emily.Clock.UI.Lights
         public bool Enabled
         {
             get => _configuration.Brightness > 0;
-            set => Brightness = value ? 1.0 : 0.0;
+            set => Brightness = value ? 1.0f : 0.0f;
         }
 
         private PanelLight PanelMode
@@ -112,11 +112,11 @@ namespace Emily.Clock.UI.Lights
         {
             Brightness = Brightness switch
             {
-                >= 1.00 => 0.00,
-                >= 0.75 => 1.00,
-                >= 0.50 => 0.75,
-                >= 0.25 => 0.50,
-                _ => 0.25
+                >= 1.00f => 0.00f,
+                >= 0.75f => 1.00f,
+                >= 0.50f => 0.75f,
+                >= 0.25f => 0.50f,
+                _ => 0.25f
             };
         }
 
@@ -156,17 +156,17 @@ namespace Emily.Clock.UI.Lights
             return true;
         }
 
-        private static double NormalizeBrightness(double value)
+        private static float NormalizeBrightness(float value)
         {
-            var brightness = Math.Clamp(value, 0.0, 1.0);
+            var brightness = Math.Clamp(value, 0.0f, 1.0f);
 
             return brightness switch
             {
-                >= 1.00 => 1.00,
-                >= 0.75 => 0.75,
-                >= 0.50 => 0.50,
-                >= 0.25 => 0.25,
-                _ => 0.0
+                >= 1.00f => 1.00f,
+                >= 0.75f => 0.75f,
+                >= 0.50f => 0.50f,
+                >= 0.25f => 0.25f,
+                _ => 0.0f
             };
         }
 
@@ -213,9 +213,7 @@ namespace Emily.Clock.UI.Lights
             Debug.WriteLine($"UpdateLedsThread start");
             var startTime = DateTime.UtcNow;
 
-            // TODO: This may be passed in the item for fading...
             var brightness = Brightness;
-            // TODO: This may be passed in the item for fading...
             var nightlightColor = NightLightColorConverter.ToColor(Color);
             var panelMode = PanelMode;
             

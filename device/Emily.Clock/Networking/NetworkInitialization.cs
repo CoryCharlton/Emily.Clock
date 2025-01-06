@@ -1,12 +1,12 @@
-﻿using CCSWE.nanoFramework.Mediator;
+﻿using CCSWE.nanoFramework.Hosting;
+using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI.Navigation;
-using MakoIoT.Device.Services.Interface;
 
 namespace Emily.Clock.Networking
 {
-    public class NetworkInitialization : IDeviceStartBehavior
+    public class NetworkInitialization : IDeviceInitializer
     {
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
@@ -21,7 +21,7 @@ namespace Emily.Clock.Networking
             _wirelessNetworkManager = wirelessNetworkManager;
         }
 
-        public bool DeviceStarting()
+        public bool Initialize()
         {
             if (!_wirelessNetworkManager.Initialize())
             {

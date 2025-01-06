@@ -1,10 +1,12 @@
 ﻿using System;
 using nanoFramework.UI;
 using System.Device.Gpio;
+using System.Threading;
 using nanoFramework.Hardware.Esp32;
 using nanoFramework.UI.GraphicDrivers;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.UI;
+using nanoFramework.Runtime.Native;
 
 namespace Emily.Clock.App.Hardware
 {
@@ -73,10 +75,10 @@ namespace Emily.Clock.App.Hardware
             _initialized = true;
             _gpioProvider.OpenPin(SCREEN_BACKLIGHT, PinMode.Output);
 
-            _gpioProvider.OpenPin(32, PinMode.OutputOpenDrain);
-            _gpioProvider.Write(32, PinValue.Low);
-            System.Threading.Thread.Sleep(100);
-            _gpioProvider.Write(32, PinValue.High);
+            _gpioProvider.OpenPin(SCREEN_DATA_COMMAND, PinMode.OutputOpenDrain);
+            _gpioProvider.Write(SCREEN_DATA_COMMAND, PinValue.Low);
+            Thread.Sleep(100);
+            _gpioProvider.Write(SCREEN_DATA_COMMAND, PinValue.High);
 
             SetPinFunction(SCREEN_MISO, DeviceFunction.SPI1_MISO);
             SetPinFunction(SCREEN_MOSI, DeviceFunction.SPI1_MOSI);
@@ -92,7 +94,20 @@ namespace Emily.Clock.App.Hardware
             Clear();
             SetBackLight(true);
 
+            Power.OnRebootEvent += OnReboot;
+
             return true;
+        }
+
+        private void OnReboot()
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+
+            Clear();
+            SetBackLight(false);
         }
 
         private void RequireInitialization()

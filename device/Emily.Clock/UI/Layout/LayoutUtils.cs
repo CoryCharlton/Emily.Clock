@@ -1,9 +1,12 @@
 ﻿using System.Drawing;
+using nanoFramework.UI;
+using Point = System.Drawing.Point;
 
 // ReSharper disable BitwiseOperatorOnEnumWithoutFlags
 namespace Emily.Clock.UI.Layout
 {
     // TODO: Switch to this
+    // TODO: Support padding
     internal class LayoutUtils
     {
         public const ContentAlignment AnyTop = ContentAlignment.TopLeft | ContentAlignment.TopCenter | ContentAlignment.TopRight;
@@ -20,6 +23,8 @@ namespace Emily.Clock.UI.Layout
 
         private static Rectangle HAlign(Size alignThis, Rectangle withinThis, ContentAlignment align)
         {
+            //var aligned = new Rectangle(withinThis.Location, withinThis.Size);
+
             if ((align & AnyRight) != 0)
             {
                 withinThis.X += withinThis.Width - alignThis.Width;
@@ -36,6 +41,8 @@ namespace Emily.Clock.UI.Layout
 
         private static Rectangle VAlign(Size alignThis, Rectangle withinThis, ContentAlignment align)
         {
+            //var aligned = new Rectangle(withinThis.Location, withinThis.Size);
+
             if ((align & AnyBottom) != 0)
             {
                 withinThis.Y += withinThis.Height - alignThis.Height;

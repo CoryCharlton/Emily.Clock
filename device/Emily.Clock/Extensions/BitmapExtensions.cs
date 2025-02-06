@@ -1,4 +1,5 @@
 ﻿using Emily.Clock.UI;
+using Emily.Clock.UI.Layout;
 using nanoFramework.Presentation;
 using nanoFramework.UI;
 // ReSharper disable RedundantArgumentDefaultValue
@@ -29,10 +30,7 @@ namespace System.Drawing
 
         public static Rectangle DrawImage(this Bitmap bitmap, Bitmap image, ContentAlignment alignment)
         {
-            var bitmapSize = bitmap.GetSize();
-            var imageSize = image.GetSize();
-
-            var rectangle = bitmapSize.AlignContent(imageSize, alignment);
+            var rectangle = LayoutUtils.Align(image.GetSize(), bitmap.GetRectangle(), alignment);
             bitmap.DrawImage(rectangle.Location, image);
 
             return rectangle;
@@ -88,5 +86,7 @@ namespace System.Drawing
         }
 
         public static Size GetSize(this Bitmap bitmap) => new(bitmap.Width, bitmap.Height);
+
+        public static Rectangle GetRectangle(this Bitmap bitmap) => new(new Point(0, 0), bitmap.GetSize());
     }
 }

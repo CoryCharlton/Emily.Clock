@@ -7,11 +7,6 @@ namespace System.Drawing
     // TODO: Replace this with LayoutUtils calls
     public static class SizeExtensions
     {
-        public static Rectangle AlignContent(this Size container, Size content, ContentAlignment alignment)
-        {
-            return container.AlignContent(content, alignment, Padding.Empty);
-        }
-
         public static Rectangle AlignContent(this Size container, Size content, ContentAlignment alignment, Padding padding)
         {
             alignment.GetAlignments(out var horizontal, out var vertical);

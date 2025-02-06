@@ -31,7 +31,6 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Device\Led\ILedManager.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensions.cs" />
-    <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Extensions\SizeExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IO\IFileStorageManager.cs" />

@@ -39,6 +39,7 @@
     <Compile Include="Mocks\NavigationServiceMock.cs" />
     <Compile Include="Mocks\NightLightManagerMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Layout\LayoutUtilsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />

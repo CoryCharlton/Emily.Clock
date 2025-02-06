@@ -37,7 +37,6 @@ namespace Emily.Clock.Networking
 
             _mediator.Publish(new StatusEvent(string.Empty));
             
-            _webServer.Initialize();
             _webServer.Start();
 
             return _wirelessNetworkManager.GetMode() != WirelessMode.AccessPoint;

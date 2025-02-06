@@ -1,16 +1,16 @@
 ﻿using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.Hosting;
+using CCSWE.nanoFramework.Logging;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
-using CCSWE.nanoFramework.WebServer.Evaluate;
 using Emily.Clock.Configuration;
 using Emily.Clock.Controllers;
 using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
-using Emily.Clock.Logging;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
+using Emily.Clock.StaticFiles;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
@@ -80,19 +80,17 @@ namespace Emily.Clock
 
         private static IHostBuilder AddLogging(this IHostBuilder builder)
         {
-#if DEBUG
-            var loggerConfig = new LoggerOptions(LogLevel.Trace);
-#else
-            var loggerConfig = new LoggerOptions(LogLevel.Warning);
-#endif
-
             builder.ConfigureServices(services =>
             {
-                services.AddSingleton(typeof(ILogger), typeof(DebugLogger));
-                services.AddSingleton(typeof(LoggerOptions), loggerConfig);
+                services.AddLogging(options =>
+                {
+#if DEBUG
+                    options.MinLogLevel = LogLevel.Trace;
+#else
+                    options.MinLogLevel = LogLevel.Warning;
+#endif
+                });
             });
-
-            LoggerFormatter.Initialize();
 
             return builder;
         }
@@ -116,14 +114,16 @@ namespace Emily.Clock
         {
             builder.ConfigureServices(services =>
             {
+                services.AddCors();
+                services.AddStaticFiles(typeof(FileProvider));
+
+                services.AddController(typeof(ConfigurationController));
+                services.AddController(typeof(DeviceController));
+
                 services.AddWebServer(options =>
                 {
                     options.Port = 80;
                     options.Protocol = HttpProtocol.Http;
-
-                    options.AddController(typeof(ConfigurationController));
-                    options.AddController(typeof(DeviceController));
-                    options.AddController(typeof(StaticContentController));
                 });
             });
 

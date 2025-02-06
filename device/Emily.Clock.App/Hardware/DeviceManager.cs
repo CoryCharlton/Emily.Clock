@@ -1,28 +1,31 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Text;
 using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device;
-using Emily.Clock.Device.Led;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;
-using Emily.Clock.UI;
+using Microsoft.Extensions.Logging;
 using nanoFramework.Runtime.Native;
 using GC = nanoFramework.Runtime.Native.GC;
 
 namespace Emily.Clock.App.Hardware
 {
+    // TODO: Consider moving most (all?) of this to a base class
     public class DeviceManager: IDeviceManager
     {
         private readonly IConfigurationManager _configurationService;
+        private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
         private string _serialNumber;
 
-        public DeviceManager(IConfigurationManager configurationService, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
+        public DeviceManager(IConfigurationManager configurationService, ILogger logger, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {
             _configurationService = configurationService;
+            _logger = logger;
             _mediator = mediator;
             _networkInterfaceProvider = networkInterfaceProvider;
         }
@@ -31,6 +34,7 @@ namespace Emily.Clock.App.Hardware
         {
             get
             {
+                // ReSharper disable once ArrangeAccessorOwnerBody
                 return GC.Run(false);
 
                 // TODO: This reports less than GC.Run(false) and not sure why
@@ -68,7 +72,17 @@ namespace Emily.Clock.App.Hardware
         {
             _mediator.Publish(new StatusEvent("Rebooting..."));
 
-            Power.RebootDevice();
+            if (Debugger.IsAttached)
+            {
+                _logger.LogWarning("Device will not reboot while debugger attached");
+                _logger.LogWarning("Please power cycle device");
+
+                _mediator.Publish(new StatusEvent("Please power cycle device"));
+            }
+            else
+            {
+                Power.RebootDevice();
+            }
         }
 
         public void ResetToDefaults()

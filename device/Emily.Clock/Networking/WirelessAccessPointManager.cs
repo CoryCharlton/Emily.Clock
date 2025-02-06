@@ -6,7 +6,6 @@ using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.DhcpServer;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Mediator.Events;
-using MakoIoT.Device.Utilities.Invoker;
 using Microsoft.Extensions.Logging;
 using AuthenticationType = System.Net.NetworkInformation.AuthenticationType;
 
@@ -121,16 +120,7 @@ namespace Emily.Clock.Networking
                 DnsServer = IPAddress.Parse(_configuration.IpAddress),
             };
 
-            var started = false;
-
-            Invoker.Retry(() =>
-            {
-                started = _dhcpServer.Start();
-                if (!started)
-                {
-                    throw new Exception("DHCP failed to start");
-                }
-            }, 3);
+            var started = _dhcpServer.Start();
 
             PublishStatusEvent(started ? $"Access point started {_configuration.Ssid}" : $"Failed to start access point {_configuration.Ssid}");
 

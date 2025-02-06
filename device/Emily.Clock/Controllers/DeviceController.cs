@@ -1,9 +1,9 @@
 ﻿using CCSWE.nanoFramework.WebServer;
-using CCSWE.nanoFramework.WebServer.Evaluate;
 using Emily.Clock.Device;
 
 namespace Emily.Clock.Controllers
 {
+    [Route("/api/device")]
     public class DeviceController: ControllerBase
     {
         private readonly IDeviceManager _deviceManager;
@@ -13,25 +13,22 @@ namespace Emily.Clock.Controllers
             _deviceManager = deviceManager;
         }
 
-        [Route("device")]
-        [Method("GET")]
-        public void GetDeviceInfo(WebServerEventArgs e)
+        [HttpGet]
+        public void GetDeviceInfo()
         {
-            Ok(e.Context.Response, _deviceManager);
+            Ok(_deviceManager);
         }
 
-        [Route("device/ping")]
-        [Method("GET")]
-        public void PingDevice(WebServerEventArgs e)
+        [HttpGet("ping")]
+        public void PingDevice()
         {
-            Ok(e.Context.Response, "Pong!");
+            Ok("Pong!");
         }
 
-        [Route("device/reboot")]
-        [Method("POST")]
-        public void RebootDevice(WebServerEventArgs e)
+        [HttpPost("reboot")]
+        public void RebootDevice()
         {
-            Ok(e.Context.Response);
+            Ok();
          
             _deviceManager.Reboot();
         }

@@ -22,7 +22,7 @@ namespace Emily.Clock.App
                 .AddSingleton(typeof(IButtonManager), typeof(ButtonManager))
                 .AddSingleton(typeof(IDeviceManager), typeof(DeviceManager))
                 .AddSingleton(typeof(IDisplayManager), typeof(DisplayManager))
-                .AddSingleton(typeof(IFileStorageProvider), typeof(FileStorageProvider))
+                .AddSingleton(typeof(IFileStorageManager), typeof(FileStorageManager))
                 .AddSingleton(typeof(ILedManager), typeof(NeoPixelStripManager));
 
             return services;

@@ -14,17 +14,17 @@ namespace Emily.Clock.Device
     {
         private readonly IButtonManager _buttonManager;
         private readonly IDisplayManager _displayManager;
-        private readonly IFileStorageProvider _fileStorageProvider;
+        private readonly IFileStorageManager _fileStorageManager;
         private readonly ILedManager _ledManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
 
-        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageProvider fileStorageProvider, ILedManager ledManager, ILogger logger, IMediator mediator, INavigationService navigationService)
+        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageManager fileStorageManager, ILedManager ledManager, ILogger logger, IMediator mediator, INavigationService navigationService)
         {
             _buttonManager = buttonManager;
             _displayManager = displayManager;
-            _fileStorageProvider = fileStorageProvider;
+            _fileStorageManager = fileStorageManager;
             _ledManager = ledManager;
             _logger = logger;
             _mediator = mediator;
@@ -54,6 +54,8 @@ namespace Emily.Clock.Device
             if (!InitializeFileStorage())
             {
                 _logger.LogError("Failed to initialize file storage");
+
+                return false;
             }
 
             if (!_ledManager.Initialize())
@@ -63,20 +65,6 @@ namespace Emily.Clock.Device
                 return false;
             }
 
-            /*
-            var internalFiles = Directory.GetFiles(@"I:\");
-            foreach (var internalFile in internalFiles)
-            {
-                Debug.WriteLine($"Checking {internalFile}");
-
-                if (internalFile.ToLower().EndsWith("ccswe-nightlight.config"))
-                {
-                    Debug.WriteLine($"Deleting {internalFile}");
-                    File.Delete(internalFile);
-                }
-            }
-            */
-
             return true;
         }
 
@@ -84,7 +72,7 @@ namespace Emily.Clock.Device
         {
             PublishStatusEvent("Initializing file storage...");
 
-            var fileStorageInitialized = _fileStorageProvider.Initialize();
+            var fileStorageInitialized = _fileStorageManager.Initialize();
 
             PublishStatusEvent(fileStorageInitialized ? "File storage initialized" : "Failed to initialize file storage");
 

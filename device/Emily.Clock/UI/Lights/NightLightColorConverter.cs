@@ -6,9 +6,13 @@ namespace Emily.Clock.UI.Lights
     public static class NightLightColorConverter
     {
         // ReSharper disable InconsistentNaming
-        private static readonly Color COLOR_RED = Color.FromArgb(255, 255, 0, 0);
-        private static readonly Color COLOR_ORANGE = Color.FromArgb(255, 255, 119, 89);
-        private static readonly Color COLOR_YELLOW = Color.FromArgb(255, 255, 175, 10);
+        //private static readonly Color COLOR_RED = Color.FromArgb(255, 255, 0, 0);
+        //private static readonly Color COLOR_ORANGE = Color.FromArgb(255, 255, 119, 89);
+        //private static readonly Color COLOR_YELLOW = Color.FromArgb(255, 255, 175, 10);
+
+        private static readonly Color COLOR_RED = Color.DarkRed;
+        private static readonly Color COLOR_ORANGE = Color.FromArgb(255, 255, 150, 0);
+        private static readonly Color COLOR_YELLOW = Color.Yellow;
         private static readonly Color COLOR_GREEN = Color.FromArgb(255, 0, 255, 0);
         private static readonly Color COLOR_BLUE = Color.Blue;
         private static readonly Color COLOR_INDIGO = Color.FromArgb(255, 255, 0, 255);

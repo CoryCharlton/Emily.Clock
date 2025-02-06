@@ -81,7 +81,7 @@ namespace Emily.Clock.Device.Gpio
             _mediator.Publish(new ButtonEvent(button, ButtonEventType.DoublePress));
         }
 
-        private void OnHolding(Button button, ButtonHoldingEventArgs eventArgs)
+        private void OnHolding(Button button, ButtonHoldingEventArgs? eventArgs)
         {
             if (eventArgs is null)
             {

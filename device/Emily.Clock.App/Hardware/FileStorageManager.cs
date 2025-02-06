@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Emily.Clock.IO;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Hardware.Esp32;
@@ -10,7 +11,7 @@ namespace Emily.Clock.App.Hardware
     {
         private bool _disposed;
         private readonly ILogger _logger;
-        private SDCard _sdCard;
+        private SDCard? _sdCard;
         private readonly object _syncLock = new();
 
         public FileStorageManager(ILogger logger)
@@ -61,6 +62,7 @@ namespace Emily.Clock.App.Hardware
             _disposed = true;
         }
 
+        [MemberNotNull(nameof(_sdCard))]
         public bool Initialize()
         {
             SetPinFunction(2, DeviceFunction.SPI2_MISO);
@@ -81,7 +83,7 @@ namespace Emily.Clock.App.Hardware
 
             try
             {
-                _sdCard.Mount();
+                _sdCard?.Mount();
             }
             catch (Exception e)
             {
@@ -105,7 +107,7 @@ namespace Emily.Clock.App.Hardware
 
             try
             {
-                _sdCard.Unmount();
+                _sdCard?.Unmount();
             }
             catch (Exception e)
             {

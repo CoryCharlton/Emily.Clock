@@ -20,7 +20,7 @@ namespace Emily.Clock.App.Hardware
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
-        private string _serialNumber;
+        private string? _serialNumber;
 
         public DeviceManager(IConfigurationManager configurationService, ILogger logger, IMediator mediator, INetworkInterfaceProvider networkInterfaceProvider)
         {

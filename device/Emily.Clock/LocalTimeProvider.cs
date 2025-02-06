@@ -7,7 +7,6 @@ using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
 
-#nullable enable
 namespace Emily.Clock
 {
     public interface ILocalTimeProvider
@@ -50,6 +49,7 @@ namespace Emily.Clock
             UpdateConfiguration((DateTimeConfiguration) _configurationManager.Get(DateTimeConfiguration.Section));
         }
 
+        // ReSharper disable once FunctionNeverReturns
         private void GenerateEventsAsync()
         {
             var generateEvents = _generateEvents.WaitOne(0, false);
@@ -75,6 +75,7 @@ namespace Emily.Clock
                 // Set the timeout to the next minute change
                 var millisecondsTimeout = (59 - currentDateTime.Second) * 1000 + (1000 - currentDateTime.Millisecond);
 
+                // ReSharper disable once SimplifyStringInterpolation
                 _logger.LogDebug($"{nameof(LocalTimeProvider)} will update in {millisecondsTimeout} - {currentDateTime.ToString("O")}");
 
                 generateEvents = _generateEvents.WaitOne(millisecondsTimeout, false);

@@ -9,7 +9,6 @@ using Emily.Clock.Mediator.Events;
 using System.Threading;
 using CCSWE.nanoFramework.Mediator;
 
-#nullable enable
 namespace Emily.Clock.UI.Windows
 {
     public class ClockWindow: Window, IMediatorEventHandler

@@ -16,6 +16,8 @@
     <AssemblyName>Emily.Clock.App</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Nullable>Enable</Nullable>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
@@ -30,31 +32,31 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.51\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.53\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.51\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.53\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.51\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.53\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.51\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.53\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.51\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.53\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Math">
-      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.51\lib\CCSWE.nanoFramework.Math.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.53\lib\CCSWE.nanoFramework.Math.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.51\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.53\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.NeoPixel">
-      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.1.1.51\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.1.1.53\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.51\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.53\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.775\lib\Iot.Device.Button.dll</HintPath>

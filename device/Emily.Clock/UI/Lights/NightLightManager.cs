@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using CCSWE.nanoFramework.Configuration;
@@ -177,11 +178,17 @@ namespace Emily.Clock.UI.Lights
                 return;
             }
 
-            UpdateConfiguration((NightLightConfiguration) e.Configuration);
+            if (e.Configuration is not NightLightConfiguration configuration)
+            {
+                return;
+            }
+
+            UpdateConfiguration(configuration);
         }
 
         public void Toggle() => Enabled = !Enabled;
 
+        [MemberNotNull(nameof(_configuration))]
         private void UpdateConfiguration(NightLightConfiguration configuration)
         {
             configuration.Brightness = NormalizeBrightness(configuration.Brightness);
@@ -189,13 +196,13 @@ namespace Emily.Clock.UI.Lights
             if (_configuration is null)
             {
                 _configuration = configuration;
-
+                // TODO: Should I not be updating leds here?
                 return;
             }
-            
-            _configuration = configuration;
 
             var updatePixels = Math.Abs(configuration.Brightness - _configuration.Brightness) < double.Epsilon || configuration.Color != _configuration.Color;
+            
+            _configuration = configuration;
             
             if (updatePixels)
             {
@@ -210,7 +217,7 @@ namespace Emily.Clock.UI.Lights
                 return;
             }
 
-            Debug.WriteLine($"UpdateLedsThread start");
+            Debug.WriteLine("UpdateLedsThread start");
             var startTime = DateTime.UtcNow;
 
             var brightness = Brightness;
@@ -224,6 +231,12 @@ namespace Emily.Clock.UI.Lights
 
             if (workItem.UpdateSunAndMoon)
             {
+                // Check always on 
+                if (brightness == 0.0f)
+                {
+                    brightness = 0.25f;
+                }
+
                 _ledManager.SetMoonLed(PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black, brightness);
                 _ledManager.SetSunLed(PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black, brightness);
             }

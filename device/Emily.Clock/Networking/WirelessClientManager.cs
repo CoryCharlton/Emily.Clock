@@ -42,7 +42,7 @@ namespace Emily.Clock.Networking
             _networkInterfaceProvider = networkInterfaceProvider;
         }
 
-        public string IpAddress => GetNetworkInterface()?.IPv4Address;
+        public string IpAddress => GetNetworkInterface().IPv4Address ?? string.Empty;
 
         public bool IsConfigured => !string.IsNullOrEmpty(_configuration.Ssid);
 
@@ -103,7 +103,7 @@ namespace Emily.Clock.Networking
 
         private Wireless80211Configuration GetNetworkConfiguration() => Wireless80211Configuration.GetAllWireless80211Configurations()[GetNetworkInterface().SpecificConfigId];
 
-        private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.GetInterface(NetworkInterfaceType.Wireless80211);
+        private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.RequireInterface(NetworkInterfaceType.Wireless80211);
 
         private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {

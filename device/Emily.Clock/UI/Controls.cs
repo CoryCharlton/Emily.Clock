@@ -40,7 +40,7 @@ namespace Emily.Clock.UI
             });
         }
 
-        public static void DrawContent(Bitmap screen, string line1 = null, string line2 = null, bool flush = false)
+        public static void DrawContent(Bitmap screen, string? line1 = null, string? line2 = null, bool flush = false)
         {
             PerformDrawingAndFlush(screen, flush, () =>
             {

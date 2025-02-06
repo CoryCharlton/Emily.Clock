@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
 
-#nullable enable
 namespace Emily.Clock.UI
 {
     public readonly struct Padding
@@ -51,7 +50,9 @@ namespace Emily.Clock.UI
             // HashCode.Combine(Left, Top, Right, Bottom);
             unchecked
             {
+                // ReSharper disable UsageOfDefaultStructEquality
                 return Left.GetHashCode() ^ Top.GetHashCode() ^ Right.GetHashCode() ^ Bottom.GetHashCode();
+                // ReSharper restore UsageOfDefaultStructEquality
             }
         }
 

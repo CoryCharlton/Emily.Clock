@@ -38,7 +38,7 @@ namespace Emily.Clock.UI.Windows
                 return;
             }
 
-            if (ButtonEventType.Press == buttonEvent.Type && Button.One == buttonEvent.Button)
+            if (buttonEvent is { Type: ButtonEventType.Press, Button: Button.One })
             {
                 _networkManager.SetMode(WirelessMode.Client);
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using Emily.Clock.Configuration;
+﻿using Emily.Clock.Configuration;
 using System.Net.NetworkInformation;
 using System.Net;
 using CCSWE.nanoFramework.Configuration;
@@ -28,7 +27,7 @@ namespace Emily.Clock.Networking
         private WirelessAccessPointConfiguration _configuration;
         private readonly IConfigurationManager _configurationManager;
         private readonly ILogger _logger;
-        private DhcpServer _dhcpServer;
+        private DhcpServer? _dhcpServer;
         private readonly IMediator _mediator;
         private readonly INetworkInterfaceProvider _networkInterfaceProvider;
 
@@ -42,7 +41,7 @@ namespace Emily.Clock.Networking
             _networkInterfaceProvider = networkInterfaceProvider;
         }
 
-        public string IpAddress => GetNetworkInterface()?.IPv4Address;
+        public string IpAddress => GetNetworkInterface().IPv4Address ?? string.Empty;
 
         /*
          * Add IsConfigured and check IsEnabled + IpAddress is correct?
@@ -93,7 +92,7 @@ namespace Emily.Clock.Networking
 
         private WirelessAPConfiguration GetNetworkConfiguration() => WirelessAPConfiguration.GetAllWirelessAPConfigurations()[GetNetworkInterface().SpecificConfigId];
 
-        private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.GetInterface(NetworkInterfaceType.WirelessAP);
+        private NetworkInterface GetNetworkInterface() => _networkInterfaceProvider.RequireInterface(NetworkInterfaceType.WirelessAP);
 
         private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
         {
@@ -129,7 +128,7 @@ namespace Emily.Clock.Networking
 
         public void Stop()
         {
-            PublishStatusEvent($"Stopping access point...");
+            PublishStatusEvent("Stopping access point...");
 
             _dhcpServer?.Stop();
             _dhcpServer = null;

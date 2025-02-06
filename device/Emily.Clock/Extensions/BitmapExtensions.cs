@@ -1,6 +1,7 @@
 ﻿using Emily.Clock.UI;
 using nanoFramework.Presentation;
 using nanoFramework.UI;
+// ReSharper disable RedundantArgumentDefaultValue
 
 // ReSharper disable once CheckNamespace
 namespace System.Drawing

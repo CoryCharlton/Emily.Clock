@@ -19,7 +19,6 @@ namespace Emily.Clock.Configuration
         public TimeSpan WakeTime { get; set; } = TimeSpan.FromHours(7);
     }
 
-    // TODO: Add unit tests
     public class DateTimeConfigurationValidator : IValidateConfiguration
     {
         private static bool IsValidTimeOfDay(TimeSpan timeOfDay)
@@ -41,7 +40,7 @@ namespace Emily.Clock.Configuration
             }
         }
 
-        public ValidateConfigurationResult Validate(object configuration)
+        public ValidateConfigurationResult Validate(object? configuration)
         {
             if (configuration is not DateTimeConfiguration dateTimeConfiguration)
             {
@@ -52,20 +51,20 @@ namespace Emily.Clock.Configuration
 
             if (!IsValidTimeOfDay(dateTimeConfiguration.BedTime))
             {
-                failures.Add($"Bed time must be between 0:00 and 23:59 [{dateTimeConfiguration.BedTime}]");
+                failures.Add("Bed time must be between 0:00 and 23:59");
             }
 
             if (!IsValidTimeZone(dateTimeConfiguration.TimeZone))
             {
-                failures.Add($"Invalid time zone [{dateTimeConfiguration.TimeZone}]");
+                failures.Add("Invalid time zone");
             }
 
             if (!IsValidTimeOfDay(dateTimeConfiguration.WakeTime))
             {
-                failures.Add($"Wake time must be between 0:00 and 23:59 [{dateTimeConfiguration.WakeTime}]");
+                failures.Add("Wake time must be between 0:00 and 23:59");
             }
 
-            return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray()) : ValidateConfigurationResult.Success;
+            return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray(typeof(string))) : ValidateConfigurationResult.Success;
         }
     }
 }

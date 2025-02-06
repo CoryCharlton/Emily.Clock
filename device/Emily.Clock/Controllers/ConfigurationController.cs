@@ -1,10 +1,12 @@
 ﻿using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.WebServer;
+using CCSWE.nanoFramework.WebServer.Authorization;
 using nanoFramework.Json;
 
 namespace Emily.Clock.Controllers
 {
     [Route("/api/configuration")]
+    [AllowAnonymous]
     public class ConfigurationController: ControllerBase
     {
         private readonly IConfigurationManager _configurationManager;

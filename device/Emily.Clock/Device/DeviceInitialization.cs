@@ -106,7 +106,7 @@ namespace Emily.Clock.Device
             var screen = _displayManager.GetBitmap();
 
             Controls.DrawTitle(screen, "Emily.Clock");
-            Controls.DrawContent(screen, $"Powered by nanoFramework", $" ");
+            Controls.DrawContent(screen, "Powered by nanoFramework", " ");
             // TODO: Fix for smaller text (pass font?)
             //Controls.DrawContent(screen, $"Powered by nanoFramework", $"https://github.com/CoryCharlton/Emily.Clock");
 

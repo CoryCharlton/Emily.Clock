@@ -9,5 +9,7 @@ namespace Emily.Clock.Configuration
         public float Brightness { get; set; } = 0.5f;
 
         public NightLightColor Color { get; set; } = NightLightColor.Violet;
+
+        //public bool PanelLightsAlwaysOn { get; set; } = true;
     }
 }

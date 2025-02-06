@@ -1,12 +1,10 @@
 ﻿using System.Drawing;
-using nanoFramework.UI;
-using Point = System.Drawing.Point;
 
 // ReSharper disable BitwiseOperatorOnEnumWithoutFlags
 namespace Emily.Clock.UI.Layout
 {
     // TODO: Switch to this
-    // TODO: Support padding
+    // TODO: Should Padding impact the size of the output? Without adjusting the size Padding acts more like a margin.
     internal class LayoutUtils
     {
         public const ContentAlignment AnyTop = ContentAlignment.TopLeft | ContentAlignment.TopCenter | ContentAlignment.TopRight;
@@ -18,43 +16,56 @@ namespace Emily.Clock.UI.Layout
 
         public static Rectangle Align(Size alignThis, Rectangle withinThis, ContentAlignment align)
         {
-            return VAlign(alignThis, HAlign(alignThis, withinThis, align), align);
+            return Align(alignThis, withinThis, align, Padding.Empty);
         }
 
-        private static Rectangle HAlign(Size alignThis, Rectangle withinThis, ContentAlignment align)
+        public static Rectangle Align(Size alignThis, Rectangle withinThis, ContentAlignment align, Padding padding)
         {
-            //var aligned = new Rectangle(withinThis.Location, withinThis.Size);
+            return VAlign(alignThis, HAlign(alignThis, withinThis, align, padding), align, padding);
+        }
+
+        private static Rectangle HAlign(Size alignThis, Rectangle withinThis, ContentAlignment align, Padding padding)
+        {
+            var aligned = new Rectangle(withinThis.Location, withinThis.Size);
 
             if ((align & AnyRight) != 0)
             {
-                withinThis.X += withinThis.Width - alignThis.Width;
+                aligned.X += withinThis.Width - alignThis.Width - padding.Right;
             }
             else if ((align & AnyCenter) != 0)
             {
-                withinThis.X += (withinThis.Width - alignThis.Width) / 2;
+                aligned.X += (withinThis.Width - alignThis.Width) / 2;
+            }
+            else
+            {
+                aligned.X += padding.Left;
             }
 
-            withinThis.Width = alignThis.Width;
+            aligned.Width = alignThis.Width;
 
-            return withinThis;
+            return aligned;
         }
 
-        private static Rectangle VAlign(Size alignThis, Rectangle withinThis, ContentAlignment align)
+        private static Rectangle VAlign(Size alignThis, Rectangle withinThis, ContentAlignment align, Padding padding)
         {
-            //var aligned = new Rectangle(withinThis.Location, withinThis.Size);
+            var aligned = new Rectangle(withinThis.Location, withinThis.Size);
 
             if ((align & AnyBottom) != 0)
             {
-                withinThis.Y += withinThis.Height - alignThis.Height;
+                aligned.Y += withinThis.Height - alignThis.Height - padding.Bottom;
             }
             else if ((align & AnyMiddle) != 0)
             {
-                withinThis.Y += (withinThis.Height - alignThis.Height) / 2;
+                aligned.Y += (withinThis.Height - alignThis.Height) / 2;
+            }
+            else
+            {
+                aligned.Y += padding.Top;
             }
 
-            withinThis.Height = alignThis.Height;
+            aligned.Height = alignThis.Height;
 
-            return withinThis;
+            return aligned;
         }
     }
 }

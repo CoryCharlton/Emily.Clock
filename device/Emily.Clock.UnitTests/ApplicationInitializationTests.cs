@@ -1,7 +1,5 @@
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UnitTests.Mocks;
-using Emily.Clock.UnitTests.Mocks.Logging;
-using Emily.Clock.UnitTests.Mocks.UI.Navigation;
 using nanoFramework.TestFramework;
 
 namespace Emily.Clock.UnitTests

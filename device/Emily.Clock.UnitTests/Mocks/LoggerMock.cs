@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace Emily.Clock.UnitTests.Mocks.Logging
+namespace Emily.Clock.UnitTests.Mocks
 {
     internal class LoggerMock: ILogger
     {

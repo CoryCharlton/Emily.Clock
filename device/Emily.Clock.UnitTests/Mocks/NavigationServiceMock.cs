@@ -1,6 +1,6 @@
 ﻿using Emily.Clock.UI.Navigation;
 
-namespace Emily.Clock.UnitTests.Mocks.UI.Navigation
+namespace Emily.Clock.UnitTests.Mocks
 {
     internal class NavigationServiceMock: INavigationService
     {

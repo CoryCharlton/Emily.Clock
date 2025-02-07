@@ -29,10 +29,12 @@
     <Compile Include="Configuration\WirelessClientConfiguration.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Device\DeviceManagerBase.cs" />
     <Compile Include="Device\Led\ILedManager.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensions.cs" />
-    <Compile Include="Extensions\SizeExtensions.cs" />
+    <Compile Include="Extensions\HorizontalAlignmentExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\VerticalAlignmentExtensions.cs" />
     <Compile Include="IO\IFileStorageManager.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
@@ -41,9 +43,7 @@
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
-    <Compile Include="Extensions\HorizontalAlignmentExtensions.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
-    <Compile Include="Extensions\VerticalAlignmentExtensions.cs" />
     <Compile Include="Device\Gpio\Button.cs" />
     <Compile Include="Device\Gpio\ButtonManagerBase.cs" />
     <Compile Include="Device\Gpio\GpioProvider.cs" />

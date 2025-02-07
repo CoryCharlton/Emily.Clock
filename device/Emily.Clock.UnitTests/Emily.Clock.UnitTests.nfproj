@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="ApplicationInitializationTests.cs" />
     <Compile Include="Configuration\DateTimeConfigurationValidatorTests.cs" />
+    <Compile Include="Extensions\FontExtensionsTests.cs" />
     <Compile Include="Mocks\DeviceManagerMock.cs" />
     <Compile Include="Mocks\LocalTimeProviderMock.cs" />
     <Compile Include="LocalTimeProviderTests.cs" />

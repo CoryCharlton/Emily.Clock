@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Emily.Clock.IO;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Hardware.Esp32;
@@ -91,6 +92,25 @@ namespace Emily.Clock.App.Hardware
             }
 
             return IsMounted;
+        }
+
+        // TODO: Optimize this (can we implement a SpanString?)
+        // This isn't very efficient
+        public string NormalizePath(string path)
+        {
+            if (path.StartsWith(Root))
+            {
+                return path.Contains("/") ? path.Replace("/", @"\") : path;
+            }
+
+            var colonIndex = path.IndexOf(':');
+            var normalizedPath = new StringBuilder(colonIndex == -1 ? path : path.Substring(colonIndex + 1, path.Length - 1 - colonIndex));
+
+            normalizedPath.Insert(0, Root + @"\", 1);
+            normalizedPath.Replace("/", @"\");
+            normalizedPath.Replace(@"\\", @"\");
+
+            return normalizedPath.ToString();
         }
 
         private static void SetPinFunction(int pin, DeviceFunction function)

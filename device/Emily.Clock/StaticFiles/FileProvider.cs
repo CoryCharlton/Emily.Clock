@@ -26,6 +26,11 @@ namespace Emily.Clock.StaticFiles
                 subpath = "/index.html";
             }
 
+            if (subpath.StartsWith("/"))
+            {
+                subpath = subpath.Substring(1);
+            }
+
             var path = _fileStorageManager.NormalizePath(Path.Combine(Root, subpath));
 
             return new FileInfo(path, _fileStorage);

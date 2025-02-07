@@ -10,6 +10,7 @@ using nanoFramework.Runtime.Native;
 
 namespace Emily.Clock.App.Hardware
 {
+    // TODO: Consider moving most (all?) of this to a base class
     public class DisplayManager: IDisplayManager
     {
         // ReSharper disable InconsistentNaming
@@ -77,7 +78,9 @@ namespace Emily.Clock.App.Hardware
 
             _gpioProvider.OpenPin(SCREEN_DATA_COMMAND, PinMode.OutputOpenDrain);
             _gpioProvider.Write(SCREEN_DATA_COMMAND, PinValue.Low);
+
             Thread.Sleep(100);
+
             _gpioProvider.Write(SCREEN_DATA_COMMAND, PinValue.High);
 
             SetPinFunction(SCREEN_MISO, DeviceFunction.SPI1_MISO);
@@ -114,7 +117,7 @@ namespace Emily.Clock.App.Hardware
         {
             if (!_initialized)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("DisplayManager is not initialized");
             }
         }
 

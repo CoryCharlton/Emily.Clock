@@ -24,8 +24,6 @@ namespace Emily.Clock.StaticFiles
         }
 
         public bool Exists { get; }
-        //TODO: Remove...
-        public long Length { get; } = 0;
         public string Name { get; }
     }
 }

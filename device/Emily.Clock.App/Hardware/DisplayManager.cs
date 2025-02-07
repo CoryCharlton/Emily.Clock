@@ -40,9 +40,17 @@ namespace Emily.Clock.App.Hardware
 
         public ushort Width => _width;
 
+        private void CheckInitialized()
+        {
+            if (!_initialized)
+            {
+                throw new InvalidOperationException("DisplayManager is not initialized");
+            }
+        }
+
         public void Clear(bool flush = true)
         {
-            RequireInitialization();
+            CheckInitialized();
 
             var bitmap = GetBitmap();
 
@@ -61,7 +69,7 @@ namespace Emily.Clock.App.Hardware
 
         public Bitmap GetBitmap()
         {
-            RequireInitialization();
+            CheckInitialized();
             
             return DisplayControl.FullScreen;
         }
@@ -111,14 +119,6 @@ namespace Emily.Clock.App.Hardware
 
             Clear();
             SetBackLight(false);
-        }
-
-        private void RequireInitialization()
-        {
-            if (!_initialized)
-            {
-                throw new InvalidOperationException("DisplayManager is not initialized");
-            }
         }
 
         public void SetBackLight(bool enabled)

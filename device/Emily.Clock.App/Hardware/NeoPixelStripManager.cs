@@ -21,9 +21,18 @@ namespace Emily.Clock.App.Hardware
 
         public bool IsInitialized { get; private set; }
 
+        [MemberNotNull(nameof(_neoPixelStrip))]
+        private void CheckInitialized()
+        {
+            if (_neoPixelStrip is null || !IsInitialized)
+            {
+                throw new InvalidOperationException("NeoPixelStrip is not initialized.");
+            }
+        }
+
         public void Clear(bool update = true)
         {
-            RequireInitialization();
+            CheckInitialized();
 
             _neoPixelStrip.Clear();
 
@@ -62,17 +71,9 @@ namespace Emily.Clock.App.Hardware
             Clear();
         }
 
-        [MemberNotNull(nameof(_neoPixelStrip))]
-        private void RequireInitialization()
-        {
-            if (_neoPixelStrip is null)
-            {
-                throw new InvalidOperationException("NeoPixelStrip is not initialized.");
-            }
-        }
         public void SetMoonLed(Color color, float brightness)
         {
-            RequireInitialization();
+            CheckInitialized();
 
             // TODO: Come back to this (I should add better comments as I don't recall what I was coming back to...)
             if (Color.Black.Equals(color))
@@ -87,7 +88,7 @@ namespace Emily.Clock.App.Hardware
 
         public void SetNightlightLeds(Color color, float brightness)
         {
-            RequireInitialization();
+            CheckInitialized();
 
             var scaledColor = ColorConverter.ScaleBrightness(color, brightness);
 
@@ -102,7 +103,7 @@ namespace Emily.Clock.App.Hardware
 
         public void SetSunLed(Color color, float brightness)
         {
-            RequireInitialization();
+            CheckInitialized();
 
             // TODO: Come back to this (I should add better comments as I don't recall what I was coming back to...)
             if (Color.Black.Equals(color))
@@ -117,7 +118,7 @@ namespace Emily.Clock.App.Hardware
 
         public void Update()
         {
-            RequireInitialization();
+            CheckInitialized();
 
             _neoPixelStrip.Update();
         }

@@ -1,6 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace System
 {
+    // TODO: Move to Core?
     internal static class DateTimeExtensions
     {
         /*

@@ -32,6 +32,12 @@
         "resolved": "1.1.53",
         "contentHash": "MHhCIRelCIahQWF76NcnArSiMDFXI/EP/6fQv2PUTCNuGJR7GuMcHzHv9tvIYVHkh3ouwlpCahw7AoYxh9SuVg=="
       },
+      "CCSWE.nanoFramework.Mediator": {
+        "type": "Direct",
+        "requested": "[1.1.53, 1.1.53]",
+        "resolved": "1.1.53",
+        "contentHash": "+8B+kYrHZWWh5BPHbMb390WY2RwThJabDceY3W47ztegGoR+pcLWJINz2OkKukReWW6ZbMIPk9EQcC3+dmxTpg=="
+      },
       "CCSWE.nanoFramework.Threading": {
         "type": "Direct",
         "requested": "[1.1.53, 1.1.53]",

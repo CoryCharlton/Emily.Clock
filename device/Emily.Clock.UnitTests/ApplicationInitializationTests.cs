@@ -8,14 +8,14 @@ namespace Emily.Clock.UnitTests
     public class ApplicationInitializationTests
     {
         [TestMethod]
-        public void DeviceStarting_should_handle_night_light_manager_failing_to_initialize()
+        public void Initialize_should_handle_night_light_manager_failing_to_initialize()
         {
             // Arrange
             var deviceManager = new DeviceManagerMock();
             var localTimeProvider = new LocalTimeProviderMock();
             var logger = new LoggerMock();
             var navigationService = new NavigationServiceMock();
-            var nightLightManager = new NightLightManagerMock() { InitializeResult = false };
+            var nightLightManager = new NightLightManagerMock { InitializeResult = false };
 
             var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
@@ -28,7 +28,7 @@ namespace Emily.Clock.UnitTests
         }
 
         [TestMethod]
-        public void DeviceStarting_should_navigate_to_clock_on_success()
+        public void Initialize_should_navigate_to_clock_on_success()
         {
             // Arrange
             var deviceManager = new DeviceManagerMock();
@@ -49,7 +49,7 @@ namespace Emily.Clock.UnitTests
         }
 
         [TestMethod]
-        public void DeviceStarting_should_set_application_start_time()
+        public void Initialize_should_set_application_start_time()
         {
             // Arrange
             var deviceManager = new DeviceManagerMock();
@@ -69,7 +69,7 @@ namespace Emily.Clock.UnitTests
         }
 
         [TestMethod]
-        public void DeviceStarting_should_start_time_provider()
+        public void Initialize_should_start_time_provider()
         {
             // Arrange
             var deviceManager = new DeviceManagerMock();

@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
+using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
 using Emily.Clock.Mediator.Events;
 
@@ -18,9 +19,10 @@ namespace Emily.Clock
         void Start();
     }
 
-    public class LocalTimeProvider : ILocalTimeProvider
+    public sealed class LocalTimeProvider : ILocalTimeProvider, IDisposable
     {
         private TimeSpan _bedTime;
+        private readonly ManualResetEvent _cancellationRequested = new(false);
         private readonly IConfigurationManager _configurationManager;
         private readonly AutoResetEvent _generateEvents = new(false);
         private Thread? _generateEventsThread;
@@ -36,7 +38,7 @@ namespace Emily.Clock
         public bool IsBedTime => Now.TimeOfDay >= _bedTime || Now.TimeOfDay <= _wakeTime;
 
         // ReSharper disable once MergeConditionalExpression
-        public DateTime Now => _timeZone is not null ? _timeZone.GetLocalTime(UtcNow) : DateTime.UtcNow;
+        public DateTime Now => _timeZone is not null ? _timeZone.GetLocalTime(UtcNow) : UtcNow;
         public DateTime UtcNow => DateTime.UtcNow;
 
         public LocalTimeProvider(IConfigurationManager configurationManager, ILogger logger, IMediator mediator)
@@ -49,12 +51,21 @@ namespace Emily.Clock
             UpdateConfiguration((DateTimeConfiguration) _configurationManager.Get(DateTimeConfiguration.Section));
         }
 
-        // ReSharper disable once FunctionNeverReturns
+        ~LocalTimeProvider()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            _cancellationRequested.Set();
+        }
+
         private void GenerateEventsAsync()
         {
             var generateEvents = _generateEvents.WaitOne(0, false);
 
-            while (true)
+            while (!_cancellationRequested.WaitOne(0, false))
             {
                 var currentDateTime = Now;
 
@@ -78,7 +89,7 @@ namespace Emily.Clock
                 // ReSharper disable once SimplifyStringInterpolation
                 _logger.LogDebug($"{nameof(LocalTimeProvider)} will update in {millisecondsTimeout} - {currentDateTime.ToString("O")}");
 
-                generateEvents = _generateEvents.WaitOne(millisecondsTimeout, false);
+                generateEvents = WaitHandles.WaitAny(millisecondsTimeout, false, _generateEvents, _cancellationRequested) == 0;
             }
         }
 
@@ -89,7 +100,12 @@ namespace Emily.Clock
                 return;
             }
 
-            UpdateConfiguration((DateTimeConfiguration) e.Configuration);
+            if (e.Configuration is not DateTimeConfiguration configuration)
+            {
+                return;
+            }
+
+            UpdateConfiguration(configuration);
         }
 
         public void Start()

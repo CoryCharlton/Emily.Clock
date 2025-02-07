@@ -61,15 +61,6 @@ namespace System.Drawing
             return rectangle;
         }
 
-        public static void DrawText(this Bitmap bitmap, string text, Font font, Color color, HorizontalAlignment alignment, Padding padding)
-        {
-            font.ComputeExtent(text, out var width, out _);
-
-            var x = alignment.AlignContent(bitmap.GetSize(), width, padding);
-
-            bitmap.DrawText(text, font, color, x, padding.Top);
-        }
-
         public static void Fill(this Bitmap bitmap, Color color)
         {
             bitmap.FillRectangle(0, 0, bitmap.Width, bitmap.Height, color, Bitmap.OpacityOpaque);

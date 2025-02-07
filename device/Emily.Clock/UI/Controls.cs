@@ -2,7 +2,6 @@
 using System.Drawing;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.UI.Layout;
-using nanoFramework.Presentation;
 using nanoFramework.UI;
 
 namespace Emily.Clock.UI
@@ -113,7 +112,7 @@ namespace Emily.Clock.UI
         {
             PerformDrawingAndFlush(screen, flush, () =>
             {
-                using var source = BitmapFactory.Create(screen.Width, title, Theme.LargeFont, Theme.PrimaryText, HorizontalAlignment.Center, Theme.ControlPadding);
+                using var source = BitmapFactory.Create(screen.Width, title, Theme.LargeFont, Theme.PrimaryText, ContentAlignment.MiddleCenter, Theme.ControlPadding);
                 screen.DrawImage(0, (int)(screen.Height * 0.30 - (source.Height / 2.0) - (LogoSize / 2.0)), source);
             });
         }

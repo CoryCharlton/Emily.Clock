@@ -32,15 +32,22 @@
   <ItemGroup>
     <Compile Include="ApplicationInitializationTests.cs" />
     <Compile Include="Configuration\DateTimeConfigurationValidatorTests.cs" />
-    <Compile Include="Extensions\FontExtensionsTests.cs" />
+    <Compile Include="Extensions\DateTimeExtensionsTests.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\TimeSpanExtensionsTests.cs" />
+    <Compile Include="Mocks\ConfigurationManagerMock.cs" />
     <Compile Include="Mocks\DeviceManagerMock.cs" />
     <Compile Include="Mocks\LocalTimeProviderMock.cs" />
     <Compile Include="LocalTimeProviderTests.cs" />
     <Compile Include="Mocks\LoggerMock.cs" />
+    <Compile Include="Mocks\MediatorMock.cs" />
     <Compile Include="Mocks\NavigationServiceMock.cs" />
     <Compile Include="Mocks\NightLightManagerMock.cs" />
+    <Compile Include="Mocks\WindowFactoryMock.cs" />
+    <Compile Include="Mocks\WindowMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Layout\LayoutUtilsTests.cs" />
+    <Compile Include="UI\Navigation\NavigationServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
@@ -63,6 +70,9 @@
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Logging">
       <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.53\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.Mediator">
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.53\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
       <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.53\lib\CCSWE.nanoFramework.Threading.dll</HintPath>

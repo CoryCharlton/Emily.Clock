@@ -18,6 +18,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eng", "Eng", "{246148B2-0E09-462C-9CB3-1021655E86B0}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\copilot-instructions.md = ..\.github\copilot-instructions.md
+		..\version.json = ..\version.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{2D46B401-1E64-4994-ADB4-E7BD49DE8221}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build-solution.yml = ..\.github\workflows\build-solution.yml
+		..\.github\config.yml = ..\.github\config.yml
+		..\.github\workflows\pull-request-checks.yml = ..\.github\workflows\pull-request-checks.yml
+		..\.github\workflows\update-dependencies.yml = ..\.github\workflows\update-dependencies.yml
 	EndProjectSection
 EndProject
 Global
@@ -47,6 +56,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D46B401-1E64-4994-ADB4-E7BD49DE8221} = {246148B2-0E09-462C-9CB3-1021655E86B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C4B86B8-6063-4C02-BFC2-40983A7C4F79}

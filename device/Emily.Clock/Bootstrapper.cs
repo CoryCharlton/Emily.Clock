@@ -5,7 +5,6 @@ using CCSWE.nanoFramework.Logging;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Configuration;
-using Emily.Clock.Controllers;
 using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
@@ -40,6 +39,8 @@ namespace Emily.Clock
 
         private static IServiceCollection AddCore(this IServiceCollection services)
         {
+            JsonSerializerOptions.Default.PropertyNameCaseInsensitive = true;
+
             services
                 .AddFileStorage();
 
@@ -117,8 +118,7 @@ namespace Emily.Clock
                 services.AddCors();
                 services.AddStaticFiles(typeof(FileProvider));
 
-                services.AddController(typeof(ConfigurationController));
-                services.AddController(typeof(DeviceController));
+                services.AddControllers(typeof(Bootstrapper).Assembly);
 
                 services.AddWebServer(options =>
                 {

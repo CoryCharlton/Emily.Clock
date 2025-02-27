@@ -1,0 +1,54 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireless Client Configuration</title>
+</head>
+<body>
+    <h1>Wireless Configuration</h1>
+    <form id="wirelessForm">
+        <label for="ssid">SSID:</label>
+        <input type="text" id="ssid" name="ssid" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="connectionTimeout">Connection Timeout (seconds):</label>
+        <input type="number" id="connectionTimeout" name="connectionTimeout" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        let endpoint = '/api/configuration/wirelessclient';
+        //let endpoint = 'http://10.0.10.117/api/configuration/wirelessclient';
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("ssid").value = data.Ssid;
+                    document.getElementById("password").value = data.Password;
+                    document.getElementById("connectionTimeout").value = data.ConnectionTimeout;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+
+            document.getElementById("wirelessForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const formData = {
+                    Ssid: document.getElementById("ssid").value,
+                    Password: document.getElementById("password").value,
+                    ConnectionTimeout: document.getElementById("connectionTimeout").value
+                };
+                fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => console.error('Error submitting data:', error));
+            });
+        });
+    </script>
+</body>
+</html>

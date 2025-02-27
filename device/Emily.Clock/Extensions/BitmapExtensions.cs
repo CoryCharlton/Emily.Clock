@@ -1,13 +1,11 @@
 ﻿using Emily.Clock.UI;
 using Emily.Clock.UI.Layout;
-using nanoFramework.Presentation;
 using nanoFramework.UI;
-// ReSharper disable RedundantArgumentDefaultValue
 
+// ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable once CheckNamespace
 namespace System.Drawing
 {
-    // TODO: Should I move the content alignment out of this layer? Maybe into controls and just allow this class to focus on core methods
     public static class BitmapExtensions
     {
         public static void Clear(this Bitmap bitmap, Rectangle region)

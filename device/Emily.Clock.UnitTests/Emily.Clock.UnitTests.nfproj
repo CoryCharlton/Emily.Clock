@@ -60,26 +60,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.65\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.66\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.65\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Configuration, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.66\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.65\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.66\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.65\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.66\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.65\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.66\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.65\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.66\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.65\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.1.66.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.66\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.822\lib\Iot.Device.Button.dll</HintPath>
@@ -102,11 +102,11 @@
     <Reference Include="nanoFramework.Hosting">
       <HintPath>..\packages\nanoFramework.Hosting.1.0.72\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Json">
-      <HintPath>..\packages\nanoFramework.Json.2.2.183\lib\nanoFramework.Json.dll</HintPath>
+    <Reference Include="nanoFramework.Json, Version=2.2.185.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Json.2.2.185\lib\nanoFramework.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Logging">
-      <HintPath>..\packages\nanoFramework.Logging.1.1.144\lib\nanoFramework.Logging.dll</HintPath>
+    <Reference Include="nanoFramework.Logging, Version=1.1.146.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Logging.1.1.146\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.ResourceManager">
       <HintPath>..\packages\nanoFramework.ResourceManager.1.2.30\lib\nanoFramework.ResourceManager.dll</HintPath>
@@ -135,14 +135,14 @@
     <Reference Include="System.IO.FileSystem">
       <HintPath>..\packages\nanoFramework.System.IO.FileSystem.1.1.80\lib\System.IO.FileSystem.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Streams">
-      <HintPath>..\packages\nanoFramework.System.IO.Streams.1.1.88\lib\System.IO.Streams.dll</HintPath>
+    <Reference Include="System.IO.Streams, Version=1.1.89.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.IO.Streams.1.1.89\lib\System.IO.Streams.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net">
-      <HintPath>..\packages\nanoFramework.System.Net.1.11.32\lib\System.Net.dll</HintPath>
+    <Reference Include="System.Net, Version=1.11.34.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Net.1.11.34\lib\System.Net.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\nanoFramework.System.Net.Http.1.5.183\lib\System.Net.Http.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=1.5.184.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Net.Http.1.5.184\lib\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
       <HintPath>..\packages\nanoFramework.System.Threading.1.1.49\lib\System.Threading.dll</HintPath>

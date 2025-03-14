@@ -28,9 +28,9 @@
       },
       "CCSWE.nanoFramework.Logging": {
         "type": "Direct",
-        "requested": "[1.1.69, 1.1.69]",
-        "resolved": "1.1.69",
-        "contentHash": "Wup7JG8NxrMpC06wBqjGsKHyFpLPF0Zbmzdu+cvdnFh4rb5VT1D0lg28h89cT8gA1SlFtYusSLSdeBZlb33Rfg=="
+        "requested": "[1.1.71, 1.1.71]",
+        "resolved": "1.1.71",
+        "contentHash": "0PybJ4w4ULPEWZjisPZ3GuheIyv73ZEUpg0UZwIuz/IIioXzblUkMgEEnTEAuQVFNF/l59YmHOZJk0HfiX48LA=="
       },
       "CCSWE.nanoFramework.Math": {
         "type": "Direct",
@@ -40,9 +40,9 @@
       },
       "CCSWE.nanoFramework.Mediator": {
         "type": "Direct",
-        "requested": "[1.1.69, 1.1.69]",
-        "resolved": "1.1.69",
-        "contentHash": "Xjk1TqeKlvjai5XIw9vybxG8pXiGQOiuO+jr8TgJaR7ucc9LkFFx2H4/mPupKzraJm6Ryrfjuvmj1DurFMB2cw=="
+        "requested": "[1.1.71, 1.1.71]",
+        "resolved": "1.1.71",
+        "contentHash": "Gwn9Ge+kNsarzH0DzTDLcmSbJaB2YWc1Bi21c0T+olNn53YPMmG5UpQk0EzneYD2fL4lUuIBHZ33GwpVp/aTlw=="
       },
       "CCSWE.nanoFramework.NeoPixel": {
         "type": "Direct",

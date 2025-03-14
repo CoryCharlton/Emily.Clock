@@ -52,14 +52,14 @@
     <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.71.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.71\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.69.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.69\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.71.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.71\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Math, Version=1.1.71.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.71\lib\CCSWE.nanoFramework.Math.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.69.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.69\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.71.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.71\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.NeoPixel, Version=1.1.71.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.1.1.71\lib\CCSWE.nanoFramework.NeoPixel.dll</HintPath>

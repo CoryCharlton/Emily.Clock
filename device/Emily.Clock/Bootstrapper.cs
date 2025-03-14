@@ -15,8 +15,8 @@ using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
 using Emily.Clock.UI.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using nanoFramework.Hosting;
 using nanoFramework.Json;
 
 namespace Emily.Clock

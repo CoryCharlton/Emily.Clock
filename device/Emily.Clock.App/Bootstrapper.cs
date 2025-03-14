@@ -5,7 +5,7 @@ using Emily.Clock.Device.Led;
 using Emily.Clock.IO;
 using Emily.Clock.UI;
 using Microsoft.Extensions.DependencyInjection;
-using nanoFramework.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Emily.Clock.App
 {

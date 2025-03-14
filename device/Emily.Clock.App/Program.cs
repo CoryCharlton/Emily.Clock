@@ -1,5 +1,5 @@
 using CCSWE.nanoFramework.Hosting;
-using nanoFramework.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Emily.Clock.App
 {

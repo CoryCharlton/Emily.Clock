@@ -189,8 +189,8 @@
     <Reference Include="nanoFramework.Graphics.Core, Version=1.2.42.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Graphics.Core.1.2.42\lib\nanoFramework.Graphics.Core.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Hosting, Version=1.0.74.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.Hosting.1.0.74\lib\nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="nanoFramework.Hosting, Version=2.0.1.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Hosting.2.0.1\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Json, Version=2.2.189.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Json.2.2.189\lib\nanoFramework.Json.dll</HintPath>

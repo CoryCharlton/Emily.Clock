@@ -94,9 +94,9 @@
       },
       "nanoFramework.Hosting": {
         "type": "Direct",
-        "requested": "[1.0.74, 1.0.74]",
-        "resolved": "1.0.74",
-        "contentHash": "leXbkZdYzBRpkORTDPPjvqFb2PX7Yj0Ggo0EaPkgBjMZrnMwWNkaic4ECVuFsME4rOc3oYkTTlQsZWCKRDitog=="
+        "requested": "[2.0.1, 2.0.1]",
+        "resolved": "2.0.1",
+        "contentHash": "E3A00615li43UVnE6e5d1j4LZyjaB1NdLAXRo2WfDvV3JKrjOazS9lvuflj5Ys/wlXwkvh+XsWe29vDIUzUzEw=="
       },
       "nanoFramework.Iot.Device.Button": {
         "type": "Direct",

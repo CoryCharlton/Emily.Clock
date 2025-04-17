@@ -175,7 +175,7 @@
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.864\lib\Iot.Device.Button.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Utilities.TimeZones, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MakoIoT.Device.Utilities.TimeZones.1.0.47.64325\lib\MakoIoT.Device.Utilities.TimeZones.dll</HintPath>
+      <HintPath>..\packages\MakoIoT.Device.Utilities.TimeZones.1.0.48.54941\lib\MakoIoT.Device.Utilities.TimeZones.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib, Version=1.17.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

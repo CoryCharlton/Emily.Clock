@@ -64,9 +64,9 @@
       },
       "MakoIoT.Device.Utilities.TimeZones": {
         "type": "Direct",
-        "requested": "[1.0.47.64325, 1.0.47.64325]",
-        "resolved": "1.0.47.64325",
-        "contentHash": "Tl7QvzDVFwxVFSQFutXMFmnZ1qy6qL4K74+uxtbQ1y1f4jcBlCX6PNvtLFxzXfG0xNg3q2mUV72QE9IX0EoVjg=="
+        "requested": "[1.0.48.54941, 1.0.48.54941]",
+        "resolved": "1.0.48.54941",
+        "contentHash": "b7mnJYDYbfI3/9PhFFEhRkHrf6U3IeaTlrWPpJ7airOijWp+lyUYFkwe1T9N+1Km/91RHR2fbCX4AZ/6dbcxdQ=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",

@@ -102,8 +102,8 @@
     <Reference Include="nanoFramework.Hosting, Version=2.0.5.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Hosting.2.0.5\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Json, Version=2.2.195.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.Json.2.2.195\lib\nanoFramework.Json.dll</HintPath>
+    <Reference Include="nanoFramework.Json, Version=2.2.199.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Json.2.2.199\lib\nanoFramework.Json.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Logging, Version=1.1.156.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Logging.1.1.156\lib\nanoFramework.Logging.dll</HintPath>
@@ -135,8 +135,8 @@
     <Reference Include="System.IO.FileSystem, Version=1.1.85.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.System.IO.FileSystem.1.1.85\lib\System.IO.FileSystem.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Streams, Version=1.1.94.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.System.IO.Streams.1.1.94\lib\System.IO.Streams.dll</HintPath>
+    <Reference Include="System.IO.Streams, Version=1.1.96.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.IO.Streams.1.1.96\lib\System.IO.Streams.dll</HintPath>
     </Reference>
     <Reference Include="System.Net, Version=1.11.42.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.System.Net.1.11.42\lib\System.Net.dll</HintPath>

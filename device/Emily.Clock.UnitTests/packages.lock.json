@@ -4,45 +4,45 @@
     ".NETnanoFramework,Version=v1.0": {
       "CCSWE.nanoFramework.Collections.Concurrent": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "L2OIN4flC1FQ6LHM75uEq1bapJEKbRPc3CVpse1hsMJm//PLuuEl8QbYId1/QsoYDzeMXbIkPymoGD50vd07TA=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "XQL1LmJhC/EhFRGiHDDN3umY0MC0AdoQwK9rrIy17NMTfKQMYIwWIiji5yqTO3hBTYghEfOYo4kk26xchNFJLw=="
       },
       "CCSWE.nanoFramework.Configuration": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "hj4dAup/MRNVBh8Vj4rt90UggjYaFFgKj4cppuvr5YK1+hwfM4+rcS6n4SYqdVYinW+1879BznaozMv4dKDznw=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "/n4hgteSBfVBtvBS3M6ELUFsp3ugY8h/mQFNspU1gT49ZNlEYOx3DbmBiQxDlaObo0pve5g98PrslVqJu/ouDg=="
       },
       "CCSWE.nanoFramework.Core": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "6D1bfze9GftfljmJskQHla9RvGQJltevTcwYTgRhA6uqVpG/YV1yIxmybB+Y4p0Ou4mON+f4yDgB5bAipajGfA=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "6G+dKW7w3QOyEW3wBzZX4Uc0iSuV67si7tulkScFyvm+nIs1lad9IqgXriHC89wckuL6kzVRoNnAsgKMczf6pA=="
       },
       "CCSWE.nanoFramework.Hosting": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "5udvonnE++B59MRjXf/3aUOo7Ggfcfo6oMyC0UEVnUZuidDCu3pqU+dBQboak2MeMYTs1kEWb3vkE8QOflVlDA=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "1JkCCH0+ZpXHEJSU065b2WHiJP/7JiStxKyzMT+2XdSEcLiW86nApqTRwx6hiTrrX9wa7eARRNIYdby4eeHhZg=="
       },
       "CCSWE.nanoFramework.Logging": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "XxPIp0rNRHmv3ufUsEG4ebA+L0QkxwWb9qviTNzeBFAxdN7EmIdQu/hgg83YjdQLmdtax2MxkIqd9YoSl4Uj0Q=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "aBrrjRBW8e+MzUxEMkFaVoj7rYQB+NNHZXdyEy53gUNZKmHleaKuaNVo8vPUorkDLVuIw2Gzqd9Y1FF+xQfobw=="
       },
       "CCSWE.nanoFramework.Mediator": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "2+r5HqhSbAe9L7IJZxNnSHrubPPGrEpm0N4l+CXrViGg6bjgJKJtJUvvm5aL1QgGN6lIFz5o+wbAq8FImXBXQQ=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "/97NgXyDbeB8sazMzEBQP+sJRO3dEC23YbDJADifkvLuKBQzQU9fpdayZ6rwdqDSrEInmM6HNtdfdgXr4Ugnug=="
       },
       "CCSWE.nanoFramework.Threading": {
         "type": "Direct",
-        "requested": "[1.1.83, 1.1.83]",
-        "resolved": "1.1.83",
-        "contentHash": "/xXA41HRTyQmTnJkxMHSRD5tdM+HdJrOJDiXUw70iXWrHI7pZd8ew8iPQC5hveEuk6HB6gmaJJN480tWiIoMhQ=="
+        "requested": "[1.1.84, 1.1.84]",
+        "resolved": "1.1.84",
+        "contentHash": "5toRMpZxHUEcmGFFC1ugcQSWxfWS8geyXavXNKCn1VPs++gBXhLiDGviPmsMs4I8pv2ywnAq6hfE2o7YNc8TSg=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",
@@ -82,9 +82,9 @@
       },
       "nanoFramework.Iot.Device.Button": {
         "type": "Direct",
-        "requested": "[1.2.864, 1.2.864]",
-        "resolved": "1.2.864",
-        "contentHash": "rRqALJZ2R4f8nZLIndZfAd8QbNzcg5G0XxsX3R/om3IlbMPSGmvV2YMHcX6NDD1Qbqd9Tmk7lmTeL+3HSD97Qg=="
+        "requested": "[1.2.907, 1.2.907]",
+        "resolved": "1.2.907",
+        "contentHash": "s6ljPucB/d7gJybvotZr6zKmCsVzP+JFT23i/KQn2GY1NuOxBEqr3PIadCBCSkM2lgxv/71mhNRAQw8HioYObw=="
       },
       "nanoFramework.Json": {
         "type": "Direct",
@@ -172,9 +172,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.7.115, 3.7.115]",
-        "resolved": "3.7.115",
-        "contentHash": "EpXamaAdRfG/BMxGgvZlTM0npRnkmXUjAj8OdNKd17t4oN+2nvjdv/KnFmzOOMDqvlwB49UCwtOHJrAQTfUBtQ=="
+        "requested": "[3.8.118, 3.8.118]",
+        "resolved": "3.8.118",
+        "contentHash": "cRaG+ICcECG+CzbtQyUV2WftH7yl2B02AjYGGNScXx8TwYavZYwhCewBTiC0qTcsac7m6AzBUYna5xzBWmTGYw=="
       }
     }
   }

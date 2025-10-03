@@ -51,9 +51,6 @@
     <Compile Include="UI\Navigation\NavigationServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.lock.json" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +145,9 @@
     <Reference Include="System.Threading, Version=1.1.52.34401, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.System.Threading.1.1.52\lib\System.Threading.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

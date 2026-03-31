@@ -58,26 +58,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.88\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Configuration, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.88\lib\CCSWE.nanoFramework.Configuration.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Configuration, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.88\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.88\lib\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.88\lib\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.88\lib\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.1.88.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.88\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.1.95.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.95\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button, Version=1.2.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.931\lib\Iot.Device.Button.dll</HintPath>

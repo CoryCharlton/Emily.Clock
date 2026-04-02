@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock", "Emily.Clock\Emily.Clock.nfproj", "{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}"
+EndProject
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.App", "Emily.Clock.App\Emily.Clock.App.nfproj", "{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}"
+EndProject
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.UnitTests", "Emily.Clock.UnitTests\Emily.Clock.UnitTests.nfproj", "{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DB263FB2-8A0C-45C0-9F86-083933444B8B}"
+	ProjectSection(SolutionItems) = preProject
+		..\CLAUDE.md = ..\CLAUDE.md
+		..\LICENSE.md = ..\LICENSE.md
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eng", "Eng", "{246148B2-0E09-462C-9CB3-1021655E86B0}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\copilot-instructions.md = ..\.github\copilot-instructions.md
+		..\version.json = ..\version.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{2D46B401-1E64-4994-ADB4-E7BD49DE8221}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build-solution.yml = ..\.github\workflows\build-solution.yml
+		..\.github\config.yml = ..\.github\config.yml
+		..\.github\workflows\pull-request-checks.yml = ..\.github\workflows\pull-request-checks.yml
+		..\.github\workflows\update-dependencies.yml = ..\.github\workflows\update-dependencies.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB5BCB0-3A6B-4F5F-A872-12D017DFA826}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5ECF74C-39DD-443B-95F9-F2FF2FBED765}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D46B401-1E64-4994-ADB4-E7BD49DE8221} = {246148B2-0E09-462C-9CB3-1021655E86B0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C4B86B8-6063-4C02-BFC2-40983A7C4F79}
+	EndGlobalSection
+EndGlobal

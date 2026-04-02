@@ -2,9 +2,9 @@
 
 This is a fun little nightlight clock project I created for my daughter.
 
-![Emily.Clock](media/clock.webp)
+![Emily.Clock](media/20231025_091832.jpg)
 
-[Watch it in action](media/clock.mp4)
+[Watch it in action](media/20231024_232243~3.mp4)
 
 ## Project Overview
 

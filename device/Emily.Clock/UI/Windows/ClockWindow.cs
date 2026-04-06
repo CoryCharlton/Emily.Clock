@@ -5,7 +5,7 @@ using System.Drawing;
 using nanoFramework.UI;
 using Emily.Clock.Device.Display;
 using Emily.Clock.UI.Lights;
-using Emily.Clock.Device.Gpio;
+using Emily.Clock.Device.Buttons;
 using Emily.Clock.Mediator.Events;
 using System.Threading;
 using CCSWE.nanoFramework.Mediator;

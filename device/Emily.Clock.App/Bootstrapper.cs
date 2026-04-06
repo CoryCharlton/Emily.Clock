@@ -1,9 +1,9 @@
 using System.Device.Gpio;
 using Emily.Clock.App.Hardware;
 using Emily.Clock.Device;
+using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Display.Ili9341;
-using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Device.SdCard;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,13 @@ namespace Emily.Clock.App;
 
 public static class Bootstrapper
 {
+    private const int BUTTON_ONE_PIN = 39;
+    private const PinMode BUTTON_ONE_PIN_MODE = PinMode.InputPullUp;
+    private const int BUTTON_TWO_PIN = 37;
+    private const PinMode BUTTON_TWO_PIN_MODE = PinMode.InputPullUp;
+    private const int BUTTON_THREE_PIN = 38;
+    private const PinMode BUTTON_THREE_PIN_MODE = PinMode.InputPullUp;
+
     private const int DISPLAY_BACKLIGHT = 4;
     private const int DISPLAY_CHIP_SELECT = 27;
     private const int DISPLAY_CLOCK = 18;
@@ -36,6 +43,11 @@ public static class Bootstrapper
     public static IHostBuilder ConfigureHardware(this IHostBuilder builder)
     {
         return builder
+            .AddButtons(new ButtonOptions(
+                new ButtonConfiguration { Pin = BUTTON_ONE_PIN, PinMode = BUTTON_ONE_PIN_MODE },
+                new ButtonConfiguration { Pin = BUTTON_TWO_PIN, PinMode = BUTTON_TWO_PIN_MODE },
+                new ButtonConfiguration { Pin = BUTTON_THREE_PIN, PinMode = BUTTON_THREE_PIN_MODE }
+            ))
             .AddIli9341Display(new SpiDisplayOptions
             {
                 Width = 320,
@@ -64,7 +76,6 @@ public static class Bootstrapper
     private static IServiceCollection ConfigureHardware(this IServiceCollection services)
     {
         services
-            .AddSingleton(typeof(IButtonManager), typeof(ButtonManager))
             .AddSingleton(typeof(IDeviceManager), typeof(DeviceManager))
             .AddSingleton(typeof(ILedManager), typeof(NeoPixelStripManager));
 

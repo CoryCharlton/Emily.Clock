@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using Emily.Clock.Device.Gpio;
+using Emily.Clock.Device.Buttons;
 using Emily.Clock.UI.Layout;
 using nanoFramework.UI;
 

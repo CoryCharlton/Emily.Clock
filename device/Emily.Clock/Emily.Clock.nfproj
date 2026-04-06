@@ -23,6 +23,8 @@
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
     <Compile Include="AlarmService.cs" />
+    <Compile Include="Audio\WavFile.cs" />
+    <Compile Include="Audio\WavFileHeader.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Configuration\NightLightConfiguration.cs" />
     <Compile Include="Configuration\WirelessAccessPointConfiguration.cs" />

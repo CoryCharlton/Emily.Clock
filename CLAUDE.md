@@ -60,6 +60,10 @@ nanoFramework does **not** support generics. Use non-generic collections and pat
 
 `.nfproj` files use old-style MSBuild format and do **not** auto-include source files. Every new `.cs` file must be manually added as a `<Compile Include="..." />` entry in the corresponding `.nfproj`.
 
+## Code Style
+
+Within each C# file, order members as: fields, constructors, properties, methods — with each group alphabetized.
+
 ## Unit Tests
 
 Uses `nanoFramework.TestFramework`. Follow these conventions:

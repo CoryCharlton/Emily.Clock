@@ -1,4 +1,5 @@
 using Emily.Clock.Device;
+using Emily.Clock.Device.FileStorage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using nanoFramework.System.IO.FileSystem;

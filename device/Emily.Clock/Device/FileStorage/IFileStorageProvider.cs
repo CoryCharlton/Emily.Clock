@@ -1,4 +1,4 @@
-namespace Emily.Clock.Device;
+namespace Emily.Clock.Device.FileStorage;
 
 public interface IFileStorageProvider
 {

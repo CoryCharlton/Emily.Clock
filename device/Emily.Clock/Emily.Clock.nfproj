@@ -37,7 +37,11 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Device\DeviceFeatures.cs" />
     <Compile Include="Device\DevicePreInitializeDelegate.cs" />
-    <Compile Include="Device\IFileStorageProvider.cs" />
+    <Compile Include="Device\Display\DisplayManagerBase.cs" />
+    <Compile Include="Device\Display\DisplayOptions.cs" />
+    <Compile Include="Device\Display\IDisplayManager.cs" />
+    <Compile Include="Device\Display\SpiDisplayOptions.cs" />
+    <Compile Include="Device\FileStorage\IFileStorageProvider.cs" />
     <Compile Include="Mediator\Events\ButtonEvent.cs" />
     <Compile Include="Mediator\Events\DateChangedEvent.cs" />
     <Compile Include="Mediator\Events\StatusEvent.cs" />
@@ -53,7 +57,6 @@
     <Compile Include="Device\IDeviceManager.cs" />
     <Compile Include="StaticFiles\FileInfo.cs" />
     <Compile Include="StaticFiles\FileProvider.cs" />
-    <Compile Include="UI\IDisplayManager.cs" />
     <Compile Include="IO\FileUtils.cs" />
     <Compile Include="Networking\NetworkInterfaceProvider.cs" />
     <Compile Include="Networking\WirelessAccessPointManager.cs" />

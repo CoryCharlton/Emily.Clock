@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Emily.Clock.Device.FileStorage;
 using Emily.Clock.Device.Gpio;
 using Microsoft.Extensions.Logging;
 using nanoFramework.System.IO.FileSystem;

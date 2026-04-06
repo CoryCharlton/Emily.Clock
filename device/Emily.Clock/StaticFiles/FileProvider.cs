@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.WebServer.StaticFiles;
-using Emily.Clock.Device;
+using Emily.Clock.Device.FileStorage;
 using Emily.Clock.IO;
 
 namespace Emily.Clock.StaticFiles;

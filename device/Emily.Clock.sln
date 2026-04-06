@@ -9,7 +9,11 @@ Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.App", "Emily.Cl
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.UnitTests", "Emily.Clock.UnitTests\Emily.Clock.UnitTests.nfproj", "{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}"
 EndProject
-Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.SdCard", "Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.SdCard", "devices\Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.Display.Ili9341", "devices\Emily.Clock.Device.Display.Ili9341\Emily.Clock.Device.Display.Ili9341.nfproj", "{B2C3D4E5-F6A7-8901-BCDE-F01234567891}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devices", "devices", "{C0D1E2F3-A4B5-6789-CDEF-012345678901}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DB263FB2-8A0C-45C0-9F86-083933444B8B}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DB263FB2-8
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eng", "Eng", "{246148B2-0E09-462C-9CB3-1021655E86B0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "eng", "eng", "{246148B2-0E09-462C-9CB3-1021655E86B0}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\copilot-instructions.md = ..\.github\copilot-instructions.md
 		..\version.json = ..\version.json
@@ -62,11 +66,20 @@ Global
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {C0D1E2F3-A4B5-6789-CDEF-012345678901}
+		{B2C3D4E5-F6A7-8901-BCDE-F01234567891} = {C0D1E2F3-A4B5-6789-CDEF-012345678901}
+		{DB263FB2-8A0C-45C0-9F86-083933444B8B} = {246148B2-0E09-462C-9CB3-1021655E86B0}
 		{2D46B401-1E64-4994-ADB4-E7BD49DE8221} = {246148B2-0E09-462C-9CB3-1021655E86B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

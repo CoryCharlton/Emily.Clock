@@ -1,34 +1,36 @@
-﻿using CCSWE.nanoFramework.Hosting;
+using System;
+using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
-using Emily.Clock.IO;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
 using Microsoft.Extensions.Logging;
 
-namespace Emily.Clock.Device
+namespace Emily.Clock.Device;
+
+public class DeviceInitialization : IDeviceInitializer
 {
-    public class DeviceInitialization : IDeviceInitializer
-    {
         private readonly IButtonManager _buttonManager;
+        private readonly DeviceFeatures _deviceFeatures;
         private readonly IDisplayManager _displayManager;
-        private readonly IFileStorageManager _fileStorageManager;
         private readonly ILedManager _ledManager;
         private readonly ILogger _logger;
         private readonly IMediator _mediator;
         private readonly INavigationService _navigationService;
+        private readonly IServiceProvider _serviceProvider;
 
-        public DeviceInitialization(IButtonManager buttonManager, IDisplayManager displayManager, IFileStorageManager fileStorageManager, ILedManager ledManager, ILogger logger, IMediator mediator, INavigationService navigationService)
+        public DeviceInitialization(IButtonManager buttonManager, DeviceFeatures deviceFeatures, IDisplayManager displayManager, ILedManager ledManager, ILogger logger, IMediator mediator, INavigationService navigationService, IServiceProvider serviceProvider)
         {
             _buttonManager = buttonManager;
+            _deviceFeatures = deviceFeatures;
             _displayManager = displayManager;
-            _fileStorageManager = fileStorageManager;
             _ledManager = ledManager;
             _logger = logger;
             _mediator = mediator;
             _navigationService = navigationService;
+            _serviceProvider = serviceProvider;
         }
 
         public bool Initialize()
@@ -54,8 +56,6 @@ namespace Emily.Clock.Device
             if (!InitializeFileStorage())
             {
                 _logger.LogError("Failed to initialize file storage");
-
-                return false;
             }
 
             if (!_ledManager.Initialize())
@@ -66,17 +66,6 @@ namespace Emily.Clock.Device
             }
 
             return true;
-        }
-
-        private bool InitializeFileStorage()
-        {
-            PublishStatusEvent("Initializing file storage...");
-
-            var fileStorageInitialized = _fileStorageManager.Initialize();
-
-            PublishStatusEvent(fileStorageInitialized ? "File storage initialized" : "Failed to initialize file storage");
-
-            return fileStorageInitialized;
         }
 
         private bool InitializeButtons()
@@ -118,9 +107,26 @@ namespace Emily.Clock.Device
             return true;
         }
 
+        private bool InitializeFileStorage()
+        {
+            var fileStorageProvider = (IFileStorageProvider)_serviceProvider.GetService(typeof(IFileStorageProvider));
+
+            if (fileStorageProvider is null)
+            {
+                return true;
+            }
+
+            PublishStatusEvent("Initializing file storage...");
+
+            _deviceFeatures.HasFileStorage = fileStorageProvider.Initialize();
+
+            PublishStatusEvent(_deviceFeatures.HasFileStorage ? "File storage initialized" : "Failed to initialize file storage");
+
+            return _deviceFeatures.HasFileStorage;
+        }
+
         private void PublishStatusEvent(string message)
         {
             _mediator.Publish(new StatusEvent(message));
         }
     }
-}

@@ -42,7 +42,8 @@ namespace Emily.Clock
             JsonSerializerOptions.Default.PropertyNameCaseInsensitive = true;
 
             services
-                .AddFileStorage();
+                .AddFileStorage()
+                .AddSingleton(typeof(DeviceFeatures), new DeviceFeatures());
 
             // These execute in order
             services

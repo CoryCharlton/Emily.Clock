@@ -52,6 +52,10 @@ The solution has three projects under `device/`:
 - Display: SPI (MISO=12, MOSI=23, CLK=18, CS=27, DC=32, RST=5, BL=4)
 - LED strip: WS2812B, 47 LEDs on pin 19; index 0 = Moon LED, index 1 = Sun LED
 
+## Language Constraints
+
+nanoFramework does **not** support generics. Use non-generic collections and patterns instead.
+
 ## Adding New Files
 
 `.nfproj` files use old-style MSBuild format and do **not** auto-include source files. Every new `.cs` file must be manually added as a `<Compile Include="..." />` entry in the corresponding `.nfproj`.

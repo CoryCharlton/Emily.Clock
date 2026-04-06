@@ -1,21 +1,23 @@
-﻿using System.IO;
+using System;
+using System.IO;
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.WebServer.StaticFiles;
+using Emily.Clock.Device;
 using Emily.Clock.IO;
 
-namespace Emily.Clock.StaticFiles
+namespace Emily.Clock.StaticFiles;
+
+internal class FileProvider : IFileProvider
 {
-    internal class FileProvider: IFileProvider
-    {
         private const string Root = @"\www";
 
         private readonly IFileStorage _fileStorage;
-        private readonly IFileStorageManager _fileStorageManager;
+        private readonly IFileStorageProvider? _fileStorageProvider;
 
-        public FileProvider(IFileStorage fileStorage, IFileStorageManager fileStorageManager)
+        public FileProvider(IFileStorage fileStorage, IServiceProvider serviceProvider)
         {
             _fileStorage = fileStorage;
-            _fileStorageManager = fileStorageManager;
+            _fileStorageProvider = (IFileStorageProvider) serviceProvider.GetService(typeof(IFileStorageProvider));
         }
 
         public IFileInfo GetFileInfo(string subpath)
@@ -31,9 +33,9 @@ namespace Emily.Clock.StaticFiles
                 subpath = subpath.Substring(1);
             }
 
-            var path = _fileStorageManager.NormalizePath(Path.Combine(Root, subpath));
+            var storageRoot = _fileStorageProvider?.Root ?? string.Empty;
+            var path = FileUtils.NormalizePath(storageRoot, Path.Combine(Root, subpath));
 
             return new FileInfo(path, _fileStorage);
         }
     }
-}

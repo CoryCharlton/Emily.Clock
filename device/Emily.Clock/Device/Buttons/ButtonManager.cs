@@ -2,7 +2,7 @@ using System.Collections;
 using System.Device.Gpio;
 using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Gpio;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Iot.Device.Button;
 
 namespace Emily.Clock.Device.Buttons;

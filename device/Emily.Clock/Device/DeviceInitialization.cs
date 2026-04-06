@@ -5,7 +5,7 @@ using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.FileStorage;
 using Emily.Clock.Device.Led;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
 using Microsoft.Extensions.Logging;

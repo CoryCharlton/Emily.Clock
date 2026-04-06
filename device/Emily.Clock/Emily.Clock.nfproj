@@ -42,10 +42,10 @@
     <Compile Include="Device\Display\IDisplayManager.cs" />
     <Compile Include="Device\Display\SpiDisplayOptions.cs" />
     <Compile Include="Device\FileStorage\IFileStorageProvider.cs" />
-    <Compile Include="Mediator\Events\ButtonEvent.cs" />
-    <Compile Include="Mediator\Events\DateChangedEvent.cs" />
-    <Compile Include="Mediator\Events\StatusEvent.cs" />
-    <Compile Include="Mediator\Events\TimeChangedEvent.cs" />
+    <Compile Include="Events\ButtonEvent.cs" />
+    <Compile Include="Events\DateChangedEvent.cs" />
+    <Compile Include="Events\StatusEvent.cs" />
+    <Compile Include="Events\TimeChangedEvent.cs" />
     <Compile Include="Extensions\BitmapExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />

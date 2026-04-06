@@ -1,7 +1,7 @@
 ﻿using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Buttons;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Emily.Clock.Networking;
 using Microsoft.Extensions.Logging;
 

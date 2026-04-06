@@ -1,6 +1,8 @@
 using System;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device.Display;
+using Emily.Clock.Device.FileStorage;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Mediator.Events;

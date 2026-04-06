@@ -1,4 +1,5 @@
 ﻿using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;
 using Emily.Clock.Networking;

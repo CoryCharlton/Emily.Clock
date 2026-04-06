@@ -1,37 +1,62 @@
 using System.Device.Gpio;
 using Emily.Clock.App.Hardware;
 using Emily.Clock.Device;
+using Emily.Clock.Device.Display;
+using Emily.Clock.Device.Display.Ili9341;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Device.SdCard;
-using Emily.Clock.UI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using nanoFramework.Hardware.Esp32;
 using nanoFramework.System.IO.FileSystem;
+using nanoFramework.UI;
 using Esp32 = nanoFramework.Hardware.Esp32.Configuration;
 
 namespace Emily.Clock.App;
 
 public static class Bootstrapper
 {
-    private const uint CHIP_SELECT_PIN = 13;
+    private const int DISPLAY_BACKLIGHT = 4;
+    private const int DISPLAY_CHIP_SELECT = 27;
+    private const int DISPLAY_CLOCK = 18;
+    private const int DISPLAY_DATA_COMMAND = 32;
+    private const int DISPLAY_SPI_BUS = 1;
+    private const int DISPLAY_MISO = 12;
+    private const int DISPLAY_MOSI = 23;
+    private const int DISPLAY_RESET = 5;
+
+    private const uint SDCARD_CHIP_SELECT_PIN = 13;
     private const int SDCARD_SLOT_INDEX = 0;
-    private const uint SPI_BUS = 2;
-    private const int SPI2_CLOCK_PIN = 14;
-    private const int SPI2_MISO_PIN = 2;
-    private const int SPI2_MOSI_PIN = 15;
+    private const uint SDCARD_SPI_BUS = 2;
+    private const int SDCARD_SPI2_CLOCK_PIN = 14;
+    private const int SDCARD_SPI2_MISO_PIN = 2;
+    private const int SDCARD_SPI2_MOSI_PIN = 15;
 
     public static IHostBuilder ConfigureHardware(this IHostBuilder builder)
     {
         return builder
-            .AddSdCard(new SDCardSpiParameters { slotIndex = SDCARD_SLOT_INDEX, spiBus = SPI_BUS, chipSelectPin = CHIP_SELECT_PIN }, gpio =>
+            .AddIli9341Display(new SpiDisplayOptions
             {
-                Esp32.SetPinFunction(SPI2_MISO_PIN, DeviceFunction.SPI2_MISO);
-                Esp32.SetPinFunction(SPI2_MOSI_PIN, DeviceFunction.SPI2_MOSI);
-                Esp32.SetPinFunction(SPI2_CLOCK_PIN, DeviceFunction.SPI2_CLOCK);
+                Width = 320,
+                Height = 240,
+                Orientation = DisplayOrientation.Landscape,
+                BacklightPin = DISPLAY_BACKLIGHT,
+                SpiConfiguration = new SpiConfiguration(DISPLAY_SPI_BUS, DISPLAY_CHIP_SELECT, DISPLAY_DATA_COMMAND, DISPLAY_RESET, -1),
+                PreInitialize = _ =>
+                {
+                    Esp32.SetPinFunction(DISPLAY_MISO, DeviceFunction.SPI1_MISO);
+                    Esp32.SetPinFunction(DISPLAY_MOSI, DeviceFunction.SPI1_MOSI);
+                    Esp32.SetPinFunction(DISPLAY_CLOCK, DeviceFunction.SPI1_CLOCK);
+                }
+            })
+            .AddSdCard(new SDCardSpiParameters { slotIndex = SDCARD_SLOT_INDEX, spiBus = SDCARD_SPI_BUS, chipSelectPin = SDCARD_CHIP_SELECT_PIN }, gpio =>
+            {
+                Esp32.SetPinFunction(SDCARD_SPI2_MISO_PIN, DeviceFunction.SPI2_MISO);
+                Esp32.SetPinFunction(SDCARD_SPI2_MOSI_PIN, DeviceFunction.SPI2_MOSI);
+                Esp32.SetPinFunction(SDCARD_SPI2_CLOCK_PIN, DeviceFunction.SPI2_CLOCK);
 
-                gpio.OpenPin(SPI2_MISO_PIN, PinMode.InputPullUp);
+                gpio.OpenPin(SDCARD_SPI2_MISO_PIN, PinMode.InputPullUp);
             })
             .ConfigureServices(services => services.ConfigureHardware());
     }
@@ -41,7 +66,6 @@ public static class Bootstrapper
         services
             .AddSingleton(typeof(IButtonManager), typeof(ButtonManager))
             .AddSingleton(typeof(IDeviceManager), typeof(DeviceManager))
-            .AddSingleton(typeof(IDisplayManager), typeof(DisplayManager))
             .AddSingleton(typeof(ILedManager), typeof(NeoPixelStripManager));
 
         return services;

@@ -25,7 +25,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Hardware\ButtonManager.cs" />
     <Compile Include="Hardware\DeviceManager.cs" />
-    <Compile Include="Hardware\DisplayManager.cs" />
     <Compile Include="Hardware\NeoPixelStripManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -38,7 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
-    <ProjectReference Include="..\Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj" />
+    <ProjectReference Include="..\devices\Emily.Clock.Device.Display.Ili9341\Emily.Clock.Device.Display.Ili9341.nfproj" />
+    <ProjectReference Include="..\devices\Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">

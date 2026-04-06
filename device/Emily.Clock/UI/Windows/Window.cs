@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Emily.Clock.Device.Display;
 using Microsoft.Extensions.Logging;
 using nanoFramework.UI;
 

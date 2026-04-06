@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using nanoFramework.UI;
+using Emily.Clock.Device.Display;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Mediator.Events;

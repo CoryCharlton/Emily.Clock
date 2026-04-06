@@ -1,7 +1,7 @@
 ﻿using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Emily.Clock.UI.Navigation;
 
 namespace Emily.Clock.Networking

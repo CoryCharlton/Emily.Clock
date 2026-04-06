@@ -7,7 +7,7 @@ using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device;
 using Emily.Clock.Device.Gpio;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Emily.Clock.Networking;
 using Emily.Clock.StaticFiles;
 using Emily.Clock.UI;

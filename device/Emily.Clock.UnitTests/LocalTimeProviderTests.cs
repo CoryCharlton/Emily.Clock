@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using Emily.Clock.Configuration;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Emily.Clock.UnitTests.Mocks;
 using nanoFramework.TestFramework;
 

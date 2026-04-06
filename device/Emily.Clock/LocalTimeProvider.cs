@@ -6,7 +6,7 @@ using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 
 namespace Emily.Clock
 {

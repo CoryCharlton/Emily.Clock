@@ -2,7 +2,7 @@
 using Emily.Clock.Device;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Buttons;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock.UI.Windows

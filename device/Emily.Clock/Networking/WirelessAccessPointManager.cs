@@ -4,7 +4,7 @@ using System.Net;
 using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.DhcpServer;
 using CCSWE.nanoFramework.Mediator;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 using Microsoft.Extensions.Logging;
 using AuthenticationType = System.Net.NetworkInformation.AuthenticationType;
 

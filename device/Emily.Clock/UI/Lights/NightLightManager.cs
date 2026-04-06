@@ -8,7 +8,7 @@ using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device.Led;
-using Emily.Clock.Mediator.Events;
+using Emily.Clock.Events;
 
 namespace Emily.Clock.UI.Lights
 {

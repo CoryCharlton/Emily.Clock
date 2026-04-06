@@ -1,5 +1,5 @@
 ﻿using CCSWE.nanoFramework.Mediator;
-using Emily.Clock.Device.Gpio;
+using Emily.Clock.Device.Buttons;
 
 namespace Emily.Clock.Mediator.Events
 {

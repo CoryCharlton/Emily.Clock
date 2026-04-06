@@ -50,10 +50,12 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\FontExtensions.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
-    <Compile Include="Device\Gpio\Button.cs" />
-    <Compile Include="Device\Gpio\ButtonManagerBase.cs" />
+    <Compile Include="Device\Buttons\Bootstrapper.cs" />
+    <Compile Include="Device\Buttons\Button.cs" />
+    <Compile Include="Device\Buttons\ButtonConfiguration.cs" />
+    <Compile Include="Device\Buttons\ButtonManager.cs" />
+    <Compile Include="Device\Buttons\ButtonOptions.cs" />
     <Compile Include="Device\Gpio\GpioProvider.cs" />
-    <Compile Include="Device\Gpio\IButtonManager.cs" />
     <Compile Include="Device\IDeviceManager.cs" />
     <Compile Include="StaticFiles\FileInfo.cs" />
     <Compile Include="StaticFiles\FileProvider.cs" />

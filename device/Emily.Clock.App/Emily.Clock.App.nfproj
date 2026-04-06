@@ -23,7 +23,6 @@
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Hardware\ButtonManager.cs" />
     <Compile Include="Hardware\DeviceManager.cs" />
     <Compile Include="Hardware\NeoPixelStripManager.cs" />
     <Compile Include="Program.cs" />

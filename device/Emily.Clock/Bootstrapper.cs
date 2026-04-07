@@ -6,6 +6,7 @@ using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device;
+using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Events;
 using Emily.Clock.Networking;
@@ -52,6 +53,7 @@ namespace Emily.Clock
                 .AddSingleton(typeof(IDeviceInitializer), typeof(ApplicationInitialization));
 
             services
+                .AddSingleton(typeof(IAudioManager), typeof(AudioManager))
                 .AddSingleton(typeof(IAlarmService), typeof(AlarmService))
                 .AddSingleton(typeof(IGpioProvider), typeof(GpioProvider))
                 .AddSingleton(typeof(ILocalTimeProvider), typeof(LocalTimeProvider))

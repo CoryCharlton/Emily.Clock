@@ -5,6 +5,7 @@ using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Display.Ili9341;
 using Emily.Clock.Device.Led;
+using Emily.Clock.Device.Audio.I2s;
 using Emily.Clock.Device.SdCard;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,12 @@ public static class Bootstrapper
     private const int DISPLAY_MISO = 12;
     private const int DISPLAY_MOSI = 23;
     private const int DISPLAY_RESET = 5;
+
+    // TODO: Verify I2S pin assignments for LILYGO TTGO T4 V1.3
+    private const int AUDIO_BCK_PIN = 26;
+    private const int AUDIO_BUS_ID = 1;
+    private const int AUDIO_DATA_PIN = 33;
+    private const int AUDIO_WS_PIN = 25;
 
     private const uint SDCARD_CHIP_SELECT_PIN = 13;
     private const int SDCARD_SLOT_INDEX = 0;
@@ -61,6 +68,13 @@ public static class Bootstrapper
                     Esp32.SetPinFunction(DISPLAY_MOSI, DeviceFunction.SPI1_MOSI);
                     Esp32.SetPinFunction(DISPLAY_CLOCK, DeviceFunction.SPI1_CLOCK);
                 }
+            })
+            .AddI2sAudio(new I2sAudioOptions
+            {
+                BusId = AUDIO_BUS_ID,
+                BckPin = AUDIO_BCK_PIN,
+                DataPin = AUDIO_DATA_PIN,
+                WsPin = AUDIO_WS_PIN,
             })
             .AddSdCard(new SDCardSpiParameters { slotIndex = SDCARD_SLOT_INDEX, spiBus = SDCARD_SPI_BUS, chipSelectPin = SDCARD_CHIP_SELECT_PIN }, gpio =>
             {

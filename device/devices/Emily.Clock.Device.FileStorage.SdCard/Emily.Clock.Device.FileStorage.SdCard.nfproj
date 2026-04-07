@@ -13,8 +13,8 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <FileAlignment>512</FileAlignment>
-    <RootNamespace>Emily.Clock.Device.SdCard</RootNamespace>
-    <AssemblyName>Emily.Clock.Device.SdCard</AssemblyName>
+    <RootNamespace>Emily.Clock.Device.FileStorage.SdCard</RootNamespace>
+    <AssemblyName>Emily.Clock.Device.FileStorage.SdCard</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <Nullable>Enable</Nullable>

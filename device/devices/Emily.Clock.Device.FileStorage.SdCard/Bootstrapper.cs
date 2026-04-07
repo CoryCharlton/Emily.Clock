@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using nanoFramework.System.IO.FileSystem;
 
-namespace Emily.Clock.Device.SdCard;
+namespace Emily.Clock.Device.FileStorage.SdCard;
 
 public static class Bootstrapper
 {

@@ -91,7 +91,7 @@ public class ButtonManager : IButtonManager
     private void OnPress(Button button)
     {
         var holdingState = _holdingStates[button];
-        if (holdingState != null)
+        if (holdingState is not null)
         {
             if (ButtonHoldingState.Started == (ButtonHoldingState)holdingState)
             {

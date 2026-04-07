@@ -17,10 +17,7 @@ public class WavFile : IDisposable
     /// <exception cref="ArgumentNullException">Throws if <paramref name="stream"/> is null.</exception>
     public WavFile(Stream stream)
     {
-        if (stream == null)
-        {
-            throw new ArgumentNullException(nameof(stream));
-        }
+        ArgumentNullException.ThrowIfNull(stream);
 
         _stream = stream;
 

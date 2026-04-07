@@ -64,6 +64,8 @@ nanoFramework does **not** support generics. Use non-generic collections and pat
 
 Within each C# file, order members as: fields, constructors, properties, methods — with each group alphabetized.
 
+Use `is null` / `is not null` instead of `== null` / `!= null` for null checks.
+
 ## Unit Tests
 
 Uses `nanoFramework.TestFramework`. Follow these conventions:

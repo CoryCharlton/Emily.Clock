@@ -2,50 +2,49 @@
 using Emily.Clock.UnitTests.Mocks;
 using nanoFramework.TestFramework;
 
-namespace Emily.Clock.UnitTests.UI.Navigation
+namespace Emily.Clock.UnitTests.UI.Navigation;
+
+[TestClass]
+public class NavigationServiceTests
 {
-    [TestClass]
-    public class NavigationServiceTests
+    [TestMethod]
+    public void Navigate_starts_window()
     {
-        [TestMethod]
-        public void Navigate_starts_window()
-        {
-            var windowFactory = new WindowFactoryMock();
+        var windowFactory = new WindowFactoryMock();
 
-            var sut = new NavigationService(windowFactory);
+        var sut = new NavigationService(windowFactory);
 
-            sut.Navigate(NavigationDestination.Clock);
+        sut.Navigate(NavigationDestination.Clock);
 
-            var window = windowFactory.Get(NavigationDestination.Clock);
+        var window = windowFactory.Get(NavigationDestination.Clock);
 
-            Assert.IsNotNull(window);
+        Assert.IsNotNull(window);
 
-            Assert.IsTrue(window.StartCalled);
-            Assert.IsFalse(window.StopCalled);
-            Assert.IsFalse(window.DisposeCalled);
-        }
+        Assert.IsTrue(window.StartCalled);
+        Assert.IsFalse(window.StopCalled);
+        Assert.IsFalse(window.DisposeCalled);
+    }
 
-        [TestMethod]
-        public void Navigate_stops_window()
-        {
-            var windowFactory = new WindowFactoryMock();
+    [TestMethod]
+    public void Navigate_stops_window()
+    {
+        var windowFactory = new WindowFactoryMock();
 
-            var sut = new NavigationService(windowFactory);
+        var sut = new NavigationService(windowFactory);
 
-            sut.Navigate(NavigationDestination.Clock);
+        sut.Navigate(NavigationDestination.Clock);
 
-            var window = windowFactory.Get(NavigationDestination.Clock);
+        var window = windowFactory.Get(NavigationDestination.Clock);
 
-            Assert.IsNotNull(window);
+        Assert.IsNotNull(window);
 
-            Assert.IsTrue(window.StartCalled);
-            Assert.IsFalse(window.StopCalled);
-            Assert.IsFalse(window.DisposeCalled);
+        Assert.IsTrue(window.StartCalled);
+        Assert.IsFalse(window.StopCalled);
+        Assert.IsFalse(window.DisposeCalled);
 
-            sut.Navigate(NavigationDestination.Configuration);
+        sut.Navigate(NavigationDestination.Configuration);
 
-            Assert.IsTrue(window.StopCalled);
-            Assert.IsTrue(window.DisposeCalled);
-        }
+        Assert.IsTrue(window.StopCalled);
+        Assert.IsTrue(window.DisposeCalled);
     }
 }

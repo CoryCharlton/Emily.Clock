@@ -3,68 +3,67 @@ using System;
 using System.Collections;
 using CCSWE.nanoFramework.Configuration;
 
-namespace Emily.Clock.Configuration
+namespace Emily.Clock.Configuration;
+
+public class DateTimeConfiguration
 {
-    public class DateTimeConfiguration
+    public const string Section = "DateTime";
+
+    public TimeSpan BedTime { get; set; } = TimeSpan.FromHours(20);
+
+    /// <summary>
+    /// A posix timezone string: https://support.cyberdata.net/portal/en/kb/articles/010d63c0cfce3676151e1f2d5442e311
+    /// </summary>
+    public string TimeZone { get; set; } = "PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00";
+
+    public TimeSpan WakeTime { get; set; } = TimeSpan.FromHours(7);
+}
+
+public class DateTimeConfigurationValidator : IValidateConfiguration
+{
+    private static bool IsValidTimeOfDay(TimeSpan timeOfDay)
     {
-        public const string Section = "DateTime";
-
-        public TimeSpan BedTime { get; set; } = TimeSpan.FromHours(20);
-
-        /// <summary>
-        /// A posix timezone string: https://support.cyberdata.net/portal/en/kb/articles/010d63c0cfce3676151e1f2d5442e311
-        /// </summary>
-        public string TimeZone { get; set; } = "PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00";
-
-        public TimeSpan WakeTime { get; set; } = TimeSpan.FromHours(7);
+        return timeOfDay >= TimeSpan.Zero && timeOfDay <= new TimeSpan(0, 23, 59, 59, 999);
     }
 
-    public class DateTimeConfigurationValidator : IValidateConfiguration
+    public static bool IsValidTimeZone(string timeZone)
     {
-        private static bool IsValidTimeOfDay(TimeSpan timeOfDay)
+        try
         {
-            return timeOfDay >= TimeSpan.Zero && timeOfDay <= new TimeSpan(0, 23, 59, 59, 999);
+            TimeZoneConverter.FromPosixString(timeZone);
+
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    public ValidateConfigurationResult Validate(object? configuration)
+    {
+        if (configuration is not DateTimeConfiguration dateTimeConfiguration)
+        {
+            return ValidateConfigurationResult.Fail("Configuration object is not the correct type");
         }
 
-        public static bool IsValidTimeZone(string timeZone)
-        {
-            try
-            {
-                TimeZoneConverter.FromPosixString(timeZone);
+        var failures = new ArrayList();
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+        if (!IsValidTimeOfDay(dateTimeConfiguration.BedTime))
+        {
+            failures.Add("Bed time must be between 0:00 and 23:59");
         }
 
-        public ValidateConfigurationResult Validate(object? configuration)
+        if (!IsValidTimeZone(dateTimeConfiguration.TimeZone))
         {
-            if (configuration is not DateTimeConfiguration dateTimeConfiguration)
-            {
-                return ValidateConfigurationResult.Fail("Configuration object is not the correct type");
-            }
-
-            var failures = new ArrayList();
-
-            if (!IsValidTimeOfDay(dateTimeConfiguration.BedTime))
-            {
-                failures.Add("Bed time must be between 0:00 and 23:59");
-            }
-
-            if (!IsValidTimeZone(dateTimeConfiguration.TimeZone))
-            {
-                failures.Add("Invalid time zone");
-            }
-
-            if (!IsValidTimeOfDay(dateTimeConfiguration.WakeTime))
-            {
-                failures.Add("Wake time must be between 0:00 and 23:59");
-            }
-
-            return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray(typeof(string))) : ValidateConfigurationResult.Success;
+            failures.Add("Invalid time zone");
         }
+
+        if (!IsValidTimeOfDay(dateTimeConfiguration.WakeTime))
+        {
+            failures.Add("Wake time must be between 0:00 and 23:59");
+        }
+
+        return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray(typeof(string))) : ValidateConfigurationResult.Success;
     }
 }

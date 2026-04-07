@@ -2,28 +2,27 @@
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.WebServer.StaticFiles;
 
-namespace Emily.Clock.StaticFiles
+namespace Emily.Clock.StaticFiles;
+
+internal class FileInfo: IFileInfo
 {
-    internal class FileInfo: IFileInfo
+    private readonly IFileStorage _fileStorage;
+    private readonly string _path;
+
+    public FileInfo(string path, IFileStorage fileStorage)
     {
-        private readonly IFileStorage _fileStorage;
-        private readonly string _path;
+        _fileStorage = fileStorage;
+        _path = path;
 
-        public FileInfo(string path, IFileStorage fileStorage)
-        {
-            _fileStorage = fileStorage;
-            _path = path;
-
-            Exists = fileStorage.Exists(_path);
-            Name = Path.GetFileName(_path);
-        }
-
-        public Stream CreateReadStream()
-        {
-            return _fileStorage.OpenRead(_path);
-        }
-
-        public bool Exists { get; }
-        public string Name { get; }
+        Exists = fileStorage.Exists(_path);
+        Name = Path.GetFileName(_path);
     }
+
+    public Stream CreateReadStream()
+    {
+        return _fileStorage.OpenRead(_path);
+    }
+
+    public bool Exists { get; }
+    public string Name { get; }
 }

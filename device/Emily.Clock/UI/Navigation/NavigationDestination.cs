@@ -1,11 +1,10 @@
 ﻿
-namespace Emily.Clock.UI.Navigation
+namespace Emily.Clock.UI.Navigation;
+
+public enum NavigationDestination
 {
-    public enum NavigationDestination
-    {
-        Clock,
-        Configuration,
-        NetworkFailure,
-        ResetToDefaults
-    }
+    Clock,
+    Configuration,
+    NetworkFailure,
+    ResetToDefaults
 }

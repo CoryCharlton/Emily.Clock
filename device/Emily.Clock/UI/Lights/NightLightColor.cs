@@ -1,13 +1,12 @@
-﻿namespace Emily.Clock.UI.Lights
+﻿namespace Emily.Clock.UI.Lights;
+
+public enum NightLightColor
 {
-    public enum NightLightColor
-    {
-        Red, 
-        Orange, 
-        Yellow, 
-        Green, 
-        Blue, 
-        Indigo, 
-        Violet
-    }
+    Red, 
+    Orange, 
+    Yellow, 
+    Green, 
+    Blue, 
+    Indigo, 
+    Violet
 }

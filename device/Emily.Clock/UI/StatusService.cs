@@ -5,56 +5,55 @@ using Emily.Clock.Events;
 using Microsoft.Extensions.Logging;
 using nanoFramework.UI;
 
-namespace Emily.Clock.UI
+namespace Emily.Clock.UI;
+
+public interface IStatusService
 {
-    public interface IStatusService
+    bool SuppressEvents { get; set; }
+}
+
+public class StatusService : IStatusService, IMediatorEventHandler
+{
+    private readonly IDisplayManager _displayManager;
+    private readonly ILogger _logger;
+
+    public StatusService(IDisplayManager displayManager, ILogger logger)
     {
-        bool SuppressEvents { get; set; }
+        _displayManager = displayManager;
+        _logger = logger;
     }
 
-    public class StatusService : IStatusService, IMediatorEventHandler
+    public bool SuppressEvents { get; set; }
+
+    public void HandleEvent(IMediatorEvent mediatorEvent)
     {
-        private readonly IDisplayManager _displayManager;
-        private readonly ILogger _logger;
-
-        public StatusService(IDisplayManager displayManager, ILogger logger)
+        if (mediatorEvent is not StatusEvent statusMessageEvent)
         {
-            _displayManager = displayManager;
-            _logger = logger;
+            return;
         }
 
-        public bool SuppressEvents { get; set; }
-
-        public void HandleEvent(IMediatorEvent mediatorEvent)
+        if (SuppressEvents)
         {
-            if (mediatorEvent is not StatusEvent statusMessageEvent)
-            {
-                return;
-            }
+            _logger.LogDebug(statusMessageEvent.Message);
 
-            if (SuppressEvents)
-            {
-                _logger.LogDebug(statusMessageEvent.Message);
-
-                return;
-            }
-
-            if (!_displayManager.IsInitialized)
-            {
-                return;
-            }
-
-            var font = Theme.SmallFont;
-            var padding = new Padding(5, 5);
-
-            var source = new Bitmap(_displayManager.Width, font.Height + padding.Vertical);
-            source.DrawText(statusMessageEvent.Message, font, Theme.SecondaryText, ContentAlignment.BottomLeft, padding);
-
-            var screen = _displayManager.GetBitmap();
-            screen.DrawImage(source, ContentAlignment.BottomLeft);
-            screen.Flush();
-
-            // TODO: Handle timeout
+            return;
         }
+
+        if (!_displayManager.IsInitialized)
+        {
+            return;
+        }
+
+        var font = Theme.SmallFont;
+        var padding = new Padding(5, 5);
+
+        var source = new Bitmap(_displayManager.Width, font.Height + padding.Vertical);
+        source.DrawText(statusMessageEvent.Message, font, Theme.SecondaryText, ContentAlignment.BottomLeft, padding);
+
+        var screen = _displayManager.GetBitmap();
+        screen.DrawImage(source, ContentAlignment.BottomLeft);
+        screen.Flush();
+
+        // TODO: Handle timeout
     }
 }

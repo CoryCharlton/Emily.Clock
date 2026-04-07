@@ -1,9 +1,8 @@
-﻿namespace Emily.Clock.UI.Lights
+﻿namespace Emily.Clock.UI.Lights;
+
+public enum PanelLight
 {
-    public enum PanelLight
-    {
-        Off,
-        Sun,
-        Moon
-    }
+    Off,
+    Sun,
+    Moon
 }

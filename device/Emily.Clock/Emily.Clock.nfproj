@@ -41,6 +41,9 @@
     <Compile Include="Device\DeviceManagerBase.cs" />
     <Compile Include="Device\Led\ILedManager.cs" />
     <Compile Include="Device\Led\LedConfiguration.cs" />
+    <Compile Include="UI\Lights\Effects\FlashEffect.cs" />
+    <Compile Include="UI\Lights\Effects\INightLightEffect.cs" />
+    <Compile Include="UI\Lights\Effects\SolidEffect.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Device\DeviceFeatures.cs" />

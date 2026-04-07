@@ -1,15 +1,13 @@
-﻿using System;
-using System.Diagnostics;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Mediator;
-using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Events;
-using Emily.Clock;
+using Emily.Clock.UI.Lights.Effects;
 
 namespace Emily.Clock.UI.Lights;
 
@@ -26,29 +24,41 @@ public interface INightLightManager
 
 public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 {
+    private const int AlarmFlashDelay = 300;
+    private const int StopRequestedHandle = 1;
+    private const int UpdateRequestedHandle = 0;
+
+    // TODO: Maybe move these colors to the configuration?
+    private static readonly Color AlarmColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
     private static readonly Color MoonColor = NightLightColorConverter.ToColor(NightLightColor.Blue);
     private static readonly Color SunColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
 
-    private readonly IAlarmService _alarmService;
+    private readonly FlashEffect _alarmFlashEffect;
     private NightLightConfiguration _configuration;
     private readonly IConfigurationManager _configurationManager;
+    private INightLightEffect _currentEffect;
+    private Thread? _effectThread;
+    private readonly WaitHandle[] _effectWaitHandles;
+    private bool _isAlarming;
     private readonly LedConfiguration _ledConfiguration;
     private readonly ILedManager _ledManager;
     private readonly ILocalTimeProvider _localTimeProvider;
     private readonly IMediator _mediator;
     private PanelLight _panelMode;
-    private readonly ConsumerThreadPool _updateLedsThread;
+    private readonly ManualResetEvent _stopRequested = new(false);
+    private readonly ManualResetEvent _updateRequested = new(false);
 
-    public NightNightLightManager(IAlarmService alarmService, IConfigurationManager configurationManager, LedConfiguration ledConfiguration, ILedManager ledManager, ILocalTimeProvider localTimeProvider, IMediator mediator)
+    public NightNightLightManager(IConfigurationManager configurationManager, LedConfiguration ledConfiguration, ILedManager ledManager, ILocalTimeProvider localTimeProvider, IMediator mediator)
     {
-        _alarmService = alarmService;
+        _alarmFlashEffect = new FlashEffect(AlarmColor, System.Drawing.Color.Black, AlarmFlashDelay);
         _configurationManager = configurationManager;
+        _configurationManager.ConfigurationChanged += OnConfigurationChanged;
+        _currentEffect = new SolidEffect(System.Drawing.Color.Black, 0.0f);
+        _effectWaitHandles = [_updateRequested, _stopRequested];
         _ledConfiguration = ledConfiguration;
         _ledManager = ledManager;
         _localTimeProvider = localTimeProvider;
-        _configurationManager.ConfigurationChanged += OnConfigurationChanged;
         _mediator = mediator;
-        _updateLedsThread = new ConsumerThreadPool(1, UpdateLedsThread);
 
         UpdateConfiguration((NightLightConfiguration)_configurationManager.Get(NightLightConfiguration.Section));
     }
@@ -64,14 +74,9 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
                 return;
             }
 
-            /* TODO: Pass previous and target brightness to fade?
-            var currentBrightness = _configuration.Brightness;
-            var targetBrightness = value;
-            */
+            _configuration.Brightness = brightness;
 
-            _configuration.Brightness = value;
-            _updateLedsThread.Enqueue(UpdateLeds.All);
-
+            UpdateCurrentEffect();
             WriteConfiguration();
         }
     }
@@ -87,8 +92,8 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
             }
 
             _configuration.Color = value;
-            _updateLedsThread.Enqueue(UpdateLeds.Nightlight);
 
+            UpdateCurrentEffect();
             WriteConfiguration();
         }
     }
@@ -97,21 +102,6 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     {
         get => _configuration.Brightness > 0;
         set => Brightness = value ? 1.0f : 0.0f;
-    }
-
-    private PanelLight PanelMode
-    {
-        get => _panelMode;
-        set
-        {
-            if (value == _panelMode)
-            {
-                return;
-            }
-
-            _panelMode = value;
-            _updateLedsThread.Enqueue(UpdateLeds.SunAndMoon);
-        }
     }
 
     public void CycleBrightness()
@@ -141,6 +131,37 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
         };
     }
 
+    private void EffectLoop()
+    {
+        while (true)
+        {
+            var effect = GetEffectiveEffect();
+            var signaled = WaitHandle.WaitAny(_effectWaitHandles, effect.Delay, false);
+
+            if (signaled == StopRequestedHandle) break;
+
+            if (signaled == UpdateRequestedHandle)
+            {
+                _updateRequested.Reset();
+                effect = GetEffectiveEffect();
+                effect.Start(_ledManager, _ledConfiguration);
+                UpdatePanelLeds();
+                _ledManager.Update();
+            }
+            else
+            {
+                // Timeout - advance animation
+                if (effect.Step(_ledManager, _ledConfiguration))
+                {
+                    UpdatePanelLeds();
+                    _ledManager.Update();
+                }
+            }
+        }
+    }
+
+    private INightLightEffect GetEffectiveEffect() => _isAlarming ? _alarmFlashEffect : _currentEffect;
+
     private PanelLight GetPanelMode() => _localTimeProvider.IsBedTime ? PanelLight.Moon : PanelLight.Sun;
 
     public void HandleEvent(IMediatorEvent mediatorEvent)
@@ -148,13 +169,18 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
         switch (mediatorEvent)
         {
             case TimeChangedEvent:
-                PanelMode = GetPanelMode();
+                var panelMode = GetPanelMode();
+                if (panelMode == _panelMode)
+                {
+                    break;
+                }
+
+                _panelMode = panelMode;
+                _updateRequested.Set();
                 break;
             case AlarmStateChangedEvent alarmStateChangedEvent:
-                if (!alarmStateChangedEvent.IsAlarming)
-                {
-                    _updateLedsThread.Enqueue(UpdateLeds.All);
-                }
+                _isAlarming = alarmStateChangedEvent.IsAlarming;
+                _updateRequested.Set();
                 break;
         }
     }
@@ -164,7 +190,9 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
         _mediator.Subscribe(typeof(AlarmStateChangedEvent), this);
         _mediator.Subscribe(typeof(TimeChangedEvent), this);
         _panelMode = GetPanelMode();
-        _updateLedsThread.Enqueue(UpdateLeds.All);
+
+        _effectThread = new Thread(EffectLoop);
+        _effectThread.Start();
 
         return true;
     }
@@ -204,71 +232,26 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     private void UpdateConfiguration(NightLightConfiguration configuration)
     {
         configuration.Brightness = NormalizeBrightness(configuration.Brightness);
-
-        if (_configuration is null)
-        {
-            _configuration = configuration;
-            // TODO: Should I not be updating leds here?
-            return;
-        }
-
-        var updatePixels = Math.Abs(configuration.Brightness - _configuration.Brightness) < double.Epsilon || configuration.Color != _configuration.Color;
-            
         _configuration = configuration;
-            
-        if (updatePixels)
-        {
-            _updateLedsThread.Enqueue(UpdateLeds.All);
-        }
+        UpdateCurrentEffect();
     }
 
-    private void UpdateLedsThread(object item)
+    private void UpdateCurrentEffect()
     {
-        if (item is not UpdateLeds workItem)
-        {
-            return;
-        }
+        _currentEffect = new SolidEffect(NightLightColorConverter.ToColor(_configuration.Color), _configuration.Brightness);
+        _updateRequested.Set();
+    }
 
-        if (_alarmService.IsAlarming)
-        {
-            return;
-        }
+    private void UpdatePanelLeds()
+    {
+        var panelBrightness = _configuration.PanelBrightness;
+        var panelMode = _panelMode;
 
-        Debug.WriteLine("UpdateLedsThread start");
-        var startTime = DateTime.UtcNow;
+        var moonColor = PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black;
+        _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor, panelBrightness);
 
-        var brightness = Brightness;
-        var nightlightColor = NightLightColorConverter.ToColor(Color);
-        var panelMode = PanelMode;
-            
-        if (workItem.UpdateNightLight)
-        {
-            for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
-            {
-                _ledManager.SetLed(i, nightlightColor, brightness);
-            }
-        }
-
-        if (workItem.UpdateSunAndMoon)
-        {
-            var panelBrightness = _configuration.PanelBrightness;
-
-            var moonColor = PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black;
-            if (System.Drawing.Color.Black.Equals(moonColor))
-                _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor);
-            else
-                _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor, panelBrightness);
-
-            var sunColor = PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black;
-            if (System.Drawing.Color.Black.Equals(sunColor))
-                _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor);
-            else
-                _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor, panelBrightness);
-        }
-
-        _ledManager.Update();
-
-        Debug.WriteLine($"UpdateLedsThread took {(DateTime.UtcNow - startTime)}");
+        var sunColor = PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black;
+        _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor, panelBrightness);
     }
 
     private void WriteConfiguration()
@@ -287,20 +270,4 @@ public static class NightLightManagerExtensions
             ? Resources.BitmapResources.Lightbulb_22
             : Resources.BitmapResources.Lightbulb_22_Outline;
     }
-}
-
-internal class UpdateLeds
-{
-    private UpdateLeds(bool updateNightLight, bool updateSunAndMoon)
-    {
-        UpdateNightLight = updateNightLight;
-        UpdateSunAndMoon = updateSunAndMoon;
-    }
-
-    public bool UpdateNightLight { get; }
-    public bool UpdateSunAndMoon { get; }
-
-    public static UpdateLeds All { get; } = new(true, true);
-    public static UpdateLeds Nightlight { get; } = new(true, false);
-    public static UpdateLeds SunAndMoon { get; } = new(false, true);
 }

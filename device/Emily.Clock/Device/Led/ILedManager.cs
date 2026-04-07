@@ -28,6 +28,8 @@ public interface ILedManager
     /// <summary>
     /// Sets the <see cref="Color"/> of the LED at the given index.
     /// </summary>
+    /// <param name="index">The zero-based LED index.</param>
+    /// <param name="color">The <see cref="Color"/> to set.</param>
     void SetLed(int index, Color color);
 
     /// <summary>
@@ -37,6 +39,24 @@ public interface ILedManager
     /// <param name="color">The <see cref="Color"/> to set.</param>
     /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
     void SetLed(int index, Color color, float brightness);
+
+    /// <summary>
+    /// Sets the <see cref="Color"/> of a contiguous range of LEDs.
+    /// </summary>
+    /// <param name="startIndex">The zero-based index of the first LED (inclusive).</param>
+    /// <param name="endIndex">The zero-based index of the last LED (inclusive).</param>
+    /// <param name="color">The <see cref="Color"/> to set.</param>
+    void SetLeds(int startIndex, int endIndex, Color color);
+
+    /// <summary>
+    /// Sets the <see cref="Color"/> and brightness of a contiguous range of LEDs.
+    /// Brightness scaling is performed once for the group rather than per-LED.
+    /// </summary>
+    /// <param name="startIndex">The zero-based index of the first LED (inclusive).</param>
+    /// <param name="endIndex">The zero-based index of the last LED (inclusive).</param>
+    /// <param name="color">The <see cref="Color"/> to set.</param>
+    /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
+    void SetLeds(int startIndex, int endIndex, Color color, float brightness);
 
     /// <summary>
     /// Send the data to the LED driver.

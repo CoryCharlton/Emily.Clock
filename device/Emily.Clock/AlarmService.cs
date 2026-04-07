@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Threading;
 using CCSWE.nanoFramework.Configuration;
@@ -8,9 +7,7 @@ using Emily.Clock.Audio;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device;
 using Emily.Clock.Device.Audio;
-using Emily.Clock.Device.Led;
 using Emily.Clock.Events;
-using Emily.Clock.UI.Lights;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock;
@@ -28,8 +25,6 @@ public interface IAlarmService
 
 public class AlarmService : IAlarmService, IMediatorEventHandler
 {
-    private static readonly Color AlarmColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
-
     private Thread? _alarmThread;
     private readonly IAudioManager _audioManager;
     private readonly ManualResetEvent _cancelAlarm = new(false);
@@ -37,20 +32,15 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     private readonly IConfigurationManager _configurationManager;
     private readonly DeviceFeatures _deviceFeatures;
     private bool _isAlarming;
-    private readonly LedConfiguration _ledConfiguration;
-    private readonly ILedManager _ledManager;
-    private Thread? _ledThread;
     private readonly ILogger _logger;
     private readonly IMediator _mediator;
 
-    public AlarmService(IAudioManager audioManager, IConfigurationManager configurationManager, DeviceFeatures deviceFeatures, LedConfiguration ledConfiguration, ILedManager ledManager, ILogger logger, IMediator mediator)
+    public AlarmService(IAudioManager audioManager, IConfigurationManager configurationManager, DeviceFeatures deviceFeatures, ILogger logger, IMediator mediator)
     {
         _audioManager = audioManager;
         _configurationManager = configurationManager;
         _configurationManager.ConfigurationChanged += OnConfigurationChanged;
         _deviceFeatures = deviceFeatures;
-        _ledConfiguration = ledConfiguration;
-        _ledManager = ledManager;
         _logger = logger;
         _mediator = mediator;
 
@@ -93,8 +83,7 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
             }
         }
 
-        // Signal the LED thread to stop (deadline reached or audio error)
-        _cancelAlarm.Set();
+        StopInternal();
     }
 
     public void HandleEvent(IMediatorEvent mediatorEvent)
@@ -120,32 +109,6 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     {
         _mediator.Subscribe(typeof(TimeChangedEvent), this);
         return true;
-    }
-
-    private void LedLoop()
-    {
-        while (true)
-        {
-            for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
-            {
-                _ledManager.SetLed(i, AlarmColor, 1.0f);
-            }
-
-            _ledManager.Update();
-
-            if (_cancelAlarm.WaitOne(300, false)) break;
-
-            for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
-            {
-                _ledManager.SetLed(i, Color.Black);
-            }
-
-            _ledManager.Update();
-
-            if (_cancelAlarm.WaitOne(300, false)) break;
-        }
-
-        StopInternal();
     }
 
     private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
@@ -176,9 +139,6 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
 
         _alarmThread = new Thread(AlarmLoop);
         _alarmThread.Start();
-
-        _ledThread = new Thread(LedLoop);
-        _ledThread.Start();
     }
 
     public void Stop()
@@ -189,13 +149,6 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     private void StopInternal()
     {
         _isAlarming = false;
-
-        for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
-        {
-            _ledManager.SetLed(i, Color.Black);
-        }
-
-        _ledManager.Update();
         _mediator.Publish(new AlarmStateChangedEvent(Enabled, false));
     }
 

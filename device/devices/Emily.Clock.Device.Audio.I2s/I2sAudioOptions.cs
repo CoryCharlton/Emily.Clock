@@ -1,9 +1,11 @@
 using System;
 
+using Emily.Clock.Device;
+
 namespace Emily.Clock.Device.Audio.I2s;
 
 /// <summary>
-/// Pin and bus configuration for an I2S audio device.
+/// Configuration for an I2S audio device.
 /// </summary>
 public class I2sAudioOptions
 {
@@ -13,17 +15,8 @@ public class I2sAudioOptions
     public int BusId { get; set; } = 1;
 
     /// <summary>
-    /// The pin ID for the BCK (bit clock) line.
+    /// Optional delegate invoked during <see cref="I2sAudioProvider.Initialize"/> to configure
+    /// platform-specific pin functions before the I2S device is used.
     /// </summary>
-    public int BckPin { get; set; }
-
-    /// <summary>
-    /// The pin ID for the data output line.
-    /// </summary>
-    public int DataPin { get; set; }
-
-    /// <summary>
-    /// The pin ID for the WS (word select / LRCLK) line.
-    /// </summary>
-    public int WsPin { get; set; }
+    public DevicePreInitializeDelegate? PreInitialize { get; set; }
 }

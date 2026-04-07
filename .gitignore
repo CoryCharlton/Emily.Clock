@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # Claude Code
 .claude/
+
+# JetBrains Rider project settings (non-user-specific DotSettings are still local)
+*.DotSettings

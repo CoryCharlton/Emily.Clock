@@ -104,38 +104,56 @@ public class ClockWindow: Window, IMediatorEventHandler
     {
         switch (mediatorEvent)
         {
+            case AlarmStateChangedEvent:
+            {
+                DrawButtons(GetBitmap(), true);
+                break;
+            }
             case ButtonEvent buttonEvent:
             {
                 Logger.LogDebug(buttonEvent.ToString());
 
-                switch (buttonEvent.Button)
+                if (_alarmService.IsAlarming)
                 {
-                    case Button.One:
-                        switch (buttonEvent.Type)
-                        {
-                            case ButtonEventType.Holding:
-                                _nightLightManager.Toggle();
-                                break;
-                            case ButtonEventType.Press:
-                                _nightLightManager.CycleBrightness();
-                                DrawProgressBar(GetBitmap(), true);
-                                break;
-                        }
-                        break;
-                    case Button.Two:
-                        if (ButtonEventType.Press == buttonEvent.Type)
-                        {
-                            _nightLightManager.CycleColor();
-                        }
-                        break;
-                    case Button.Three:
-                        if (ButtonEventType.Press == buttonEvent.Type)
-                        {
-                            _alarmService.Enabled = !_alarmService.Enabled;
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    _alarmService.Stop();
+                }
+                else
+                {
+                    switch (buttonEvent.Button)
+                    {
+                        case Button.One:
+                            switch (buttonEvent.Type)
+                            {
+                                case ButtonEventType.Holding:
+                                    _nightLightManager.Toggle();
+                                    break;
+                                case ButtonEventType.Press:
+                                    _nightLightManager.CycleBrightness();
+                                    DrawProgressBar(GetBitmap(), true);
+                                    break;
+                            }
+                            break;
+                        case Button.Two:
+                            if (ButtonEventType.Press == buttonEvent.Type)
+                            {
+                                _nightLightManager.CycleColor();
+                            }
+                            break;
+                        case Button.Three:
+                            switch (buttonEvent.Type)
+                            {
+                                case ButtonEventType.Holding:
+                                    // TODO: Remove after testing is complete
+                                    _alarmService.StartAlarm();
+                                    break;
+                                case ButtonEventType.Press:
+                                    _alarmService.Toggle();
+                                    break;
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
 
                 DrawButtons(GetBitmap(), true);
@@ -157,6 +175,7 @@ public class ClockWindow: Window, IMediatorEventHandler
 
     protected override void OnStart()
     {
+        _mediator.Subscribe(typeof(AlarmStateChangedEvent), this);
         _mediator.Subscribe(typeof(ButtonEvent), this);
         _mediator.Subscribe(typeof(DateChangedEvent), this);
         _mediator.Subscribe(typeof(TimeChangedEvent), this);
@@ -188,6 +207,7 @@ public class ClockWindow: Window, IMediatorEventHandler
 
     protected override void OnStop()
     {
+        _mediator.Unsubscribe(typeof(AlarmStateChangedEvent), this);
         _mediator.Unsubscribe(typeof(ButtonEvent), this);
         _mediator.Unsubscribe(typeof(DateChangedEvent), this);
         _mediator.Unsubscribe(typeof(TimeChangedEvent), this);

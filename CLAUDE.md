@@ -37,9 +37,9 @@ The solution has three projects under `device/`:
 
 **Initialization order**: Three `IDeviceInitializer` singletons execute sequentially: `DeviceInitialization` → `NetworkInitialization` → `ApplicationInitialization`.
 
-**Mediator (pub/sub)**: `CCSWE.nanoFramework.Mediator` handles events (`ButtonEvent`, `TimeChangedEvent`, `DateChangedEvent`, `StatusEvent`). Subscribers are registered in `Bootstrapper.AddMediator()`.
+**Mediator (pub/sub)**: `CCSWE.nanoFramework.Mediator` handles events (`AlarmStateChangedEvent`, `ButtonEvent`, `TimeChangedEvent`, `DateChangedEvent`, `StatusEvent`). Subscribers are registered in `Bootstrapper.AddMediator()`.
 
-**Configuration**: Typed configuration classes bound via `AddConfigurationManager().BindConfiguration(...)`. Configs: `DateTimeConfiguration`, `NightLightConfiguration`, `WirelessClientConfiguration`, `WirelessAccessPointConfiguration`.
+**Configuration**: Typed configuration classes bound via `AddConfigurationManager().BindConfiguration(...)`. Configs: `AlarmConfiguration`, `DateTimeConfiguration`, `NightLightConfiguration`, `WirelessClientConfiguration`, `WirelessAccessPointConfiguration`.
 
 **REST API**: HTTP server on port 80 via `CCSWE.nanoFramework.WebServer`. Controllers are in `Emily.Clock/Controllers/` (`DeviceController`, `ConfigurationController`).
 

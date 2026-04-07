@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Emily.Clock.Audio;
 
 namespace Emily.Clock.Device.Audio;
@@ -20,14 +21,20 @@ public class AudioManager : IAudioManager
     }
 
     /// <inheritdoc />
-    public bool Play(WavFile wavFile, int loopCount = 1, int loopDelayMilliseconds = 0)
+    public IAudioDevice? Prepare(WavFile wavFile)
     {
         if (_audioProvider is null || !_audioProvider.IsInitialized)
         {
-            return false;
+            return null;
         }
 
-        var device = _audioProvider.Prepare(wavFile);
+        return _audioProvider.Prepare(wavFile);
+    }
+
+    /// <inheritdoc />
+    public bool Play(WavFile wavFile, WaitHandle? stopEvent = null)
+    {
+        var device = Prepare(wavFile);
         if (device is null)
         {
             return false;
@@ -35,9 +42,7 @@ public class AudioManager : IAudioManager
 
         try
         {
-            // TODO: Do this in a dedicated thread?
-            // TODO: Expose a Stop() method?
-            device.Play(loopCount, loopDelayMilliseconds);
+            device.Play(stopEvent);
             return true;
         }
         finally

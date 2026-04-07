@@ -47,7 +47,7 @@ The device hosts an HTTP server on port 80 with the following endpoints:
 | GET | `/api/configuration/{section}` | Get configuration for a section |
 | POST | `/api/configuration/{section}` | Save configuration for a section |
 
-Configuration sections: `datetime`, `nightlight`, `wireless-access-point`, `wireless-client`
+Configuration sections: `alarm`, `datetime`, `nightlight`, `wireless-access-point`, `wireless-client`
 
 ## Hardware
 
@@ -68,8 +68,8 @@ You can swap out any of the hardware and adjust the Fusion 360 model or design y
 
 The more I worked on this the more I wanted to do with it. Currently the following features on the roadmap (in no particular order)
 
-- Alarm functionality
-- Audio provider (piezo buzzer, I2S)
+- Alarm functionality (in progress, needs UI)
+- Audio provider (I2S completed, consider piezzo buzzer)
 - Expand web interface to cover nightlight, alarm, and time settings (wireless client setup is already working)
 - Battery-powered RTC for situations where the WiFi is temporarily unavailable
 

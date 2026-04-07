@@ -1,3 +1,4 @@
+using System.Threading;
 using Emily.Clock.Audio;
 
 namespace Emily.Clock.Device.Audio;
@@ -8,11 +9,18 @@ namespace Emily.Clock.Device.Audio;
 public interface IAudioManager
 {
     /// <summary>
-    /// Plays the given WAV file, blocking until playback is complete.
+    /// Prepares an <see cref="IAudioDevice"/> for the given WAV file.
+    /// Returns <see langword="null"/> if no audio hardware is available or a lease is already active.
+    /// The caller is responsible for disposing the returned device.
+    /// </summary>
+    /// <param name="wavFile">The WAV file to prepare for playback.</param>
+    IAudioDevice? Prepare(WavFile wavFile);
+
+    /// <summary>
+    /// Plays the given WAV file once, blocking until complete or <paramref name="stopEvent"/> is signaled.
     /// Returns <see langword="false"/> if no audio hardware is available or a lease is already active.
     /// </summary>
     /// <param name="wavFile">The WAV file to play.</param>
-    /// <param name="loopCount">The number of times to play the audio. Defaults to 1.</param>
-    /// <param name="loopDelayMilliseconds">The delay in milliseconds between loops. Defaults to 0.</param>
-    bool Play(WavFile wavFile, int loopCount = 1, int loopDelayMilliseconds = 0);
+    /// <param name="stopEvent">Optional wait handle that, when signaled, stops playback early.</param>
+    bool Play(WavFile wavFile, WaitHandle? stopEvent = null);
 }

@@ -9,14 +9,16 @@ namespace Emily.Clock;
 
 public class ApplicationInitialization : IDeviceInitializer
 {
+    private readonly IAlarmService _alarmService;
     private readonly IDeviceManager _deviceManager;
     private readonly ILocalTimeProvider _localTimeProvider;
     private readonly ILogger _logger;
     private readonly INavigationService _navigationService;
     private readonly INightLightManager _nightLightManager;
 
-    public ApplicationInitialization(IDeviceManager deviceManager, ILocalTimeProvider localTimeProvider, ILogger logger, INavigationService navigationService, INightLightManager nightLightManager)
+    public ApplicationInitialization(IAlarmService alarmService, IDeviceManager deviceManager, ILocalTimeProvider localTimeProvider, ILogger logger, INavigationService navigationService, INightLightManager nightLightManager)
     {
+        _alarmService = alarmService;
         _deviceManager = deviceManager;
         _localTimeProvider = localTimeProvider;
         _logger = logger;
@@ -36,7 +38,10 @@ public class ApplicationInitialization : IDeviceInitializer
             return false;
         }
 
-        // TODO: Start alarm service
+        if (!_alarmService.Initialize())
+        {
+            _logger.LogError("Failed to initialize alarm service");
+        }
 
         _navigationService.Navigate(NavigationDestination.Clock);
 

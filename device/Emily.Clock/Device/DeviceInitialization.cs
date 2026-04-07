@@ -1,6 +1,8 @@
 using System;
+using CCSWE.nanoFramework.Configuration;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Configuration;
 using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;

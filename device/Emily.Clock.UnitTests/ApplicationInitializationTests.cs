@@ -10,19 +10,17 @@ public class ApplicationInitializationTests
     [TestMethod]
     public void Initialize_should_handle_night_light_manager_failing_to_initialize()
     {
-        // Arrange
+        var alarmService = new AlarmServiceMock();
         var deviceManager = new DeviceManagerMock();
         var localTimeProvider = new LocalTimeProviderMock();
         var logger = new LoggerMock();
         var navigationService = new NavigationServiceMock();
         var nightLightManager = new NightLightManagerMock { InitializeResult = false };
 
-        var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
-        // Act
         var result = sut.Initialize();
 
-        // Assert
         Assert.IsFalse(result);
         Assert.IsFalse(navigationService.NavigateCalled);
     }
@@ -30,19 +28,17 @@ public class ApplicationInitializationTests
     [TestMethod]
     public void Initialize_should_navigate_to_clock_on_success()
     {
-        // Arrange
+        var alarmService = new AlarmServiceMock();
         var deviceManager = new DeviceManagerMock();
         var localTimeProvider = new LocalTimeProviderMock();
         var logger = new LoggerMock();
         var navigationService = new NavigationServiceMock();
         var nightLightManager = new NightLightManagerMock();
 
-        var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
-        // Act
         var result = sut.Initialize();
 
-        // Assert
         Assert.IsTrue(result);
         Assert.IsTrue(navigationService.NavigateCalled);
         Assert.AreEqual(NavigationDestination.Clock, navigationService.Destination);
@@ -51,19 +47,17 @@ public class ApplicationInitializationTests
     [TestMethod]
     public void Initialize_should_set_application_start_time()
     {
-        // Arrange
+        var alarmService = new AlarmServiceMock();
         var deviceManager = new DeviceManagerMock();
         var localTimeProvider = new LocalTimeProviderMock();
         var logger = new LoggerMock();
         var navigationService = new NavigationServiceMock();
         var nightLightManager = new NightLightManagerMock();
 
-        var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
-        // Act
         var result = sut.Initialize();
 
-        // Assert
         Assert.IsTrue(result);
         Assert.IsTrue(deviceManager.StartedAtSet);
     }
@@ -71,19 +65,17 @@ public class ApplicationInitializationTests
     [TestMethod]
     public void Initialize_should_start_time_provider()
     {
-        // Arrange
+        var alarmService = new AlarmServiceMock();
         var deviceManager = new DeviceManagerMock();
         var localTimeProvider = new LocalTimeProviderMock();
         var logger = new LoggerMock();
         var navigationService = new NavigationServiceMock();
         var nightLightManager = new NightLightManagerMock();
 
-        var sut = new ApplicationInitialization(deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
 
-        // Act
         var result = sut.Initialize();
 
-        // Assert
         Assert.IsTrue(result);
         Assert.IsTrue(localTimeProvider.StartCalled);
     }

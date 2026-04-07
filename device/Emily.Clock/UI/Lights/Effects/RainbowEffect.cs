@@ -1,4 +1,5 @@
 using System.Drawing;
+using CCSWE.nanoFramework.Graphics;
 using Emily.Clock.Device.Led;
 
 namespace Emily.Clock.UI.Lights.Effects;
@@ -40,24 +41,7 @@ public class RainbowEffect : INightLightEffect
 
         for (var i = 0; i < count; i++)
         {
-            ledManager.SetLed(ledConfiguration.NightlightStartIndex + i, Wheel(((i * 255 / count) + _offset) & 255));
+            ledManager.SetLed(ledConfiguration.NightlightStartIndex + i, ColorWheel.GetColor(((i * 255 / count) + _offset) & 255));
         }
-    }
-
-    private static Color Wheel(int position)
-    {
-        if (position < 85)
-        {
-            return Color.FromArgb(255, position * 3, 255 - position * 3, 0);
-        }
-
-        if (position < 170)
-        {
-            position -= 85;
-            return Color.FromArgb(255, 255 - position * 3, 0, position * 3);
-        }
-
-        position -= 170;
-        return Color.FromArgb(255, 0, position * 3, 255 - position * 3);
     }
 }

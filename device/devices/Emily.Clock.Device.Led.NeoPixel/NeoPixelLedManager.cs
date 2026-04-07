@@ -85,26 +85,24 @@ internal class NeoPixelLedManager : ILedManager
 
     public void SetLed(int index, Color color, float brightness)
     {
-        var scaledColor = Color.Black.Equals(color) ? color : ColorConverter.ScaleBrightness(color, brightness);
-
-        SetLed(index, scaledColor);
+        CheckInitialized();
+        
+        _neoPixelStrip.SetLed(index, color, brightness);
     }
 
     public void SetLeds(int startIndex, int endIndex, Color color)
     {
         CheckInitialized();
 
-        for (var i = startIndex; i <= endIndex ; i++)
-        {
-            _neoPixelStrip.SetLed(i, color);
-        }
+        _neoPixelStrip.SetLeds(startIndex, endIndex, color);
+
     }
 
     public void SetLeds(int startIndex, int endIndex, Color color, float brightness)
     {
-        var scaledColor = Color.Black.Equals(color) ? color : ColorConverter.ScaleBrightness(color, brightness);
-
-        SetLeds(startIndex, endIndex, scaledColor);
+        CheckInitialized();
+        
+        _neoPixelStrip.SetLeds(startIndex, endIndex, color, brightness);
     }
 
     public void Update()

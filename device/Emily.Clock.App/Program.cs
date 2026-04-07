@@ -1,19 +1,18 @@
 using CCSWE.nanoFramework.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Emily.Clock.App
+namespace Emily.Clock.App;
+
+public class Program
 {
-    public class Program
+    public static void Main()
     {
-        public static void Main()
-        {
-            var builder = DeviceHost.CreateDefaultBuilder()
-                .ConfigureHardware()
-                .AddCore();
+        var builder = DeviceHost.CreateDefaultBuilder()
+            .ConfigureHardware()
+            .AddCore();
 
-            using var host = builder.Build();
+        using var host = builder.Build();
 
-            host.Run();
-        }
+        host.Run();
     }
 }

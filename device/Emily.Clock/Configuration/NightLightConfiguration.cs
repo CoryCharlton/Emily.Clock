@@ -1,15 +1,14 @@
 ﻿using Emily.Clock.UI.Lights;
 
-namespace Emily.Clock.Configuration
+namespace Emily.Clock.Configuration;
+
+public class NightLightConfiguration
 {
-    public class NightLightConfiguration
-    {
-        public const string Section = "NightLight";
+    public const string Section = "NightLight";
 
-        public float Brightness { get; set; } = 0.5f;
+    public float Brightness { get; set; } = 0.5f;
 
-        public NightLightColor Color { get; set; } = NightLightColor.Violet;
+    public NightLightColor Color { get; set; } = NightLightColor.Violet;
 
-        //public bool PanelLightsAlwaysOn { get; set; } = true;
-    }
+    //public bool PanelLightsAlwaysOn { get; set; } = true;
 }

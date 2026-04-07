@@ -4,105 +4,104 @@ using Emily.Clock.Device.Display;
 using Microsoft.Extensions.Logging;
 using nanoFramework.UI;
 
-namespace Emily.Clock.UI.Windows
+namespace Emily.Clock.UI.Windows;
+
+public interface IWindow : IDisposable
 {
-    public interface IWindow : IDisposable
+    void Start();
+    void Stop();
+}
+
+public abstract class Window : IWindow
+{
+    private bool _disposed;
+
+    protected readonly object SyncLock = new();
+
+    protected Window(IDisplayManager displayManager, ILogger logger)
     {
-        void Start();
-        void Stop();
+        CancellationToken = CancellationTokenSource.Token;
+        DisplayManager = displayManager;
+        Logger = logger;
     }
 
-    public abstract class Window : IWindow
+    ~Window() => Dispose(false);
+
+    protected CancellationToken CancellationToken { get; }
+
+    protected CancellationTokenSource CancellationTokenSource { get; } = new();
+
+    private IDisplayManager DisplayManager { get; }
+
+    protected ILogger Logger { get; }
+
+    protected void ClearDisplay(bool flush = false)
     {
-        private bool _disposed;
+        DisplayManager.Clear(flush);
+    }
 
-        protected readonly object SyncLock = new();
-
-        protected Window(IDisplayManager displayManager, ILogger logger)
+    public void Dispose()
+    {
+        if (_disposed)
         {
-            CancellationToken = CancellationTokenSource.Token;
-            DisplayManager = displayManager;
-            Logger = logger;
+            return;
         }
 
-        ~Window() => Dispose(false);
-
-        protected CancellationToken CancellationToken { get; }
-
-        protected CancellationTokenSource CancellationTokenSource { get; } = new();
-
-        private IDisplayManager DisplayManager { get; }
-
-        protected ILogger Logger { get; }
-
-        protected void ClearDisplay(bool flush = false)
-        {
-            DisplayManager.Clear(flush);
-        }
-
-        public void Dispose()
+        lock (SyncLock)
         {
             if (_disposed)
             {
                 return;
             }
 
-            lock (SyncLock)
-            {
-                if (_disposed)
-                {
-                    return;
-                }
-
-                Dispose(true);
-                GC.SuppressFinalize(this);
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+    }
 
-        protected void Dispose(bool disposing)
+    protected void Dispose(bool disposing)
+    {
+        if (_disposed)
         {
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                Stop();
-            }
-
-            OnDispose(disposing);
-
-            _disposed = true;
+            return;
         }
 
-        protected Bitmap GetBitmap() => DisplayManager.GetBitmap();
-
-        protected virtual void OnDispose(bool disposing)
+        if (disposing)
         {
-
+            Stop();
         }
 
-        protected virtual void OnStart()
-        {
+        OnDispose(disposing);
 
-        }
+        _disposed = true;
+    }
 
-        protected virtual void OnStop()
-        {
+    protected Bitmap GetBitmap() => DisplayManager.GetBitmap();
 
-        }
+    protected virtual void OnDispose(bool disposing)
+    {
 
-        public void Start()
-        {
-            OnStart();
-        }
+    }
 
-        public void Stop()
-        {
-            CancellationTokenSource.Cancel();
+    protected virtual void OnStart()
+    {
 
-            OnStop();
-        }
+    }
+
+    protected virtual void OnStop()
+    {
+
+    }
+
+    public void Start()
+    {
+        OnStart();
+    }
+
+    public void Stop()
+    {
+        CancellationTokenSource.Cancel();
+
+        OnStop();
     }
 }

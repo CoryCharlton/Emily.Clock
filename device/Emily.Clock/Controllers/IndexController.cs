@@ -2,13 +2,13 @@ using CCSWE.nanoFramework.Net;
 using CCSWE.nanoFramework.WebServer;
 using CCSWE.nanoFramework.WebServer.Authorization;
 
-namespace Emily.Clock.Controllers
+namespace Emily.Clock.Controllers;
+
+[Route("/")]
+[AllowAnonymous]
+public class IndexController : ControllerBase
 {
-    [Route("/")]
-    [AllowAnonymous]
-    public class IndexController : ControllerBase
-    {
-        private const string Html = @"<!DOCTYPE html>
+    private const string Html = @"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -97,8 +97,7 @@ namespace Emily.Clock.Controllers
 </body>
 </html>";
 
-        [HttpGet]
-        [HttpGet("index.html")]
-        public void Index() => Ok(Html, MimeType.Text.Html);
-    }
+    [HttpGet]
+    [HttpGet("index.html")]
+    public void Index() => Ok(Html, MimeType.Text.Html);
 }

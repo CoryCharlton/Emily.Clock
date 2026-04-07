@@ -66,12 +66,14 @@ public class DeviceInitialization : IDeviceInitializer
                 _logger.LogError("Failed to initialize audio");
             }
 
+/*
             var alarm = File.OpenRead(@"D:\alarm.wav");
             var audioPlayer = (IAudioManager) _serviceProvider.GetService(typeof(IAudioManager));
-            if (audioPlayer is not null)
+            if (audioPlayer is not null && alarm is not null)
             {
                 audioPlayer.Play(new WavFile(alarm));
             }
+*/
 
             if (!_ledManager.Initialize())
             {

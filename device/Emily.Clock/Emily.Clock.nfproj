@@ -41,8 +41,11 @@
     <Compile Include="Device\DeviceManagerBase.cs" />
     <Compile Include="Device\Led\ILedManager.cs" />
     <Compile Include="Device\Led\LedConfiguration.cs" />
+    <Compile Include="UI\Lights\Effects\BreatheEffect.cs" />
     <Compile Include="UI\Lights\Effects\FlashEffect.cs" />
     <Compile Include="UI\Lights\Effects\INightLightEffect.cs" />
+    <Compile Include="UI\Lights\Effects\NightLightEffectType.cs" />
+    <Compile Include="UI\Lights\Effects\RainbowEffect.cs" />
     <Compile Include="UI\Lights\Effects\SolidEffect.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

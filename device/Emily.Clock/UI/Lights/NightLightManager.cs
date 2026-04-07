@@ -238,7 +238,15 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 
     private void UpdateCurrentEffect()
     {
-        _currentEffect = new SolidEffect(NightLightColorConverter.ToColor(_configuration.Color), _configuration.Brightness);
+        var color = NightLightColorConverter.ToColor(_configuration.Color);
+        var brightness = _configuration.Brightness;
+
+        _currentEffect = _configuration.Effect switch
+        {
+            NightLightEffectType.Breathe => new BreatheEffect(color, brightness),
+            NightLightEffectType.Rainbow => new RainbowEffect(),
+            _ => new SolidEffect(color, brightness)
+        };
         _updateRequested.Set();
     }
 

@@ -1,14 +1,18 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace Emily.Clock.Device.Led;
 
-// TODO: In order to support multi-color functionality this will need to expose a Count property and there will need to be a SetNightlightLeds that takes an array of colors
 /// <summary>
-/// Represents the LEDs used for the nightlight and day/night functions.
+/// Represents a strip of addressable LEDs.
 /// </summary>
 public interface ILedManager
 {
-    public bool IsInitialized { get; }
+    /// <summary>
+    /// The total number of LEDs in the strip.
+    /// </summary>
+    int Count { get; }
+
+    bool IsInitialized { get; }
 
     /// <summary>
     /// Reset all LEDs to <see cref="Color.Black"/>.
@@ -22,28 +26,20 @@ public interface ILedManager
     bool Initialize();
 
     /// <summary>
-    /// Sets the <see cref="Color"/> and brightness of the moon LED.
+    /// Sets the <see cref="Color"/> of the LED at the given index.
     /// </summary>
-    /// <param name="color">The <see cref="Color"/> to adjust.</param>
-    /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-    public void SetMoonLed(Color color, float brightness);
+    void SetLed(int index, Color color);
 
     /// <summary>
-    /// Sets the <see cref="Color"/> and brightness of the nightlight LEDs.
+    /// Sets the <see cref="Color"/> and brightness of the LED at the given index.
     /// </summary>
-    /// <param name="color">The <see cref="Color"/> to adjust.</param>
+    /// <param name="index">The zero-based LED index.</param>
+    /// <param name="color">The <see cref="Color"/> to set.</param>
     /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-    public void SetNightlightLeds(Color color, float brightness);
-
-    /// <summary>
-    /// Sets the <see cref="Color"/> and brightness of the sun LED.
-    /// </summary>
-    /// <param name="color">The <see cref="Color"/> to adjust.</param>
-    /// <param name="brightness">The brightness value between 0.0 and 1.0.</param>
-    public void SetSunLed(Color color, float brightness);
+    void SetLed(int index, Color color, float brightness);
 
     /// <summary>
     /// Send the data to the LED driver.
     /// </summary>
-    public void Update();
+    void Update();
 }

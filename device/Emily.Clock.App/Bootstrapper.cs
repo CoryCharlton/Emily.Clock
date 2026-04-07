@@ -4,9 +4,10 @@ using Emily.Clock.Device;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Display.Ili9341;
-using Emily.Clock.Device.Led;
 using Emily.Clock.Device.Audio.I2s;
 using Emily.Clock.Device.FileStorage.SdCard;
+using Emily.Clock.Device.Led.NeoPixel;
+using CCSWE.nanoFramework.NeoPixel.Drivers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using nanoFramework.Hardware.Esp32;
@@ -18,6 +19,9 @@ namespace Emily.Clock.App;
 
 public static class Bootstrapper
 {
+    private const byte NEOPIXEL_PIN = 19;
+    private const ushort NEOPIXEL_COUNT = 47;
+
     private const int BUTTON_ONE_PIN = 39;
     private const PinMode BUTTON_ONE_PIN_MODE = PinMode.InputPullUp;
     private const int BUTTON_TWO_PIN = 37;
@@ -49,6 +53,7 @@ public static class Bootstrapper
     public static IHostBuilder ConfigureHardware(this IHostBuilder builder)
     {
         return builder
+            .AddNeoPixelLeds(new NeoPixelLedOptions { Pin = NEOPIXEL_PIN, Count = NEOPIXEL_COUNT, Driver = new Ws2812B() })
             .AddButtons(new ButtonOptions(
                 new ButtonConfiguration { Pin = BUTTON_ONE_PIN, PinMode = BUTTON_ONE_PIN_MODE },
                 new ButtonConfiguration { Pin = BUTTON_TWO_PIN, PinMode = BUTTON_TWO_PIN_MODE },
@@ -91,9 +96,7 @@ public static class Bootstrapper
 
     private static IServiceCollection ConfigureHardware(this IServiceCollection services)
     {
-        services
-            .AddSingleton(typeof(IDeviceManager), typeof(DeviceManager))
-            .AddSingleton(typeof(ILedManager), typeof(NeoPixelStripManager));
+        services.AddSingleton(typeof(IDeviceManager), typeof(DeviceManager));
 
         return services;
     }

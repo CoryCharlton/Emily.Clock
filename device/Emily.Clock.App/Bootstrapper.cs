@@ -6,6 +6,7 @@ using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Display.Ili9341;
 using Emily.Clock.Device.Audio.I2s;
 using Emily.Clock.Device.FileStorage.SdCard;
+using Emily.Clock.Device.Led;
 using Emily.Clock.Device.Led.NeoPixel;
 using CCSWE.nanoFramework.NeoPixel.Drivers;
 using Microsoft.Extensions.DependencyInjection;
@@ -96,7 +97,15 @@ public static class Bootstrapper
 
     private static IServiceCollection ConfigureHardware(this IServiceCollection services)
     {
-        services.AddSingleton(typeof(IDeviceManager), typeof(DeviceManager));
+        services
+            .AddSingleton(typeof(IDeviceManager), typeof(DeviceManager))
+            .AddSingleton(typeof(LedConfiguration), new LedConfiguration
+            {
+                MoonLedIndex = 0,
+                NightlightEndIndex = 46,
+                NightlightStartIndex = 2,
+                SunLedIndex = 1
+            });
 
         return services;
     }

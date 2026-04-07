@@ -29,7 +29,6 @@ public interface IAlarmService
 public class AlarmService : IAlarmService, IMediatorEventHandler
 {
     private static readonly Color AlarmColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
-    private const int NightlightStartIndex = 2;
 
     private Thread? _alarmThread;
     private readonly IAudioManager _audioManager;
@@ -38,17 +37,19 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     private readonly IConfigurationManager _configurationManager;
     private readonly DeviceFeatures _deviceFeatures;
     private bool _isAlarming;
+    private readonly LedConfiguration _ledConfiguration;
     private readonly ILedManager _ledManager;
     private Thread? _ledThread;
     private readonly ILogger _logger;
     private readonly IMediator _mediator;
 
-    public AlarmService(IAudioManager audioManager, IConfigurationManager configurationManager, DeviceFeatures deviceFeatures, ILedManager ledManager, ILogger logger, IMediator mediator)
+    public AlarmService(IAudioManager audioManager, IConfigurationManager configurationManager, DeviceFeatures deviceFeatures, LedConfiguration ledConfiguration, ILedManager ledManager, ILogger logger, IMediator mediator)
     {
         _audioManager = audioManager;
         _configurationManager = configurationManager;
         _configurationManager.ConfigurationChanged += OnConfigurationChanged;
         _deviceFeatures = deviceFeatures;
+        _ledConfiguration = ledConfiguration;
         _ledManager = ledManager;
         _logger = logger;
         _mediator = mediator;
@@ -125,7 +126,7 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     {
         while (true)
         {
-            for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+            for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
             {
                 _ledManager.SetLed(i, AlarmColor, 1.0f);
             }
@@ -134,7 +135,7 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
 
             if (_cancelAlarm.WaitOne(300, false)) break;
 
-            for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+            for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
             {
                 _ledManager.SetLed(i, Color.Black);
             }
@@ -189,7 +190,7 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     {
         _isAlarming = false;
 
-        for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+        for (var i = _ledConfiguration.NightlightStartIndex; i <= _ledConfiguration.NightlightEndIndex; i++)
         {
             _ledManager.SetLed(i, Color.Black);
         }

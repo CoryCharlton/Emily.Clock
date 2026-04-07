@@ -9,7 +9,7 @@ Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.App", "Emily.Cl
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.UnitTests", "Emily.Clock.UnitTests\Emily.Clock.UnitTests.nfproj", "{E68D5A40-E61C-41A5-9B5C-61DCDDFD160E}"
 EndProject
-Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.SdCard", "devices\Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.FileStorage.SdCard", "devices\Emily.Clock.Device.FileStorage.SdCard\Emily.Clock.Device.FileStorage.SdCard.nfproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.Display.Ili9341", "devices\Emily.Clock.Device.Display.Ili9341\Emily.Clock.Device.Display.Ili9341.nfproj", "{B2C3D4E5-F6A7-8901-BCDE-F01234567891}"
 EndProject

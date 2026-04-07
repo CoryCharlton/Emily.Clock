@@ -1,7 +1,7 @@
 using Emily.Clock.Device;
 using nanoFramework.System.IO.FileSystem;
 
-namespace Emily.Clock.Device.SdCard;
+namespace Emily.Clock.Device.FileStorage.SdCard;
 
 public class SdCardOptions
 {

@@ -5,7 +5,7 @@ using Emily.Clock.Device.Gpio;
 using Microsoft.Extensions.Logging;
 using nanoFramework.System.IO.FileSystem;
 
-namespace Emily.Clock.Device.SdCard;
+namespace Emily.Clock.Device.FileStorage.SdCard;
 
 internal class SdCardFileStorageProvider : IFileStorageProvider, IDisposable
 {

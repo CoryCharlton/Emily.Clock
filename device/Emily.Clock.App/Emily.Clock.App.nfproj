@@ -38,7 +38,7 @@
     <ProjectReference Include="..\Emily.Clock\Emily.Clock.nfproj" />
     <ProjectReference Include="..\devices\Emily.Clock.Device.Display.Ili9341\Emily.Clock.Device.Display.Ili9341.nfproj" />
     <ProjectReference Include="..\devices\Emily.Clock.Device.Audio.I2s\Emily.Clock.Device.Audio.I2s.nfproj" />
-    <ProjectReference Include="..\devices\Emily.Clock.Device.SdCard\Emily.Clock.Device.SdCard.nfproj" />
+    <ProjectReference Include="..\devices\Emily.Clock.Device.FileStorage.SdCard\Emily.Clock.Device.FileStorage.SdCard.nfproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">

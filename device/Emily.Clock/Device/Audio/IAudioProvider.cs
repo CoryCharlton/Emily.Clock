@@ -25,5 +25,5 @@ public interface IAudioProvider
     /// Disposing the returned device releases the lease.
     /// </summary>
     /// <param name="wavFile">The WAV file to prepare for playback.</param>
-    IAudioDevice Prepare(WavFile wavFile);
+    IAudioDevice? Prepare(WavFile wavFile);
 }

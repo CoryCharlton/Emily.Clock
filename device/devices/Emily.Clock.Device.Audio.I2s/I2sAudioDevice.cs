@@ -1,31 +1,30 @@
+using System;
+using System.Device.I2s;
 using System.IO;
 using System.Threading;
-using Emily.Clock.Audio;
 
 namespace Emily.Clock.Device.Audio.I2s;
 
 internal delegate void LeaseReleasedCallback();
 
 /// <summary>
-/// Stub I2S audio device. Reads the audio stream to exercise the playback loop
-/// but does not write to hardware until a real I2S driver is wired in.
+/// I2S audio device. Plays audio from a stream by writing chunks to an <see cref="I2sDevice"/>.
 /// </summary>
 public class I2sAudioDevice : IAudioDevice
 {
     private const int AudioDataStartOffset = 44;
-    private const int BufferSize = 4096;
+    private const int BufferSize = 10000;
 
     private bool _disposed;
+    private readonly I2sDevice _i2sDevice;
     private readonly LeaseReleasedCallback _leaseReleasedCallback;
     private readonly Stream _stream;
 
-    internal I2sAudioDevice(Stream stream, WavFileHeader header, LeaseReleasedCallback leaseReleasedCallback)
+    internal I2sAudioDevice(Stream stream, I2sDevice i2sDevice, LeaseReleasedCallback leaseReleasedCallback)
     {
         _stream = stream;
+        _i2sDevice = i2sDevice;
         _leaseReleasedCallback = leaseReleasedCallback;
-
-        // TODO: Configure I2S device using header.SampleRate, header.BitsPerSample, header.NumberOfChannels
-        _ = header;
     }
 
     /// <inheritdoc />
@@ -40,6 +39,7 @@ public class I2sAudioDevice : IAudioDevice
         }
 
         _disposed = true;
+        _i2sDevice.Dispose();
         _leaseReleasedCallback();
     }
 
@@ -70,14 +70,12 @@ public class I2sAudioDevice : IAudioDevice
     private void PlayOnce()
     {
         var buffer = new byte[BufferSize];
+        var spanBytes = new SpanByte(buffer);
         int length;
 
         while ((length = _stream.Read(buffer, 0, buffer.Length)) > 0)
         {
-            // TODO: Write to I2S device
-            // var spanBytes = new SpanByte(buffer);
-            // _i2sDevice.Write(length == buffer.Length ? spanBytes : spanBytes.Slice(0, length));
-            _ = length;
+            _i2sDevice.Write(length == buffer.Length ? spanBytes : spanBytes.Slice(0, length));
         }
     }
 }

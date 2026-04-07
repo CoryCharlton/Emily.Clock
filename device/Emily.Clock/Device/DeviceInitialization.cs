@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Audio;
 using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
@@ -62,6 +64,13 @@ public class DeviceInitialization : IDeviceInitializer
             if (!InitializeAudio())
             {
                 _logger.LogError("Failed to initialize audio");
+            }
+
+            var alarm = File.OpenRead(@"D:\alarm.wav");
+            var audioPlayer = (IAudioManager) _serviceProvider.GetService(typeof(IAudioManager));
+            if (audioPlayer is not null)
+            {
+                audioPlayer.Play(new WavFile(alarm));
             }
 
             if (!_ledManager.Initialize())

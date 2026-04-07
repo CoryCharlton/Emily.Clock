@@ -8,7 +8,7 @@ namespace Emily.Clock.Device.Audio;
 /// </summary>
 public class AudioManager : IAudioManager
 {
-    private readonly IAudioProvider _audioProvider;
+    private readonly IAudioProvider? _audioProvider;
 
     /// <summary>
     /// Creates a new instance of <see cref="AudioManager"/>.
@@ -35,6 +35,8 @@ public class AudioManager : IAudioManager
 
         try
         {
+            // TODO: Do this in a dedicated thread?
+            // TODO: Expose a Stop() method?
             device.Play(loopCount, loopDelayMilliseconds);
             return true;
         }

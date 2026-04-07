@@ -59,6 +59,9 @@
     <Reference Include="nanoFramework.Logging">
       <HintPath>..\..\packages\nanoFramework.Logging.1.1.161\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="System.Device.I2s">
+      <HintPath>..\..\packages\nanoFramework.System.Device.I2s.1.0.28\lib\System.Device.I2s.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Streams">
       <HintPath>..\..\packages\nanoFramework.System.IO.Streams.1.1.96\lib\System.IO.Streams.dll</HintPath>
     </Reference>

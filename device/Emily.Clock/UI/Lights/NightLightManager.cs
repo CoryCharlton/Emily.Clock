@@ -251,23 +251,19 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 
         if (workItem.UpdateSunAndMoon)
         {
-            // Check always on
-            if (brightness == 0.0f)
-            {
-                brightness = 0.25f;
-            }
+            var panelBrightness = _configuration.PanelBrightness;
 
             var moonColor = PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black;
             if (System.Drawing.Color.Black.Equals(moonColor))
                 _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor);
             else
-                _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor, brightness);
+                _ledManager.SetLed(_ledConfiguration.MoonLedIndex, moonColor, panelBrightness);
 
             var sunColor = PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black;
             if (System.Drawing.Color.Black.Equals(sunColor))
                 _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor);
             else
-                _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor, brightness);
+                _ledManager.SetLed(_ledConfiguration.SunLedIndex, sunColor, panelBrightness);
         }
 
         _ledManager.Update();

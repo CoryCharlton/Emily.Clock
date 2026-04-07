@@ -10,5 +10,5 @@ public class NightLightConfiguration
 
     public NightLightColor Color { get; set; } = NightLightColor.Violet;
 
-    //public bool PanelLightsAlwaysOn { get; set; } = true;
+    public float PanelBrightness { get; set; } = 0.25f;
 }

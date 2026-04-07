@@ -26,6 +26,10 @@
     <Compile Include="Audio\WavFile.cs" />
     <Compile Include="Audio\WavFileHeader.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Device\Audio\AudioManager.cs" />
+    <Compile Include="Device\Audio\IAudioDevice.cs" />
+    <Compile Include="Device\Audio\IAudioManager.cs" />
+    <Compile Include="Device\Audio\IAudioProvider.cs" />
     <Compile Include="Configuration\NightLightConfiguration.cs" />
     <Compile Include="Configuration\WirelessAccessPointConfiguration.cs" />
     <Compile Include="Configuration\DateTimeConfiguration.cs" />

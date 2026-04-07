@@ -1,6 +1,7 @@
 using System;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
+using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.FileStorage;
@@ -51,13 +52,16 @@ public class DeviceInitialization : IDeviceInitializer
                 return false;
             }
 
-            // TODO: Initialize Audio provider (I2S or Piezo)
-
             // TODO: Initialize RTC and restore time if valid
 
             if (!InitializeFileStorage())
             {
                 _logger.LogError("Failed to initialize file storage");
+            }
+
+            if (!InitializeAudio())
+            {
+                _logger.LogError("Failed to initialize audio");
             }
 
             if (!_ledManager.Initialize())
@@ -68,6 +72,24 @@ public class DeviceInitialization : IDeviceInitializer
             }
 
             return true;
+        }
+
+        private bool InitializeAudio()
+        {
+            var audioProvider = (IAudioProvider)_serviceProvider.GetService(typeof(IAudioProvider));
+
+            if (audioProvider is null)
+            {
+                return true;
+            }
+
+            PublishStatusEvent("Initializing audio...");
+
+            _deviceFeatures.HasAudio = audioProvider.Initialize();
+
+            PublishStatusEvent(_deviceFeatures.HasAudio ? "Audio initialized" : "Failed to initialize audio");
+
+            return _deviceFeatures.HasAudio;
         }
 
         private bool InitializeButtons()

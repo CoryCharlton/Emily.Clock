@@ -1,4 +1,4 @@
-﻿using Emily.Clock.UI.Lights;
+using Emily.Clock.UI.Lights;
 
 namespace Emily.Clock.Configuration;
 

@@ -75,7 +75,7 @@ internal class NeoPixelStripManager: ILedManager
     {
         CheckInitialized();
 
-        // TODO: Come back to this (I should add better comments as I don't recall what I was coming back to...)
+        // TODO: Come back to this (I should add better comments as I don't recall what I was coming back to...) [See comment in SetSunLed for more details]
         if (Color.Black.Equals(color))
         {
             _neoPixelStrip.SetLed(MoonLedIndex, color);
@@ -90,7 +90,7 @@ internal class NeoPixelStripManager: ILedManager
     {
         CheckInitialized();
 
-        var scaledColor = ColorConverter.ScaleBrightness(color, brightness);
+        var scaledColor = Color.Black.Equals(color) ? color : ColorConverter.ScaleBrightness(color, brightness);
 
         for (var i = 0; i < _neoPixelStrip.Count; i++)
         {
@@ -106,6 +106,10 @@ internal class NeoPixelStripManager: ILedManager
         CheckInitialized();
 
         // TODO: Come back to this (I should add better comments as I don't recall what I was coming back to...)
+        // I think the idea here was that if the color is black we want to set it without brightness as that is
+        // effectively a brightness of 0 but setting it with brightness may still result in some light being emitted.
+        // This should probably be handled in the NeoPixelStrip class, but I don't recall if I had an issue with that
+        // or not so I'm leaving it here for now.
         if (Color.Black.Equals(color))
         {
             _neoPixelStrip.SetLed(SunLedIndex, color);

@@ -9,6 +9,7 @@ using CCSWE.nanoFramework.Threading;
 using Emily.Clock.Configuration;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Events;
+using Emily.Clock;
 
 namespace Emily.Clock.UI.Lights;
 
@@ -28,6 +29,7 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     private static readonly Color MoonColor = NightLightColorConverter.ToColor(NightLightColor.Blue);
     private static readonly Color SunColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
 
+    private readonly IAlarmService _alarmService;
     private NightLightConfiguration _configuration;
     private readonly IConfigurationManager _configurationManager;
     private readonly ILedManager _ledManager;
@@ -36,8 +38,9 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     private PanelLight _panelMode;
     private readonly ConsumerThreadPool _updateLedsThread;
 
-    public NightNightLightManager(IConfigurationManager configurationManager, ILedManager ledManager, ILocalTimeProvider localTimeProvider, IMediator mediator)
+    public NightNightLightManager(IAlarmService alarmService, IConfigurationManager configurationManager, ILedManager ledManager, ILocalTimeProvider localTimeProvider, IMediator mediator)
     {
+        _alarmService = alarmService;
         _configurationManager = configurationManager;
         _ledManager = ledManager;
         _localTimeProvider = localTimeProvider;
@@ -140,16 +143,23 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 
     public void HandleEvent(IMediatorEvent mediatorEvent)
     {
-        if (mediatorEvent is not TimeChangedEvent)
+        switch (mediatorEvent)
         {
-            return;
+            case TimeChangedEvent:
+                PanelMode = GetPanelMode();
+                break;
+            case AlarmStateChangedEvent alarmStateChangedEvent:
+                if (!alarmStateChangedEvent.IsAlarming)
+                {
+                    _updateLedsThread.Enqueue(UpdateLeds.All);
+                }
+                break;
         }
-
-        PanelMode = GetPanelMode();
     }
 
     public bool Initialize()
     {
+        _mediator.Subscribe(typeof(AlarmStateChangedEvent), this);
         _mediator.Subscribe(typeof(TimeChangedEvent), this);
         _panelMode = GetPanelMode();
         _updateLedsThread.Enqueue(UpdateLeds.All);
@@ -213,6 +223,11 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
     private void UpdateLedsThread(object item)
     {
         if (item is not UpdateLeds workItem)
+        {
+            return;
+        }
+
+        if (_alarmService.IsAlarming)
         {
             return;
         }

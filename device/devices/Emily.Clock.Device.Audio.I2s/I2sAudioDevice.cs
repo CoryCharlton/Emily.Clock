@@ -12,6 +12,7 @@ internal delegate void LeaseReleasedCallback();
 /// </summary>
 public class I2sAudioDevice : IAudioDevice
 {
+    // TODO: This feels like it belongs in WavFile
     private const int AudioDataStartOffset = 44;
     private const int BufferSize = 10000;
 
@@ -44,30 +45,19 @@ public class I2sAudioDevice : IAudioDevice
     }
 
     /// <inheritdoc />
-    public void Play(int loopCount = 1, int loopDelayMilliseconds = 0)
+    public void Play(WaitHandle? stopEvent = null)
     {
         if (_disposed)
         {
             return;
         }
 
-        for (var i = 0; i < loopCount; i++)
-        {
-            if (i > 0)
-            {
-                if (loopDelayMilliseconds > 0)
-                {
-                    Thread.Sleep(loopDelayMilliseconds);
-                }
+        _stream.Seek(AudioDataStartOffset, SeekOrigin.Begin);
 
-                _stream.Seek(AudioDataStartOffset, SeekOrigin.Begin);
-            }
-
-            PlayOnce();
-        }
+        PlayOnce(stopEvent);
     }
 
-    private void PlayOnce()
+    private void PlayOnce(WaitHandle? stopEvent)
     {
         var buffer = new byte[BufferSize];
         var spanBytes = new SpanByte(buffer);
@@ -75,6 +65,11 @@ public class I2sAudioDevice : IAudioDevice
 
         while ((length = _stream.Read(buffer, 0, buffer.Length)) > 0)
         {
+            if (stopEvent is not null && stopEvent.WaitOne(0, false))
+            {
+                break;
+            }
+
             _i2sDevice.Write(length == buffer.Length ? spanBytes : spanBytes.Slice(0, length));
         }
     }

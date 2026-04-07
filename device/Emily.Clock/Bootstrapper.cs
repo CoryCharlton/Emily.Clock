@@ -74,6 +74,7 @@ public static class Bootstrapper
 
         services
             .AddConfigurationManager()
+            .BindConfiguration(AlarmConfiguration.Section, new AlarmConfiguration(), new AlarmConfigurationValidator())
             .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
             .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration())
             .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration())

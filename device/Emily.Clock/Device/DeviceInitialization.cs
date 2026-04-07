@@ -1,8 +1,6 @@
 using System;
-using System.IO;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Mediator;
-using Emily.Clock.Audio;
 using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
@@ -66,15 +64,6 @@ public class DeviceInitialization : IDeviceInitializer
                 _logger.LogError("Failed to initialize audio");
             }
 
-/*
-            var alarm = File.OpenRead(@"D:\alarm.wav");
-            var audioPlayer = (IAudioManager) _serviceProvider.GetService(typeof(IAudioManager));
-            if (audioPlayer is not null && alarm is not null)
-            {
-                audioPlayer.Play(new WavFile(alarm));
-            }
-*/
-
             if (!_ledManager.Initialize())
             {
                 _logger.LogError("Failed to initialize LEDs.");
@@ -131,8 +120,6 @@ public class DeviceInitialization : IDeviceInitializer
 
             Controls.DrawTitle(screen, "Emily.Clock");
             Controls.DrawContent(screen, "Powered by nanoFramework", " ");
-            // TODO: Fix for smaller text (pass font?)
-            //Controls.DrawContent(screen, $"Powered by nanoFramework", $"https://github.com/CoryCharlton/Emily.Clock");
 
             Controls.DrawLogo(screen, Resources.BitmapResources.Loading_48);
             screen.Flush();

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace Emily.Clock.Device.Audio;
 
@@ -13,9 +14,8 @@ public interface IAudioDevice : IDisposable
     bool IsDisposed { get; }
 
     /// <summary>
-    /// Plays the prepared audio file, blocking until playback is complete.
+    /// Seeks to the start of the audio data and plays once, blocking until complete or <paramref name="stopEvent"/> is signaled.
     /// </summary>
-    /// <param name="loopCount">The number of times to play the audio. Defaults to 1.</param>
-    /// <param name="loopDelayMilliseconds">The delay in milliseconds between loops. Defaults to 0.</param>
-    void Play(int loopCount = 1, int loopDelayMilliseconds = 0);
+    /// <param name="stopEvent">Optional wait handle that, when signaled, stops playback early.</param>
+    void Play(WaitHandle? stopEvent = null);
 }

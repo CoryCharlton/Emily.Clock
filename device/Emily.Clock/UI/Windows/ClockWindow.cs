@@ -70,7 +70,7 @@ public class ClockWindow: Window, IMediatorEventHandler
         {
             screen.Clear(DateRectangle);
 
-            using var source = BitmapFactory.Create(date.ToString("dddd, MMMM dd"), Theme.SmallFont, Theme.SecondaryText, ContentAlignment.MiddleLeft, DatePadding);
+            using var source = BitmapFactory.Create(date.ToString("dddd, MMMM dd"), Theme.MediumFont, Theme.SecondaryText, ContentAlignment.MiddleLeft, DatePadding);
             DateRectangle = screen.DrawImage(source, ContentAlignment.TopLeft);
         });
     }

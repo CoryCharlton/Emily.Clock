@@ -26,6 +26,10 @@ public interface INightLightManager
 
 public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 {
+    private const int MoonLedIndex = 0;
+    private const int NightlightStartIndex = 2;
+    private const int SunLedIndex = 1;
+
     private static readonly Color MoonColor = NightLightColorConverter.ToColor(NightLightColor.Blue);
     private static readonly Color SunColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
 
@@ -241,19 +245,31 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
             
         if (workItem.UpdateNightLight)
         {
-            _ledManager.SetNightlightLeds(nightlightColor, brightness);
+            for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+            {
+                _ledManager.SetLed(i, nightlightColor, brightness);
+            }
         }
 
         if (workItem.UpdateSunAndMoon)
         {
-            // Check always on 
+            // Check always on
             if (brightness == 0.0f)
             {
                 brightness = 0.25f;
             }
 
-            _ledManager.SetMoonLed(PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black, brightness);
-            _ledManager.SetSunLed(PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black, brightness);
+            var moonColor = PanelLight.Moon == panelMode ? MoonColor : System.Drawing.Color.Black;
+            if (System.Drawing.Color.Black.Equals(moonColor))
+                _ledManager.SetLed(MoonLedIndex, moonColor);
+            else
+                _ledManager.SetLed(MoonLedIndex, moonColor, brightness);
+
+            var sunColor = PanelLight.Sun == panelMode ? SunColor : System.Drawing.Color.Black;
+            if (System.Drawing.Color.Black.Equals(sunColor))
+                _ledManager.SetLed(SunLedIndex, sunColor);
+            else
+                _ledManager.SetLed(SunLedIndex, sunColor, brightness);
         }
 
         _ledManager.Update();

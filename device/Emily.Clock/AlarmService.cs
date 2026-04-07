@@ -10,6 +10,7 @@ using Emily.Clock.Device;
 using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Events;
+using Emily.Clock.UI.Lights;
 using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock;
@@ -27,7 +28,8 @@ public interface IAlarmService
 
 public class AlarmService : IAlarmService, IMediatorEventHandler
 {
-    private static readonly Color AlarmColor = Color.Red;
+    private static readonly Color AlarmColor = NightLightColorConverter.ToColor(NightLightColor.Orange);
+    private const int NightlightStartIndex = 2;
 
     private Thread? _alarmThread;
     private readonly IAudioManager _audioManager;
@@ -123,12 +125,20 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     {
         while (true)
         {
-            _ledManager.SetNightlightLeds(AlarmColor, 1.0f);
+            for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+            {
+                _ledManager.SetLed(i, AlarmColor, 1.0f);
+            }
+
             _ledManager.Update();
 
             if (_cancelAlarm.WaitOne(300, false)) break;
 
-            _ledManager.SetNightlightLeds(Color.Black, 1.0f);
+            for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+            {
+                _ledManager.SetLed(i, Color.Black);
+            }
+
             _ledManager.Update();
 
             if (_cancelAlarm.WaitOne(300, false)) break;
@@ -178,7 +188,12 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
     private void StopInternal()
     {
         _isAlarming = false;
-        _ledManager.SetNightlightLeds(Color.Black, 1.0f);
+
+        for (var i = NightlightStartIndex; i < _ledManager.Count; i++)
+        {
+            _ledManager.SetLed(i, Color.Black);
+        }
+
         _ledManager.Update();
         _mediator.Publish(new AlarmStateChangedEvent(Enabled, false));
     }

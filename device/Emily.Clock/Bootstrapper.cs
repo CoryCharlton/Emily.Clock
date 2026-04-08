@@ -53,6 +53,7 @@ public static class Bootstrapper
             .AddSingleton(typeof(IDeviceInitializer), typeof(ApplicationInitialization));
 
         services
+            .AddSingleton(typeof(IMulticastDnsManager), typeof(MulticastDnsManager))
             .AddSingleton(typeof(IAudioManager), typeof(AudioManager))
             .AddSingleton(typeof(IAlarmService), typeof(AlarmService))
             .AddSingleton(typeof(IGpioProvider), typeof(GpioProvider))

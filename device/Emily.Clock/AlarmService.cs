@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Emily.Clock;
 
-public interface IAlarmService
+public interface IAlarmService : IDisposable
 {
     bool Enabled { get; }
     bool IsAlarming { get; }
@@ -23,7 +23,7 @@ public interface IAlarmService
     void Toggle();
 }
 
-public class AlarmService : IAlarmService, IMediatorEventHandler
+public class AlarmService : IAlarmService, IMediatorEventHandler, IDisposable
 {
     private Thread? _alarmThread;
     private readonly IAudioManager _audioManager;
@@ -84,6 +84,11 @@ public class AlarmService : IAlarmService, IMediatorEventHandler
         }
 
         StopInternal();
+    }
+
+    public void Dispose()
+    {
+        Stop();
     }
 
     public void HandleEvent(IMediatorEvent mediatorEvent)

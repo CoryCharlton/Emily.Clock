@@ -1,0 +1,82 @@
+using Emily.Clock.UI.Navigation;
+using Emily.Clock.Testing.Mocks;
+using nanoFramework.TestFramework;
+
+namespace Emily.Clock.UnitTests;
+
+[TestClass]
+public class ApplicationInitializationTests
+{
+    [TestMethod]
+    public void Initialize_should_handle_night_light_manager_failing_to_initialize()
+    {
+        var alarmService = new AlarmServiceMock();
+        var deviceManager = new DeviceManagerMock();
+        var localTimeProvider = new LocalTimeProviderMock();
+        var logger = new LoggerMock();
+        var navigationService = new NavigationServiceMock();
+        var nightLightManager = new NightLightManagerMock { InitializeResult = false };
+
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+
+        var result = sut.Initialize();
+
+        Assert.IsFalse(result);
+        Assert.IsFalse(navigationService.NavigateCalled);
+    }
+
+    [TestMethod]
+    public void Initialize_should_navigate_to_clock_on_success()
+    {
+        var alarmService = new AlarmServiceMock();
+        var deviceManager = new DeviceManagerMock();
+        var localTimeProvider = new LocalTimeProviderMock();
+        var logger = new LoggerMock();
+        var navigationService = new NavigationServiceMock();
+        var nightLightManager = new NightLightManagerMock();
+
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+
+        var result = sut.Initialize();
+
+        Assert.IsTrue(result);
+        Assert.IsTrue(navigationService.NavigateCalled);
+        Assert.AreEqual(NavigationDestination.Clock, navigationService.Destination);
+    }
+
+    [TestMethod]
+    public void Initialize_should_set_application_start_time()
+    {
+        var alarmService = new AlarmServiceMock();
+        var deviceManager = new DeviceManagerMock();
+        var localTimeProvider = new LocalTimeProviderMock();
+        var logger = new LoggerMock();
+        var navigationService = new NavigationServiceMock();
+        var nightLightManager = new NightLightManagerMock();
+
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+
+        var result = sut.Initialize();
+
+        Assert.IsTrue(result);
+        Assert.IsTrue(deviceManager.StartedAtSet);
+    }
+
+    [TestMethod]
+    public void Initialize_should_start_time_provider()
+    {
+        var alarmService = new AlarmServiceMock();
+        var deviceManager = new DeviceManagerMock();
+        var localTimeProvider = new LocalTimeProviderMock();
+        var logger = new LoggerMock();
+        var navigationService = new NavigationServiceMock();
+        var nightLightManager = new NightLightManagerMock();
+
+        var sut = new ApplicationInitialization(alarmService, deviceManager, localTimeProvider, logger, navigationService, nightLightManager);
+
+        var result = sut.Initialize();
+
+        Assert.IsTrue(result);
+        Assert.IsTrue(localTimeProvider.StartCalled);
+    }
+}

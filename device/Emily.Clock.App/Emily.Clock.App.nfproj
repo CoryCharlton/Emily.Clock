@@ -39,6 +39,7 @@
     <ProjectReference Include="..\devices\Emily.Clock.Device.Audio.I2s\Emily.Clock.Device.Audio.I2s.nfproj" />
     <ProjectReference Include="..\devices\Emily.Clock.Device.FileStorage.SdCard\Emily.Clock.Device.FileStorage.SdCard.nfproj" />
     <ProjectReference Include="..\devices\Emily.Clock.Device.Led.NeoPixel\Emily.Clock.Device.Led.NeoPixel.nfproj" />
+    <ProjectReference Include="..\devices\Emily.Clock.Device.Rtc.Ds3231\Emily.Clock.Device.Rtc.Ds3231.nfproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">

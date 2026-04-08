@@ -1,13 +1,14 @@
 using System.Device.Gpio;
 using Emily.Clock.App.Hardware;
 using Emily.Clock.Device;
+using Emily.Clock.Device.Audio.I2s;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Display.Ili9341;
-using Emily.Clock.Device.Audio.I2s;
 using Emily.Clock.Device.FileStorage.SdCard;
 using Emily.Clock.Device.Led;
 using Emily.Clock.Device.Led.NeoPixel;
+using Emily.Clock.Device.Rtc.Ds3231;
 using CCSWE.nanoFramework.NeoPixel.Drivers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -51,6 +52,10 @@ public static class Bootstrapper
     private const int SDCARD_SPI2_MISO_PIN = 2;
     private const int SDCARD_SPI2_MOSI_PIN = 15;
 
+    private const int RTC_I2C_BUS = 1;
+    private const int RTC_SCL_PIN = 22;
+    private const int RTC_SDA_PIN = 21;
+
     public static IHostBuilder ConfigureHardware(this IHostBuilder builder)
     {
         return builder
@@ -91,6 +96,15 @@ public static class Bootstrapper
                 Esp32.SetPinFunction(SDCARD_SPI2_CLOCK_PIN, DeviceFunction.SPI2_CLOCK);
 
                 gpio.OpenPin(SDCARD_SPI2_MISO_PIN, PinMode.InputPullUp);
+            })
+            .AddDs3231Rtc(new Ds3231RtcOptions
+            {
+                BusId = RTC_I2C_BUS,
+                PreInitialize = _ =>
+                {
+                    Esp32.SetPinFunction(RTC_SDA_PIN, DeviceFunction.I2C1_DATA);
+                    Esp32.SetPinFunction(RTC_SCL_PIN, DeviceFunction.I2C1_CLOCK);
+                }
             })
             .ConfigureServices(services => services.ConfigureHardware());
     }

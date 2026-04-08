@@ -6,10 +6,12 @@ using Emily.Clock.Device.Buttons;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.FileStorage;
 using Emily.Clock.Device.Led;
+using Emily.Clock.Device.Rtc;
 using Emily.Clock.Events;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Navigation;
 using Microsoft.Extensions.Logging;
+using nanoFramework.Runtime.Native;
 
 namespace Emily.Clock.Device;
 
@@ -52,7 +54,10 @@ public class DeviceInitialization : IDeviceInitializer
                 return false;
             }
 
-            // TODO: Initialize RTC and restore time if valid
+            if (!InitializeRtc())
+            {
+                _logger.LogError("Failed to initialize RTC");
+            }
 
             if (!InitializeFileStorage())
             {
@@ -69,6 +74,41 @@ public class DeviceInitialization : IDeviceInitializer
                 _logger.LogError("Failed to initialize LEDs.");
 
                 return false;
+            }
+
+            return true;
+        }
+
+        private bool InitializeRtc()
+        {
+            var rtcProvider = (IRtcProvider)_serviceProvider.GetService(typeof(IRtcProvider));
+
+            if (rtcProvider is null)
+            {
+                return true;
+            }
+
+            PublishStatusEvent("Initializing RTC...");
+
+            _deviceFeatures.HasRtc = rtcProvider.Initialize();
+
+            if (!_deviceFeatures.HasRtc)
+            {
+                PublishStatusEvent("Failed to initialize RTC");
+
+                return false;
+            }
+
+            var rtcTime = rtcProvider.DateTime;
+
+            if (rtcTime.Year >= 2024)
+            {
+                _deviceFeatures.HasValidTime = nanoFramework.Runtime.Native.Rtc.SetSystemTime(rtcTime);
+                PublishStatusEvent("Time restored from RTC");
+            }
+            else
+            {
+                PublishStatusEvent("RTC time not valid");
             }
 
             return true;

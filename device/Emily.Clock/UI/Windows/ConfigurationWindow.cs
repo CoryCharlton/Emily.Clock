@@ -9,12 +9,14 @@ namespace Emily.Clock.UI.Windows;
 
 public class ConfigurationWindow: Window, IMediatorEventHandler
 {
+    private readonly IMulticastDnsManager _multicastDnsManager;
     private readonly IMediator _mediator;
     private readonly IWirelessNetworkManager _networkManager;
 
-    public ConfigurationWindow(IDisplayManager displayManager, ILogger logger, IMediator mediator, IWirelessNetworkManager networkManager) : base(displayManager, logger)
+    public ConfigurationWindow(IDisplayManager displayManager, ILogger logger, IMediator mediator, IMulticastDnsManager multicastDnsManager, IWirelessNetworkManager networkManager) : base(displayManager, logger)
     {
         _mediator = mediator;
+        _multicastDnsManager = multicastDnsManager;
         _networkManager = networkManager;
     }
 
@@ -24,7 +26,7 @@ public class ConfigurationWindow: Window, IMediatorEventHandler
         screen.Clear();
 
         Controls.DrawTitle(screen, "Configuration Mode");
-        Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"Address: {_networkManager.IpAddress}");
+        Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"http://{_multicastDnsManager.HostName}");
         Controls.DrawLogo(screen, Resources.BitmapResources.Wireless_48);
 
         Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Restart_22);

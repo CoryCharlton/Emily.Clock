@@ -9,7 +9,13 @@ namespace Emily.Clock.UI.Lights.Effects;
 /// </summary>
 public class RainbowEffect : INightLightEffect
 {
+    private readonly float _brightness;
     private int _offset;
+
+    public RainbowEffect(float brightness)
+    {
+        _brightness = brightness;
+    }
 
     /// <inheritdoc/>
     public int Delay => 20;
@@ -41,7 +47,7 @@ public class RainbowEffect : INightLightEffect
 
         for (var i = 0; i < count; i++)
         {
-            ledManager.SetLed(ledConfiguration.NightlightStartIndex + i, ColorWheel.GetColor(((i * 255 / count) + _offset) & 255));
+            ledManager.SetLed(ledConfiguration.NightlightStartIndex + i, ColorWheel.GetColor(((i * 255 / count) + _offset) & 255), _brightness);
         }
     }
 }

@@ -111,7 +111,7 @@ public class ClockWindow: Window, IMediatorEventHandler
             }
             case ButtonEvent buttonEvent:
             {
-                Logger.LogDebug(buttonEvent.ToString());
+                //Logger.LogDebug(buttonEvent.ToString());
 
                 if (_alarmService.IsAlarming)
                 {
@@ -134,9 +134,14 @@ public class ClockWindow: Window, IMediatorEventHandler
                             }
                             break;
                         case Button.Two:
-                            if (ButtonEventType.Press == buttonEvent.Type)
+                            switch (buttonEvent.Type)
                             {
-                                _nightLightManager.CycleColor();
+                                case ButtonEventType.Holding:
+                                    _nightLightManager.CycleEffect();
+                                    break;
+                                case ButtonEventType.Press:
+                                    _nightLightManager.CycleColor();
+                                    break;
                             }
                             break;
                         case Button.Three:

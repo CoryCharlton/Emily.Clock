@@ -18,10 +18,12 @@ public interface INightLightManager
 
     void CycleBrightness();
     void CycleColor();
+    void CycleEffect();
     bool Initialize();
     void Toggle();
 }
 
+// TODO: Brightness has no effect 
 public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 {
     private const int AlarmFlashDelay = 300;
@@ -98,6 +100,22 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
         }
     }
 
+    public NightLightEffectType Effect
+    {
+        get => _configuration.Effect;
+        set
+        {
+            if (value == _configuration.Effect)
+            {
+                return;
+            }
+            _configuration.Effect = value;
+            
+            UpdateCurrentEffect();
+            WriteConfiguration();
+        }
+    }
+    
     public bool Enabled
     {
         get => _configuration.Brightness > 0;
@@ -131,6 +149,17 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
         };
     }
 
+    public void CycleEffect()
+    {
+        Effect = Effect switch
+        {
+            NightLightEffectType.Breathe => NightLightEffectType.Rainbow,
+            NightLightEffectType.Rainbow => NightLightEffectType.Solid,
+            NightLightEffectType.Solid => NightLightEffectType.Breathe,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+    
     private void EffectLoop()
     {
         while (true)
@@ -243,10 +272,11 @@ public class NightNightLightManager : INightLightManager, IMediatorEventHandler
 
         _currentEffect = _configuration.Effect switch
         {
-            NightLightEffectType.Breathe => new BreatheEffect(color, brightness),
-            NightLightEffectType.Rainbow => new RainbowEffect(),
+            NightLightEffectType.Breathe when brightness > 0 => new BreatheEffect(color, brightness),
+            NightLightEffectType.Rainbow when brightness > 0 => new RainbowEffect(brightness),
             _ => new SolidEffect(color, brightness)
         };
+
         _updateRequested.Set();
     }
 

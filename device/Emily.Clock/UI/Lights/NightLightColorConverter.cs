@@ -17,6 +17,14 @@ public static class NightLightColorConverter
     private static readonly Color COLOR_BLUE = Color.Blue;
     private static readonly Color COLOR_INDIGO = Color.FromArgb(255, 255, 0, 255);
     private static readonly Color COLOR_VIOLET = Color.DeepPink;
+
+    //private static readonly Color COLOR_RED = Color.Red;
+    //private static readonly Color COLOR_ORANGE = Color.Orange;
+    //private static readonly Color COLOR_YELLOW = Color.Yellow;
+    //private static readonly Color COLOR_GREEN = Color.Green;
+    //private static readonly Color COLOR_BLUE = Color.Blue;
+    //private static readonly Color COLOR_INDIGO = Color.Indigo;
+    //private static readonly Color COLOR_VIOLET = Color.Violet;
     // ReSharper restore InconsistentNaming
 
     public static Color ToColor(NightLightColor color)

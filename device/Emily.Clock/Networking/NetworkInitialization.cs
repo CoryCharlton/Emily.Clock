@@ -1,5 +1,7 @@
 using System;
+using System.Net;
 using CCSWE.nanoFramework.Hosting;
+using CCSWE.nanoFramework.MdnsServer;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Device;
@@ -12,18 +14,20 @@ namespace Emily.Clock.Networking;
 public class NetworkInitialization : IDeviceInitializer
 {
     private readonly DeviceFeatures _deviceFeatures;
+    private readonly IDeviceManager _deviceManager;
     private readonly IMediator _mediator;
-    private readonly IMulticastDnsManager _multicastDnsManager;
+    private readonly IMdnsServer _mdnsServer;
     private readonly INavigationService _navigationService;
     private readonly IServiceProvider _serviceProvider;
     private readonly IWebServer _webServer;
     private readonly IWirelessNetworkManager _wirelessNetworkManager;
 
-    public NetworkInitialization(DeviceFeatures deviceFeatures, IMediator mediator, IMulticastDnsManager multicastDnsManager, INavigationService navigationService, IServiceProvider serviceProvider, IWebServer webServer, IWirelessNetworkManager wirelessNetworkManager)
+    public NetworkInitialization(DeviceFeatures deviceFeatures, IDeviceManager deviceManager, IMediator mediator, IMdnsServer mdnsServer, INavigationService navigationService, IServiceProvider serviceProvider, IWebServer webServer, IWirelessNetworkManager wirelessNetworkManager)
     {
         _deviceFeatures = deviceFeatures;
+        _deviceManager = deviceManager;
         _mediator = mediator;
-        _multicastDnsManager = multicastDnsManager;
+        _mdnsServer = mdnsServer;
         _navigationService = navigationService;
         _serviceProvider = serviceProvider;
         _webServer = webServer;
@@ -59,7 +63,10 @@ public class NetworkInitialization : IDeviceInitializer
 
         _mediator.Publish(new StatusEvent(string.Empty));
 
-        _multicastDnsManager.Start(_wirelessNetworkManager.IpAddress);
+        _mdnsServer.Hostname = $"emily-clock-{_deviceManager.SerialNumber}";
+        _mdnsServer.IPAddress = IPAddress.Parse(_wirelessNetworkManager.IpAddress);
+        _mdnsServer.Start();
+        
         _webServer.Start();
 
         return _wirelessNetworkManager.GetMode() != WirelessMode.AccessPoint;

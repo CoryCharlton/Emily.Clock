@@ -1,4 +1,5 @@
-﻿using CCSWE.nanoFramework.Mediator;
+﻿using CCSWE.nanoFramework.MdnsServer;
+using CCSWE.nanoFramework.Mediator;
 using Emily.Clock.Device.Display;
 using Emily.Clock.Device.Buttons;
 using Emily.Clock.Events;
@@ -9,14 +10,14 @@ namespace Emily.Clock.UI.Windows;
 
 public class ConfigurationWindow: Window, IMediatorEventHandler
 {
-    private readonly IMulticastDnsManager _multicastDnsManager;
+    private readonly IMdnsServer _mdnsServer;
     private readonly IMediator _mediator;
     private readonly IWirelessNetworkManager _networkManager;
 
-    public ConfigurationWindow(IDisplayManager displayManager, ILogger logger, IMediator mediator, IMulticastDnsManager multicastDnsManager, IWirelessNetworkManager networkManager) : base(displayManager, logger)
+    public ConfigurationWindow(IDisplayManager displayManager, ILogger logger, IMediator mediator, IMdnsServer mdnsServer, IWirelessNetworkManager networkManager) : base(displayManager, logger)
     {
         _mediator = mediator;
-        _multicastDnsManager = multicastDnsManager;
+        _mdnsServer = mdnsServer;
         _networkManager = networkManager;
     }
 
@@ -26,7 +27,7 @@ public class ConfigurationWindow: Window, IMediatorEventHandler
         screen.Clear();
 
         Controls.DrawTitle(screen, "Configuration Mode");
-        Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"http://{_multicastDnsManager.HostName}");
+        Controls.DrawContent(screen, $"SSID: {_networkManager.Ssid}", $"http://{_mdnsServer.Hostname}");
         Controls.DrawLogo(screen, Resources.BitmapResources.Wireless_48);
 
         Controls.DrawButton(screen, Button.One, Resources.BitmapResources.Restart_22);

@@ -47,19 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Configuration.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Configuration.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Mediator.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Mediator.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Threading.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Threading.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

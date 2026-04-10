@@ -90,8 +90,6 @@
     <Compile Include="LocalTimeProvider.cs" />
     <Compile Include="Device\DeviceInitialization.cs" />
     <Compile Include="Networking\WirelessClientManager.cs" />
-    <Compile Include="Networking\IMulticastDnsManager.cs" />
-    <Compile Include="Networking\MulticastDnsManager.cs" />
     <Compile Include="Networking\NetworkInitialization.cs" />
     <Compile Include="UI\BitmapFactory.cs" />
     <Compile Include="UI\Lights\NightLightColor.cs" />
@@ -169,46 +167,49 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.DhcpServer">
-      <HintPath>..\packages\CCSWE.nanoFramework.DhcpServer.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.DhcpServer.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.DhcpServer.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.DhcpServer.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.FileStorage">
-      <HintPath>..\packages\CCSWE.nanoFramework.FileStorage.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.FileStorage.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.FileStorage.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.FileStorage.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Graphics">
-      <HintPath>..\packages\CCSWE.nanoFramework.Graphics.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Graphics.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Math">
-      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="CCSWE.nanoFramework.MdnsServer">
+      <HintPath>..\packages\CCSWE.nanoFramework.MdnsServer.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.MdnsServer.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.WebServer">
-      <HintPath>..\packages\CCSWE.nanoFramework.WebServer.1.1.103\lib\netnano1.0\CCSWE.nanoFramework.WebServer.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.WebServer.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.WebServer.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Button">
       <HintPath>..\packages\nanoFramework.Iot.Device.Button.1.2.931\lib\Iot.Device.Button.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.MulticastDns">
-      <HintPath>..\packages\nanoFramework.Iot.Device.MulticastDns.1.0.230\lib\Iot.Device.MulticastDns.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.Iot.Device.MulticastDns.1.0.260\lib\Iot.Device.MulticastDns.dll</HintPath>
     </Reference>
     <Reference Include="MakoIoT.Device.Utilities.TimeZones">
       <HintPath>..\packages\MakoIoT.Device.Utilities.TimeZones.1.0.51.19445\lib\MakoIoT.Device.Utilities.TimeZones.dll</HintPath>
@@ -274,10 +275,10 @@
       <HintPath>..\packages\nanoFramework.System.Net.1.11.50\lib\System.Net.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\packages\nanoFramework.System.Net.Http.1.5.200\lib\System.Net.Http.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Net.Http.1.5.203\lib\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Sockets.UdpClient">
-      <HintPath>..\packages\nanoFramework.System.Net.Sockets.UdpClient.1.1.100\lib\System.Net.Sockets.UdpClient.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.System.Net.Sockets.UdpClient.1.1.101\lib\System.Net.Sockets.UdpClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
       <HintPath>..\packages\nanoFramework.System.Threading.1.1.52\lib\System.Threading.dll</HintPath>

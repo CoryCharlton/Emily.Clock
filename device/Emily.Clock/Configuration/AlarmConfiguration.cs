@@ -8,11 +8,18 @@ public class AlarmConfiguration
 {
     public const string Section = "Alarm";
 
-    public TimeSpan AlarmTime { get; set; } = TimeSpan.FromHours(7);
+    public TimeSpan AlarmTime { get; set; } = TimeSpan.MinValue;
 
     public bool Enabled { get; set; }
 
-    public int MaxDurationMinutes { get; set; } = 10;
+    public int MaxDurationMinutes { get; set; } = -1;
+
+    public static readonly AlarmConfiguration Defaults = new()
+    {
+        AlarmTime = TimeSpan.FromHours(7),
+        Enabled = false,
+        MaxDurationMinutes = 10
+    };
 }
 
 public class AlarmConfigurationValidator : IValidateConfiguration

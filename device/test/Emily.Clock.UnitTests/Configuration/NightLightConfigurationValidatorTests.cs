@@ -11,7 +11,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_Brightness_is_negative()
     {
-        var config = new NightLightConfiguration { Brightness = -0.1f };
+        var config = new NightLightConfiguration
+        {
+            Brightness = -0.1f,
+            Color = NightLightColor.Violet,
+            Effect = NightLightEffectType.Solid,
+            PanelBrightness = 0.5f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -24,7 +31,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_Brightness_exceeds_1()
     {
-        var config = new NightLightConfiguration { Brightness = 1.1f };
+        var config = new NightLightConfiguration
+        {
+            Brightness = 1.1f,
+            Color = NightLightColor.Violet,
+            Effect = NightLightEffectType.Solid,
+            PanelBrightness = 0.5f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -37,7 +51,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_Color_is_invalid()
     {
-        var config = new NightLightConfiguration { Color = (NightLightColor)7 };
+        var config = new NightLightConfiguration
+        {
+            Brightness = 0.5f,
+            Color = (NightLightColor)7,
+            Effect = NightLightEffectType.Solid,
+            PanelBrightness = 0.5f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -63,7 +84,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_Effect_is_invalid()
     {
-        var config = new NightLightConfiguration { Effect = (NightLightEffectType)3 };
+        var config = new NightLightConfiguration
+        {
+            Brightness = 0.5f,
+            Color = NightLightColor.Violet,
+            Effect = (NightLightEffectType)3,
+            PanelBrightness = 0.5f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -76,7 +104,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_PanelBrightness_is_negative()
     {
-        var config = new NightLightConfiguration { PanelBrightness = -0.1f };
+        var config = new NightLightConfiguration
+        {
+            Brightness = 0.5f,
+            Color = NightLightColor.Violet,
+            Effect = NightLightEffectType.Solid,
+            PanelBrightness = -0.1f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -89,7 +124,14 @@ public class NightLightConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_PanelBrightness_exceeds_1()
     {
-        var config = new NightLightConfiguration { PanelBrightness = 1.1f };
+        var config = new NightLightConfiguration
+        {
+            Brightness = 0.5f,
+            Color = NightLightColor.Violet,
+            Effect = NightLightEffectType.Solid,
+            PanelBrightness = 1.1f
+        };
+
         var validator = new NightLightConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -105,6 +147,8 @@ public class NightLightConfigurationValidatorTests
         var config = new NightLightConfiguration
         {
             Brightness = -0.1f,
+            Color = NightLightColor.Violet,
+            Effect = NightLightEffectType.Solid,
             PanelBrightness = 1.5f
         };
 

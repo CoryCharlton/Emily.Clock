@@ -8,13 +8,21 @@ public class WirelessAccessPointConfiguration
 {
     public const string Section = "WirelessAccessPoint";
 
-    public string IpAddress { get; set; } = "192.168.4.1";
+    public static readonly WirelessAccessPointConfiguration Defaults = new()
+    {
+        IpAddress = "192.168.4.1",
+        Password = string.Empty,
+        Ssid = "Emily.Clock",
+        SubnetMask = "255.255.255.0"
+    };
+
+    public string IpAddress { get; set; } = string.Empty;
 
     public string Password { get; set; } = string.Empty;
 
-    public string Ssid { get; set; } = "Emily.Clock";
+    public string Ssid { get; set; } = string.Empty;
 
-    public string SubnetMask { get; set; } = "255.255.255.0";
+    public string SubnetMask { get; set; } = string.Empty;
 }
 
 public class WirelessAccessPointConfigurationValidator : IValidateConfiguration

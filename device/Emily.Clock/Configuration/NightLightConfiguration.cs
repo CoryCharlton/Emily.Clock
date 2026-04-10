@@ -9,13 +9,21 @@ public class NightLightConfiguration
 {
     public const string Section = "NightLight";
 
-    public float Brightness { get; set; } = 0.5f;
+    public static readonly NightLightConfiguration Defaults = new()
+    {
+        Brightness = 0.5f,
+        Color = NightLightColor.Violet,
+        Effect = NightLightEffectType.Solid,
+        PanelBrightness = 0.5f
+    };
 
-    public NightLightColor Color { get; set; } = NightLightColor.Violet;
+    public float Brightness { get; set; } = -1.0f;
 
-    public NightLightEffectType Effect { get; set; } = NightLightEffectType.Solid;
+    public NightLightColor Color { get; set; } = (NightLightColor)(-1);
 
-    public float PanelBrightness { get; set; } = 0.5f;
+    public NightLightEffectType Effect { get; set; } = (NightLightEffectType)(-1);
+
+    public float PanelBrightness { get; set; } = -1.0f;
 }
 
 public class NightLightConfigurationValidator : IValidateConfiguration

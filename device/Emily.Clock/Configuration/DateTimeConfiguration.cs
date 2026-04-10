@@ -9,14 +9,21 @@ public class DateTimeConfiguration
 {
     public const string Section = "DateTime";
 
-    public TimeSpan BedTime { get; set; } = TimeSpan.FromHours(20);
+    public static readonly DateTimeConfiguration Defaults = new()
+    {
+        BedTime = TimeSpan.FromHours(20),
+        TimeZone = "PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00",
+        WakeTime = TimeSpan.FromHours(7)
+    };
+
+    public TimeSpan BedTime { get; set; } = TimeSpan.MinValue;
 
     /// <summary>
     /// A posix timezone string: https://support.cyberdata.net/portal/en/kb/articles/010d63c0cfce3676151e1f2d5442e311
     /// </summary>
-    public string TimeZone { get; set; } = "PST8PDT,M3.2.0/2:00:00,M11.1.0/2:00:00";
+    public string TimeZone { get; set; } = string.Empty;
 
-    public TimeSpan WakeTime { get; set; } = TimeSpan.FromHours(7);
+    public TimeSpan WakeTime { get; set; } = TimeSpan.MinValue;
 }
 
 public class DateTimeConfigurationValidator : IValidateConfiguration

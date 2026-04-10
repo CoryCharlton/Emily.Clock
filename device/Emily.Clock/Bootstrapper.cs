@@ -75,11 +75,11 @@ public static class Bootstrapper
 
         services
             .AddConfigurationManager()
-            .BindConfiguration(AlarmConfiguration.Section, new AlarmConfiguration(), new AlarmConfigurationValidator())
-            .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
-            .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration(), new NightLightConfigurationValidator())
-            .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration(), new WirelessAccessPointConfigurationValidator())
-            .BindConfiguration(WirelessClientConfiguration.Section, new WirelessClientConfiguration(), new WirelessClientConfigurationValidator());
+            .BindConfiguration(AlarmConfiguration.Section, AlarmConfiguration.Defaults, new AlarmConfigurationValidator())
+            .BindConfiguration(DateTimeConfiguration.Section, DateTimeConfiguration.Defaults, new DateTimeConfigurationValidator())
+            .BindConfiguration(NightLightConfiguration.Section, NightLightConfiguration.Defaults, new NightLightConfigurationValidator())
+            .BindConfiguration(WirelessAccessPointConfiguration.Section, WirelessAccessPointConfiguration.Defaults, new WirelessAccessPointConfigurationValidator())
+            .BindConfiguration(WirelessClientConfiguration.Section, WirelessClientConfiguration.Defaults, new WirelessClientConfigurationValidator());
 
         return services;
     }

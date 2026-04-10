@@ -22,7 +22,13 @@ public class WirelessAccessPointConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_IpAddress_is_invalid()
     {
-        var config = new WirelessAccessPointConfiguration { IpAddress = "not-an-ip" };
+        var config = new WirelessAccessPointConfiguration
+        {
+            IpAddress = "not-an-ip",
+            Ssid = "Emily.Clock",
+            SubnetMask = "255.255.255.0"
+        };
+
         var validator = new WirelessAccessPointConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -35,7 +41,13 @@ public class WirelessAccessPointConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_Ssid_is_empty()
     {
-        var config = new WirelessAccessPointConfiguration { Ssid = string.Empty };
+        var config = new WirelessAccessPointConfiguration
+        {
+            IpAddress = "192.168.4.1",
+            Ssid = string.Empty,
+            SubnetMask = "255.255.255.0"
+        };
+
         var validator = new WirelessAccessPointConfigurationValidator();
         var result = validator.Validate(config);
 
@@ -48,7 +60,13 @@ public class WirelessAccessPointConfigurationValidatorTests
     [TestMethod]
     public void Validate_should_return_failure_when_SubnetMask_is_invalid()
     {
-        var config = new WirelessAccessPointConfiguration { SubnetMask = "not-a-mask" };
+        var config = new WirelessAccessPointConfiguration
+        {
+            IpAddress = "192.168.4.1",
+            Ssid = "Emily.Clock",
+            SubnetMask = "not-a-mask"
+        };
+
         var validator = new WirelessAccessPointConfigurationValidator();
         var result = validator.Validate(config);
 

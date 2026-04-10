@@ -7,10 +7,17 @@ public class WirelessClientConfiguration
 {
     public const string Section = "WirelessClient";
 
+    public static readonly WirelessClientConfiguration Defaults = new()
+    {
+        ConnectionTimeout = 60,
+        Password = string.Empty,
+        Ssid = string.Empty
+    };
+
     /// <summary>
     /// Connection timeout in seconds
     /// </summary>
-    public int ConnectionTimeout { get; set; } = 60;
+    public int ConnectionTimeout { get; set; } = -1;
 
     /// <summary>
     /// The password used to connect
@@ -37,6 +44,11 @@ public class WirelessClientConfigurationValidator : IValidateConfiguration
         if (wirelessClientConfiguration.ConnectionTimeout is < 1 or > 300)
         {
             failures.Add("Connection timeout must be between 1 and 300 seconds");
+        }
+
+        if (string.IsNullOrEmpty(wirelessClientConfiguration.Ssid))
+        {
+            failures.Add("SSID must not be empty");
         }
 
         return failures.Count > 0 ? ValidateConfigurationResult.Fail((string[]) failures.ToArray(typeof(string))) : ValidateConfigurationResult.Success;

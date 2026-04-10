@@ -4,33 +4,33 @@
     ".NETnanoFramework,Version=v1.0": {
       "CCSWE.nanoFramework.Collections.Concurrent": {
         "type": "Direct",
-        "requested": "[1.1.103, 1.1.103]",
-        "resolved": "1.1.103",
-        "contentHash": "ScgzHBU0QyMCe/EOZqzO90+gHA9NTymrdWtiCAIik6ZyMTnltS91WsF5CqUIL5dWo33E+SIuj5Uw8TBQaArA5Q=="
+        "requested": "[1.1.114, 1.1.114]",
+        "resolved": "1.1.114",
+        "contentHash": "mWjNiF+WYmq/9U4NTuxbiru8o+ppMaPrKsWybuqSHyupZANRjnIXvAPIM69w9tppwn+WhtaqIzMM4Lr6/sm9HQ=="
       },
       "CCSWE.nanoFramework.Configuration": {
         "type": "Direct",
-        "requested": "[1.1.103, 1.1.103]",
-        "resolved": "1.1.103",
-        "contentHash": "rrO/FFc97NPagkaAFSF3/+ZOsK1IpmOoAMlENaOTyBaaXPs43y0NV/UufiGQuGiMcnQcgUPePAhWGr0sotLR0g=="
+        "requested": "[1.1.114, 1.1.114]",
+        "resolved": "1.1.114",
+        "contentHash": "5ZAP/zhjhmiFGa7Yht3+hbDqTBVJX2QIQ21F2+Cr9L7tHt7OeuJo0GT4DpxiTLM19gYDXxxW45iC0Kltc1QwHA=="
       },
       "CCSWE.nanoFramework.Core": {
         "type": "Direct",
-        "requested": "[1.1.103, 1.1.103]",
-        "resolved": "1.1.103",
-        "contentHash": "CKGGmUKsbubLjR02xs+V97NE5369wEmWIv2Ne6uxxS360OPcPyVACrME3PKm/K4mEQfB7rvW1X29ENao2ieQMA=="
+        "requested": "[1.1.114, 1.1.114]",
+        "resolved": "1.1.114",
+        "contentHash": "xHO3C3cjGG6TSfc/XE68ddLrFWRreqazgxU+CaCJKBwztP3JQ1aQCGQqk7Z+DXFQGW8aVmqZRHtIgNgmXkM0zA=="
       },
       "CCSWE.nanoFramework.Mediator": {
         "type": "Direct",
-        "requested": "[1.1.103, 1.1.103]",
-        "resolved": "1.1.103",
-        "contentHash": "hzM/D8WyLEvwLyvsB/Dxy+pKpBH1z8QL5hahVsTZQJw4nJIJmTw3H2sXHfYs55qpjY9o3+uUQDApbMtVQp+ltw=="
+        "requested": "[1.1.114, 1.1.114]",
+        "resolved": "1.1.114",
+        "contentHash": "V+WCiRK2vvXm+8+L6DOlQZaD2BpMxGG5gvtwla6FFgSet0GwCBhgJqgF9mtlTgeCnfmI1JdzeEcGe/rJ2GC1sw=="
       },
       "CCSWE.nanoFramework.Threading": {
         "type": "Direct",
-        "requested": "[1.1.103, 1.1.103]",
-        "resolved": "1.1.103",
-        "contentHash": "wI/KCGukAOu4IwoXBTdGjPGrmGggNWIwMiymVatH0gieV+SX8ny1K1BGDwN7ttfzQA8DgYic/DVcrmcecHNkig=="
+        "requested": "[1.1.114, 1.1.114]",
+        "resolved": "1.1.114",
+        "contentHash": "kVH24dNgBTGaTLgmtwE46PwVHz8oIy6Gd6tC4AX157r0RFMbBKUE5P78r8TBj7q0C+kfBFidLHvT6C6R8pNe4g=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",

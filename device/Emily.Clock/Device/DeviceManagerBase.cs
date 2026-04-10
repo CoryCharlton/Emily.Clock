@@ -46,7 +46,7 @@ public abstract class DeviceManagerBase : IDeviceManager
                     stringBuilder.Append(BitConverter.ToString(macAddress, i, 1));
                 }
 
-                _serialNumber = stringBuilder.ToString();
+                _serialNumber = stringBuilder.ToString().ToLower();
             }
 
             return _serialNumber;

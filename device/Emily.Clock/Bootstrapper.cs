@@ -2,6 +2,7 @@
 using CCSWE.nanoFramework.FileStorage;
 using CCSWE.nanoFramework.Hosting;
 using CCSWE.nanoFramework.Logging;
+using CCSWE.nanoFramework.MdnsServer;
 using CCSWE.nanoFramework.Mediator;
 using CCSWE.nanoFramework.WebServer;
 using Emily.Clock.Configuration;
@@ -10,7 +11,6 @@ using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Events;
 using Emily.Clock.Networking;
-using Emily.Clock.StaticFiles;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
@@ -32,6 +32,7 @@ public static class Bootstrapper
 
         builder
             .AddLogging()
+            .AddMdnsServer()
             .AddMediator()
             .AddWebServer();
 
@@ -53,7 +54,6 @@ public static class Bootstrapper
             .AddSingleton(typeof(IDeviceInitializer), typeof(ApplicationInitialization));
 
         services
-            .AddSingleton(typeof(IMulticastDnsManager), typeof(MulticastDnsManager))
             .AddSingleton(typeof(IAudioManager), typeof(AudioManager))
             .AddSingleton(typeof(IAlarmService), typeof(AlarmService))
             .AddSingleton(typeof(IGpioProvider), typeof(GpioProvider))
@@ -86,14 +86,14 @@ public static class Bootstrapper
 
     private static IHostBuilder AddLogging(this IHostBuilder builder)
     {
-        builder.ConfigureServices(services =>
+        return builder.ConfigureServices(services =>
         {
             services.AddLogging(options =>
             {
 #if DEBUG
                 options.MinLogLevel = LogLevel.Trace;
 #else
-                    options.MinLogLevel = LogLevel.Warning;
+                options.MinLogLevel = LogLevel.Warning;
 #endif
             });
         });
@@ -101,9 +101,21 @@ public static class Bootstrapper
         return builder;
     }
 
+    private static IHostBuilder AddMdnsServer(this IHostBuilder builder)
+    {
+        return builder.ConfigureServices(services =>
+        {
+            services.AddMdnsServer(options =>
+            {
+                options.AddService(new MdnsServiceRegistration("_http._tcp.local", 80, "path=/"));
+                options.AddService(new MdnsServiceRegistration("_emily-clock._tcp.local", 80, "path=/"));
+            });
+        });
+    }
+    
     private static IHostBuilder AddMediator(this IHostBuilder builder)
     {
-        builder.ConfigureServices(services =>
+        return builder.ConfigureServices(services =>
         {
             services.AddMediator(options =>
             {
@@ -112,13 +124,11 @@ public static class Bootstrapper
                 options.LogLevel = LogLevel.Debug;
             });
         });
-
-        return builder;
     }
 
     private static IHostBuilder AddWebServer(this IHostBuilder builder)
     {
-        builder.ConfigureServices(services =>
+        return builder.ConfigureServices(services =>
         {
             services.AddCors();
             //services.AddStaticFiles(typeof(FileProvider));
@@ -131,7 +141,5 @@ public static class Bootstrapper
                 options.Protocol = HttpProtocol.Http;
             });
         });
-
-        return builder;
     }
 }

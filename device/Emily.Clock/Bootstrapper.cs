@@ -77,9 +77,9 @@ public static class Bootstrapper
             .AddConfigurationManager()
             .BindConfiguration(AlarmConfiguration.Section, new AlarmConfiguration(), new AlarmConfigurationValidator())
             .BindConfiguration(DateTimeConfiguration.Section, new DateTimeConfiguration(), new DateTimeConfigurationValidator())
-            .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration())
-            .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration())
-            .BindConfiguration(WirelessClientConfiguration.Section, new WirelessClientConfiguration());
+            .BindConfiguration(NightLightConfiguration.Section, new NightLightConfiguration(), new NightLightConfigurationValidator())
+            .BindConfiguration(WirelessAccessPointConfiguration.Section, new WirelessAccessPointConfiguration(), new WirelessAccessPointConfigurationValidator())
+            .BindConfiguration(WirelessClientConfiguration.Section, new WirelessClientConfiguration(), new WirelessClientConfigurationValidator());
 
         return services;
     }

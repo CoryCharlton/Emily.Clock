@@ -53,9 +53,9 @@ public class ConfigurationController: ControllerBase
             BadRequest();
             return;
         }
-        catch (ValidateConfigurationException)
+        catch (ValidateConfigurationException e)
         {
-            BadRequest();
+            BadRequest(e.Result);
             return;
         }
 

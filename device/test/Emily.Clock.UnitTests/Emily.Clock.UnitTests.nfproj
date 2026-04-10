@@ -36,6 +36,9 @@
     <Compile Include="Audio\WavFileHeaderTests.cs" />
     <Compile Include="Configuration\AlarmConfigurationValidatorTests.cs" />
     <Compile Include="Configuration\DateTimeConfigurationValidatorTests.cs" />
+    <Compile Include="Configuration\NightLightConfigurationValidatorTests.cs" />
+    <Compile Include="Configuration\WirelessAccessPointConfigurationValidatorTests.cs" />
+    <Compile Include="Configuration\WirelessClientConfigurationValidatorTests.cs" />
     <Compile Include="Extensions\ContentAlignmentExtensionsTests.cs" />
     <Compile Include="Extensions\DateTimeExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />

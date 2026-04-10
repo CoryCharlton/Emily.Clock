@@ -36,7 +36,7 @@ public class Ds3231RtcProvider : IRtcProvider
     {
         if (_rtc is null || !IsInitialized)
         {
-            throw new InvalidOperationException("NeoPixelStrip is not initialized.");
+            throw new InvalidOperationException("RTC is not initialized.");
         }
     }
     

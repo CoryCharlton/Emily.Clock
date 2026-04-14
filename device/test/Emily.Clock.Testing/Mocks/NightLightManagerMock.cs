@@ -21,6 +21,13 @@ public class NightLightManagerMock: INightLightManager
 
     public bool CycleColorCalled { get; set; }
 
+    public void CycleEffect()
+    {
+        CycleEffectCalled = true;
+    }
+
+    public bool CycleEffectCalled { get; set; }
+
     public bool Initialize()
     {
         InitializeCalled = true;

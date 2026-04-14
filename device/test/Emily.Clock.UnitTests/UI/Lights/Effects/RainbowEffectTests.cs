@@ -18,7 +18,7 @@ public class RainbowEffectTests
     [TestMethod]
     public void Delay_should_be_20()
     {
-        var effect = new RainbowEffect();
+        var effect = new RainbowEffect(1.0f);
         Assert.AreEqual(20, effect.Delay);
     }
 
@@ -27,7 +27,7 @@ public class RainbowEffectTests
     {
         var ledManager = new LedManagerMock();
         var config = CreateConfig();
-        var effect = new RainbowEffect();
+        var effect = new RainbowEffect(1.0f);
 
         effect.Start(ledManager, config);
 
@@ -39,7 +39,7 @@ public class RainbowEffectTests
     {
         var ledManager = new LedManagerMock();
         var config = CreateConfig();
-        var effect = new RainbowEffect();
+        var effect = new RainbowEffect(1.0f);
 
         effect.Start(ledManager, config);
         var countAfterStart = ledManager.SetLedCallCount;
@@ -54,7 +54,7 @@ public class RainbowEffectTests
     {
         var ledManager = new LedManagerMock();
         var config = CreateConfig();
-        var effect = new RainbowEffect();
+        var effect = new RainbowEffect(1.0f);
 
         effect.Start(ledManager, config);
         effect.Stop(ledManager, config);

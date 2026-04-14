@@ -43,34 +43,34 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Configuration">
-      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Configuration.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Graphics">
-      <HintPath>..\packages\CCSWE.nanoFramework.Graphics.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Graphics.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Hosting.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Logging.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Math">
-      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Math.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Mediator">
-      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Mediator.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.NeoPixel">
-      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.NeoPixel.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>
@@ -128,6 +128,9 @@
     </Reference>
     <Reference Include="System.Math">
       <HintPath>..\packages\nanoFramework.System.Math.1.5.116\lib\System.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net">
+      <HintPath>..\packages\nanoFramework.System.Net.1.11.50\lib\System.Net.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
       <HintPath>..\packages\nanoFramework.System.Threading.1.1.52\lib\System.Threading.dll</HintPath>

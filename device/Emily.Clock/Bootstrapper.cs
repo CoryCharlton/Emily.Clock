@@ -11,6 +11,7 @@ using Emily.Clock.Device.Audio;
 using Emily.Clock.Device.Gpio;
 using Emily.Clock.Events;
 using Emily.Clock.Networking;
+using Emily.Clock.StaticFiles;
 using Emily.Clock.UI;
 using Emily.Clock.UI.Lights;
 using Emily.Clock.UI.Navigation;
@@ -131,7 +132,7 @@ public static class Bootstrapper
         return builder.ConfigureServices(services =>
         {
             services.AddCors();
-            //services.AddStaticFiles(typeof(FileProvider));
+            services.AddStaticFiles(typeof(FileProvider));
 
             services.AddControllers(typeof(Bootstrapper).Assembly);
 

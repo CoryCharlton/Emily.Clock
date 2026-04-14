@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emily.Clock &ndash; Night Light</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Emily.Clock</h1>
+    <a class="back" href="/">&larr; Back</a>
+    <section>
+        <h2>Night Light</h2>
+        <form id="form">
+            <label for="color">Color</label>
+            <select id="color" name="color">
+                <option value="0">Red</option>
+                <option value="1">Orange</option>
+                <option value="2">Yellow</option>
+                <option value="3">Green</option>
+                <option value="4">Blue</option>
+                <option value="5">Indigo</option>
+                <option value="6">Violet</option>
+            </select>
+
+            <label for="effect">Effect</label>
+            <select id="effect" name="effect">
+                <option value="0">Solid</option>
+                <option value="1">Breathe</option>
+                <option value="2">Rainbow</option>
+            </select>
+
+            <label for="brightness">Brightness</label>
+            <div class="range-row">
+                <input type="range" id="brightness" name="brightness" min="0" max="1" step="0.01">
+                <span class="range-val" id="brightnessVal">0.50</span>
+            </div>
+
+            <label for="panelBrightness">Panel Brightness</label>
+            <div class="range-row">
+                <input type="range" id="panelBrightness" name="panelBrightness" min="0" max="1" step="0.01">
+                <span class="range-val" id="panelBrightnessVal">0.50</span>
+            </div>
+
+            <button type="submit">Save</button>
+            <div id="status"></div>
+        </form>
+    </section>
+    <script src="/js/app.js"></script>
+    <script>
+        (function () {
+            var section = 'nightlight';
+            var statusEl = document.getElementById('status');
+
+            function wireRange(inputId, valId) {
+                var input = document.getElementById(inputId);
+                var val = document.getElementById(valId);
+                input.addEventListener('input', function () {
+                    val.textContent = parseFloat(input.value).toFixed(2);
+                });
+            }
+
+            wireRange('brightness', 'brightnessVal');
+            wireRange('panelBrightness', 'panelBrightnessVal');
+
+            App.loadConfig(section, function (data) {
+                var colorEl = document.getElementById('color');
+                colorEl.value = data.Color !== undefined ? String(data.Color) : '6';
+
+                var effectEl = document.getElementById('effect');
+                effectEl.value = data.Effect !== undefined ? String(data.Effect) : '0';
+
+                var b = data.Brightness !== undefined ? data.Brightness : 0.5;
+                document.getElementById('brightness').value = b;
+                document.getElementById('brightnessVal').textContent = parseFloat(b).toFixed(2);
+
+                var pb = data.PanelBrightness !== undefined ? data.PanelBrightness : 0.5;
+                document.getElementById('panelBrightness').value = pb;
+                document.getElementById('panelBrightnessVal').textContent = parseFloat(pb).toFixed(2);
+            });
+
+            document.getElementById('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                App.saveConfig(section, {
+                    Color: parseInt(document.getElementById('color').value, 10),
+                    Effect: parseInt(document.getElementById('effect').value, 10),
+                    Brightness: parseFloat(document.getElementById('brightness').value),
+                    PanelBrightness: parseFloat(document.getElementById('panelBrightness').value)
+                }, statusEl);
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -169,4 +169,31 @@
   <data name="Wireless_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Icons\Wireless_48.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="html_configure_alarm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\configure_alarm.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="html_configure_date_time" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\configure_date_time.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="html_configure_night_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\configure_night_light.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="html_configure_wireless_access_point" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\configure_wireless_access_point.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="html_configure_wireless_client" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\configure_wireless_client.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="html_index" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\index.html;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="css_style" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\css\style.css;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="script_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\js\app.js;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\www\favicon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

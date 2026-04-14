@@ -38,13 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.114\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

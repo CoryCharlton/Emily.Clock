@@ -44,7 +44,7 @@ public class ApplicationInitialization : IDeviceInitializer
         }
 
         _navigationService.Navigate(NavigationDestination.Clock);
-
+        
         return true;
     }
 }

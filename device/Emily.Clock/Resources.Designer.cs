@@ -33,6 +33,10 @@ namespace Emily.Clock
         {
             return ((nanoFramework.UI.Font)(nanoFramework.Runtime.Native.ResourceUtility.GetObject(ResourceManager, id)));
         }
+        internal static byte[] GetBytes(Resources.BinaryResources id)
+        {
+            return ((byte[])(nanoFramework.Runtime.Native.ResourceUtility.GetObject(ResourceManager, id)));
+        }
         [System.SerializableAttribute()]
         internal enum BitmapResources : short
         {
@@ -48,6 +52,19 @@ namespace Emily.Clock
             Palette_22 = 13115,
             Loading_48 = 14590,
             Alarm_22_Outline = 24756,
+        }
+        [System.SerializableAttribute()]
+        internal enum BinaryResources : short
+        {
+            html_configure_alarm = -31334,
+            html_configure_night_light = -29966,
+            css_style = -24903,
+            html_configure_wireless_access_point = -22823,
+            favicon2 = -19707,
+            script_app = -8585,
+            html_configure_date_time = -6456,
+            html_configure_wireless_client = 376,
+            html_index = 20901,
         }
         [System.SerializableAttribute()]
         internal enum FontResources : short

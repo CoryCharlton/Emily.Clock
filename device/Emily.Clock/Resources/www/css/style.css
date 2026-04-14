@@ -1,0 +1,21 @@
+body { font-family: sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; }
+h1 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+a.back { font-size: 0.85rem; display: inline-block; margin-bottom: 1.25rem; }
+label { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; }
+input, select { width: 100%; box-sizing: border-box; padding: 0.4rem; margin-bottom: 1rem; font-size: 1rem; }
+input[type="checkbox"] { width: auto; margin-bottom: 0; vertical-align: middle; }
+input[type="range"] { padding: 0; }
+.range-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.range-row input { margin-bottom: 0; }
+.range-val { font-size: 0.9rem; white-space: nowrap; }
+.check-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.check-row label { margin-bottom: 0; }
+button { padding: 0.5rem 1.25rem; font-size: 1rem; cursor: pointer; }
+.hint { font-size: 0.8rem; color: #666; margin-top: -0.75rem; margin-bottom: 1rem; }
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav ul li { margin-bottom: 0.75rem; }
+nav ul li a { font-size: 1rem; }
+#status { margin-top: 0.75rem; font-size: 0.9rem; }
+#status.success { color: green; }
+#status.error { color: red; }

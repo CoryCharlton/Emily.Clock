@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Alarm_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Icons\Alarm_22.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Alarm_22_Outline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Icons\Alarm_22_Outline.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -195,5 +192,8 @@
   </data>
   <data name="favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\www\favicon.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Alarm_22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Icons\Alarm_22.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

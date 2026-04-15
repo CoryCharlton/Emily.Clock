@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emily.Clock &ndash; Night Light</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Urbanist:wght@600;700&display=swap">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Emily.Clock</h1>
-    <a class="back" href="/">&larr; Back</a>
+    <a class="back" href="index.html">&larr; Back</a>
     <section>
         <h2>Night Light</h2>
         <form id="form">
@@ -32,20 +35,20 @@
 
             <label for="brightness">Brightness</label>
             <div class="range-row">
-                <input type="range" id="brightness" name="brightness" min="0" max="1" step="0.01">
+                <input type="range" id="brightness" name="brightness" min="0" max="1" step="0.25">
                 <span class="range-val" id="brightnessVal">0.50</span>
             </div>
 
             <label for="panelBrightness">Panel Brightness</label>
             <div class="range-row">
-                <input type="range" id="panelBrightness" name="panelBrightness" min="0" max="1" step="0.01">
+                <input type="range" id="panelBrightness" name="panelBrightness" min="0" max="1" step="0.25">
                 <span class="range-val" id="panelBrightnessVal">0.50</span>
             </div>
 
             <button type="submit">Save</button>
-            <div id="status"></div>
         </form>
     </section>
+    <div id="status"></div>
     <script src="/js/app.js"></script>
     <script>
         (function () {

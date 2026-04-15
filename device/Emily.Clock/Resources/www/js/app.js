@@ -1,14 +1,25 @@
 (function (global) {
+    // Detect iframe embedding and suppress page chrome via CSS
+    if (window.self !== window.top) {
+        document.documentElement.classList.add('embedded');
+    }
+
     function showStatus(el, msg, isError) {
         el.className = isError ? 'error' : 'success';
         el.textContent = msg;
     }
 
     function loadConfig(section, cb) {
+        var form = document.getElementById('form');
+        if (form) { form.classList.add('loading'); }
         fetch('/api/configuration/' + section)
             .then(function (r) { return r.json(); })
-            .then(cb)
+            .then(function (data) {
+                if (form) { form.classList.remove('loading'); }
+                cb(data);
+            })
             .catch(function () {
+                if (form) { form.classList.remove('loading'); }
                 var el = document.getElementById('status');
                 if (el) { showStatus(el, 'Failed to load configuration.', true); }
             });

@@ -12,9 +12,10 @@ This is a fun little nightlight clock project I created for my daughter.
 
 - Nightlight with 7 color options (red, orange, yellow, green, blue, indigo, violet) and 5 brightness levels
 - Sun and moon indicator LEDs that switch based on configured bedtime and wake time
-- Retrieves current time from WiFi connection
+- Retrieves current time from WiFi; falls back to onboard RTC (DS3231) when WiFi is unavailable
 - Dual WiFi mode: connects as a client or hosts its own access point for initial setup
-- Web UI for wireless client configuration
+- Web UI for alarm, date/time, night light, and wireless configuration
+- mDNS: device advertises as `emily-clock-{serial}.local` with `_http._tcp.local` service discovery
 - REST API for device info, network status, and configuration management
 
 ### Structure
@@ -68,10 +69,7 @@ You can swap out any of the hardware and adjust the Fusion 360 model or design y
 
 The more I worked on this the more I wanted to do with it. Currently the following features on the roadmap (in no particular order)
 
-- Alarm functionality (in progress, needs UI)
-- Audio provider (I2S completed, consider piezzo buzzer)
-- Expand web interface to cover nightlight, alarm, and time settings (wireless client setup is already working)
-- Battery-powered RTC for situations where the WiFi is temporarily unavailable
+- Audio provider (I2S completed, consider piezo buzzer)
 
 ## Background and History
 

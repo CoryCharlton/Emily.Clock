@@ -45,8 +45,10 @@ The solution has three projects under `device/`:
 
 **UI / Navigation**: `INavigationService` manages window transitions. Windows (`ClockWindow`, `ConfigurationWindow`, `NetworkFailureWindow`, `ResetToDefaultsWindow`) are registered as transient services and resolved via `IWindowFactory`.
 
+**mDNS**: Device advertises as `emily-clock-{serial}.local` with `_http._tcp.local` service discovery. Starts alongside the web server in all network modes.
+
 **Hardware abstractions** (defined in `Emily.Clock`, implemented in `Emily.Clock.App`):
-- `IButtonManager`, `IDisplayManager`, `ILedManager`, `IDeviceManager`, `IGpioProvider`
+- `IButtonManager`, `IDisplayManager`, `ILedManager`, `IDeviceManager`, `IGpioProvider`, `IRtcProvider`
 
 ### Hardware Specifics (Emily.Clock.App)
 - Display: SPI (MISO=12, MOSI=23, CLK=18, CS=27, DC=32, RST=5, BL=4)

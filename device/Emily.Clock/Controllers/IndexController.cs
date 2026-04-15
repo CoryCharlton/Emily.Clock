@@ -33,7 +33,7 @@ public class IndexController : ControllerBase
     public void ConfigureWirelessClient() => Ok(Resources.GetBytes(Resources.BinaryResources.html_configure_wireless_client), MimeType.Text.Html);
 
     [HttpGet("favicon.ico")]
-    public void Favicon() => Ok(Resources.GetBytes(Resources.BinaryResources.favicon2), "image/x-icon");
+    public void Favicon() => Ok(Resources.GetBytes(Resources.BinaryResources.favicon), "image/x-icon");
     
     [HttpGet]
     [HttpGet("index.html")]

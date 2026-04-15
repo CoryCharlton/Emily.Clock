@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emily.Clock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Urbanist:wght@600;700&display=swap">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>Emily.Clock</h1>
-    <nav>
-        <ul>
-            <li><a href="/configure_alarm.html">Alarm</a></li>
-            <li><a href="/configure_date_time.html">Date &amp; Time</a></li>
-            <li><a href="/configure_night_light.html">Night Light</a></li>
-            <li><a href="/configure_wireless_client.html">Wireless Client</a></li>
-            <li><a href="/configure_wireless_access_point.html">Wireless Access Point</a></li>
-        </ul>
-    </nav>
+    <div class="tab-panel">
+        <div class="tabs">
+            <button class="tab" data-src="configure_alarm.html">Alarm</button>
+            <button class="tab" data-src="configure_date_time.html">Date/Time</button>
+            <button class="tab" data-src="configure_night_light.html">Night Light</button>
+            <button class="tab" data-src="configure_wireless_client.html">Wi-Fi</button>
+            <button class="tab" data-src="configure_wireless_access_point.html">Access Point</button>
+        </div>
+        <iframe id="content" title="Configuration"></iframe>
+    </div>
+    <script src="/js/app.js"></script>
+    <script>
+        (function () {
+            var tabs = document.querySelectorAll('.tab');
+            var frame = document.getElementById('content');
+
+            frame.addEventListener('load', function () {
+                frame.classList.remove('loading');
+            });
+
+            function activate(tab) {
+                for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+                tab.classList.add('active');
+                frame.classList.add('loading');
+                frame.src = tab.getAttribute('data-src');
+            }
+
+            for (var i = 0; i < tabs.length; i++) {
+                (function (t) { t.addEventListener('click', function () { activate(t); }); })(tabs[i]);
+            }
+
+            if (tabs.length > 0) { activate(tabs[0]); }
+        })();
+    </script>
 </body>
 </html>

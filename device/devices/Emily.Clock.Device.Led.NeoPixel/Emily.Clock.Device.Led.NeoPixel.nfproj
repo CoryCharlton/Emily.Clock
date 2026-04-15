@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\Nerdbank.GitVersioning.3.9.50\build\Nerdbank.GitVersioning.props" Condition="Exists('..\..\packages\Nerdbank.GitVersioning.3.9.50\build\Nerdbank.GitVersioning.props')" />
   <PropertyGroup Label="Globals">
@@ -37,23 +37,23 @@
     <ProjectReference Include="..\..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Core">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Graphics">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Graphics.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Graphics, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Graphics.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Math">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Math.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Math, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Math.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.Math.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.NeoPixel">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.NeoPixel.1.1.123\lib\netnano1.0\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.NeoPixel, Version=1.1.127.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.NeoPixel.1.1.127\lib\netnano1.0\CCSWE.nanoFramework.NeoPixel.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

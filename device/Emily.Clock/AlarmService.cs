@@ -129,6 +129,13 @@ public class AlarmService : IAlarmService, IMediatorEventHandler, IDisposable
         }
 
         _configuration = configuration;
+        
+        PublishAlarmStateChanged();
+    }
+
+    private void PublishAlarmStateChanged()
+    {
+        _mediator.Publish(new AlarmStateChangedEvent(Enabled, IsAlarming));
     }
 
     public void StartAlarm()
@@ -140,8 +147,9 @@ public class AlarmService : IAlarmService, IMediatorEventHandler, IDisposable
 
         _cancelAlarm.Reset();
         _isAlarming = true;
-        _mediator.Publish(new AlarmStateChangedEvent(Enabled, true));
 
+        PublishAlarmStateChanged();
+        
         _alarmThread = new Thread(AlarmLoop);
         _alarmThread.Start();
     }
@@ -154,7 +162,8 @@ public class AlarmService : IAlarmService, IMediatorEventHandler, IDisposable
     private void StopInternal()
     {
         _isAlarming = false;
-        _mediator.Publish(new AlarmStateChangedEvent(Enabled, false));
+        
+        PublishAlarmStateChanged();
     }
 
     public void Toggle()
@@ -168,7 +177,7 @@ public class AlarmService : IAlarmService, IMediatorEventHandler, IDisposable
             return;
         }
 
-        _mediator.Publish(new AlarmStateChangedEvent(Enabled, IsAlarming));
+        PublishAlarmStateChanged();
     }
 }
 

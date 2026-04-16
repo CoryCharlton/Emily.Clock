@@ -1,4 +1,3 @@
-using System;
 using CCSWE.nanoFramework.Net;
 using CCSWE.nanoFramework.WebServer;
 using CCSWE.nanoFramework.WebServer.Authorization;

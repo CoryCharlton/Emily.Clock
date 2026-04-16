@@ -107,12 +107,18 @@ public class WirelessClientManager : IWirelessClientManager
 
     private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
     {
-        if (WirelessClientConfiguration.Section != e.Section)
+        if (e.Section != WirelessClientConfiguration.Section)
         {
             return;
         }
 
-        _configuration = (WirelessClientConfiguration) e.Configuration;
+        if (e.Configuration is not WirelessClientConfiguration configuration)
+        {
+            return;
+        }
+
+        // TODO: We should respond to this...
+        _configuration = configuration;
     }
 
     private void PublishStatusEvent(string message)

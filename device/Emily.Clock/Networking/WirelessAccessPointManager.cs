@@ -96,12 +96,18 @@ public class WirelessAccessPointManager : IWirelessAccessPointManager
 
     private void OnConfigurationChanged(object sender, ConfigurationChangedEventArgs e)
     {
-        if (WirelessAccessPointConfiguration.Section != e.Section)
+        if (e.Section != WirelessAccessPointConfiguration.Section)
         {
             return;
         }
 
-        _configuration = (WirelessAccessPointConfiguration) e.Configuration;
+        if (e.Configuration is not WirelessAccessPointConfiguration configuration)
+        {
+            return;
+        }
+
+        // TODO: We should respond to this...
+        _configuration = configuration;
     }
 
     private void PublishStatusEvent(string message)

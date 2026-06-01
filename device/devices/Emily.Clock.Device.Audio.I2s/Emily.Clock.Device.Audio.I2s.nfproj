@@ -38,40 +38,40 @@
     <ProjectReference Include="..\..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.129.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.129\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.135.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.135\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.129.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.129\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.135.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.135\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.129.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.129\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.135.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.135\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="mscorlib">
+    <Reference Include="mscorlib, Version=1.17.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.DependencyInjection">
+    <Reference Include="nanoFramework.DependencyInjection, Version=1.1.32.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.DependencyInjection.1.1.32\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Hosting">
+    <Reference Include="nanoFramework.Hosting, Version=2.0.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.Hosting.2.0.11\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Logging">
+    <Reference Include="nanoFramework.Logging, Version=1.1.161.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.Logging.1.1.161\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.System.Collections">
+    <Reference Include="nanoFramework.System.Collections, Version=1.5.67.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.System.Collections.1.5.67\lib\nanoFramework.System.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.System.Text">
+    <Reference Include="nanoFramework.System.Text, Version=1.3.42.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.System.Text.1.3.42\lib\nanoFramework.System.Text.dll</HintPath>
     </Reference>
-    <Reference Include="System.Device.I2s">
+    <Reference Include="System.Device.I2s, Version=1.0.28.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.System.Device.I2s.1.0.28\lib\System.Device.I2s.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Streams">
+    <Reference Include="System.IO.Streams, Version=1.1.96.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.System.IO.Streams.1.1.96\lib\System.IO.Streams.dll</HintPath>
     </Reference>
-    <Reference Include="System.Threading">
+    <Reference Include="System.Threading, Version=1.1.52.34401, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.System.Threading.1.1.52\lib\System.Threading.dll</HintPath>
     </Reference>
   </ItemGroup>

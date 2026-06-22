@@ -46,9 +46,9 @@
       },
       "nanoFramework.Iot.Device.Rtc": {
         "type": "Direct",
-        "requested": "[1.2.952, 1.2.952]",
-        "resolved": "1.2.952",
-        "contentHash": "10hslGijeUGfYF2NSgpmmLrMUrBgi6Mbzs9UxBwj7IRbkiyHMtKHOCUqIt5cJ9yKsps8eX1VPiEvJQdn+lcCTA=="
+        "requested": "[1.2.991, 1.2.991]",
+        "resolved": "1.2.991",
+        "contentHash": "O2bq4ajkzpKfx65H+ILU7gii9s//mj8C9qNjGSCatzYkuZ+lyD0mlkML25NAtNGojMGBS62EbTDIG0xIZABMVA=="
       },
       "nanoFramework.Logging": {
         "type": "Direct",
@@ -88,9 +88,9 @@
       },
       "Nerdbank.GitVersioning": {
         "type": "Direct",
-        "requested": "[3.9.50, 3.9.50]",
-        "resolved": "3.9.50",
-        "contentHash": "HtOgGF6jZ+WYbXnCUCYPT8Y2d6mIJo9ozjK/FINTRsXdm4Zgv9GehUMa7EFoGQkqrMcDJNOIDwCmENnvXg4UbA=="
+        "requested": "[3.10.85, 3.10.85]",
+        "resolved": "3.10.85",
+        "contentHash": "smhqiTAbnI/6NRn+k7m+a65qKY7nREbnFqFgqxiw3JS8kXiBUOxdCxIZFP9TOpCsoh46DbMlBlcd+dWQYAVVCA=="
       }
     }
   }

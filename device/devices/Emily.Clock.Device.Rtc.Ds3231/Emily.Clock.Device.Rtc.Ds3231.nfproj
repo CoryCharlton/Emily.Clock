@@ -37,14 +37,14 @@
     <ProjectReference Include="..\..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.140.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.140\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.141.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.141\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.140.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.140\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.141.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.141\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.140.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.140\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.141.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.141\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Iot.Device.Common.NumberHelper, Version=1.2.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.Iot.Device.Common.NumberHelper.1.2.862\lib\Iot.Device.Common.NumberHelper.dll</HintPath>

@@ -46,20 +46,20 @@
     <ProjectReference Include="..\..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.1.145.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.1.145\lib\netnano1.0\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Configuration, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Configuration.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Configuration, Version=1.1.145.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Configuration.1.1.145\lib\netnano1.0\CCSWE.nanoFramework.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.145.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.145\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Mediator.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Mediator, Version=1.1.145.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Mediator.1.1.145\lib\netnano1.0\CCSWE.nanoFramework.Mediator.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Threading.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.1.145.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Threading.1.1.145\lib\netnano1.0\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib, Version=1.17.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

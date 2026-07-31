@@ -38,14 +38,14 @@
     <ProjectReference Include="..\..\Emily.Clock\Emily.Clock.nfproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.1.146.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Core.1.1.146\lib\netnano1.0\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Hosting, Version=1.1.146.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Hosting.1.1.146\lib\netnano1.0\CCSWE.nanoFramework.Hosting.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.144.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.144\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Logging, Version=1.1.146.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\CCSWE.nanoFramework.Logging.1.1.146\lib\netnano1.0\CCSWE.nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib, Version=1.17.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\..\packages\nanoFramework.CoreLibrary.1.17.11\lib\mscorlib.dll</HintPath>

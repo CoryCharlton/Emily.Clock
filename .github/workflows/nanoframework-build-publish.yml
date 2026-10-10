@@ -17,4 +17,3 @@ jobs:
     uses: CCSWE-nanoFramework/actions-nanoframework/.github/workflows/nanoframework-build-publish.yml@master
     with:
       solution: 'device\Emily.Clock.sln'
-    secrets: inherit

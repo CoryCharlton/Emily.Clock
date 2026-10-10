@@ -4,21 +4,21 @@
     ".NETnanoFramework,Version=v1.0": {
       "CCSWE.nanoFramework.Core": {
         "type": "Direct",
-        "requested": "[1.1.155, 1.1.155]",
-        "resolved": "1.1.155",
-        "contentHash": "QhQ8eW2DR+lWA6ATNEXiobV3/CBiTjPFP7brpfD2x8o+yB/Ost+WHgTinfzO4duNdUzoKdpuIDeGo79Yac4V2A=="
+        "requested": "[1.1.158, 1.1.158]",
+        "resolved": "1.1.158",
+        "contentHash": "ckrIQq2qGjfl2snRR8YEjd3nbzHkfMHbnRWkLzEHuqGYQinVe2dpuq8CIKCPab48oDTZvY0KsB/mXVrOAdQ1xw=="
       },
       "CCSWE.nanoFramework.Hosting": {
         "type": "Direct",
-        "requested": "[1.1.155, 1.1.155]",
-        "resolved": "1.1.155",
-        "contentHash": "kj5ZKNe2v6vL5ANL8U/fZ0lgj7/cQXjpbJ+B/6YJiCW2nlYF89geUINPCncBnomb3vpOadIdBkQqfSZSYFMG/Q=="
+        "requested": "[1.1.158, 1.1.158]",
+        "resolved": "1.1.158",
+        "contentHash": "C4WF3tZBw5LvI5VmKsQmxy5YpnNg6tXPuX5G4Lf4KsvpOpgtAWKYAvNYPct+6qyxzpDOc0vznvAH/mzmyCnvNA=="
       },
       "CCSWE.nanoFramework.Logging": {
         "type": "Direct",
-        "requested": "[1.1.155, 1.1.155]",
-        "resolved": "1.1.155",
-        "contentHash": "9U87bDCwmnZrl+jjXjciItTnx3kLyn6a+ZOukf0sc7eQYliMsvkAoVEatCyqD6kv/lKYWmz0dpNdYxanROFj9Q=="
+        "requested": "[1.1.158, 1.1.158]",
+        "resolved": "1.1.158",
+        "contentHash": "807pxpYsN+RcqtcIzY0RLo1mwJ4pLjH8cgKO4CNfcnsadfRTvI1qQuUb7lLOU1kks4Ale3Rt+26hyOpxF7r4Kg=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",

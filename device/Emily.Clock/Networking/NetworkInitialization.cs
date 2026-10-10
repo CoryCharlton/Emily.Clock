@@ -49,6 +49,10 @@ public class NetworkInitialization : IDeviceInitializer
             return true;
         }
 
+        _mdnsServer.Hostname = $"emily-clock-{_deviceManager.SerialNumber}";
+        _mdnsServer.IPAddress = IPAddress.Parse(_wirelessNetworkManager.IpAddress);
+        _mdnsServer.Start();
+
         if (_wirelessNetworkManager.GetMode() == WirelessMode.AccessPoint)
         {
             _navigationService.Navigate(NavigationDestination.Configuration);
@@ -63,10 +67,6 @@ public class NetworkInitialization : IDeviceInitializer
 
         _mediator.Publish(new StatusEvent(string.Empty));
 
-        _mdnsServer.Hostname = $"emily-clock-{_deviceManager.SerialNumber}";
-        _mdnsServer.IPAddress = IPAddress.Parse(_wirelessNetworkManager.IpAddress);
-        _mdnsServer.Start();
-        
         _webServer.Start();
 
         return _wirelessNetworkManager.GetMode() != WirelessMode.AccessPoint;

@@ -14,8 +14,9 @@ permissions:
   pull-requests: read
 
 jobs:
+  # Keep the id: required checks are `pipeline / build`, `/ package-lock`, `/ packages-updated`.
   pipeline:
-    uses: ccswe-nanoframework/actions-nanoframework/.github/workflows/nanoframework-build-publish.yml@master
+    uses: ccswe-apps/actions/.github/workflows/nanoframework-build-app.yml@nanoframework
     with:
       solution: 'device\Emily.Clock.sln'
     secrets:

@@ -21,7 +21,7 @@ Run unit tests using the nanoFramework test runner with the settings file:
 device\Emily.Clock.UnitTests\nano.runsettings
 ```
 
-CI builds via GitHub Actions using `ccswe-nanoframework/actions-nanoframework` reusable workflows (see `.github/workflows/nanoframework-build-publish.yml`).
+CI builds via GitHub Actions using the `ccswe-apps/actions` nanoFramework workflows: `.github/workflows/nanoframework-build-app.yml` (required checks `pipeline / build`, `/ package-lock`, `/ packages-updated`) and `nanoframework-update-dependencies.yml` (daily, and when CCSWE.nanoFramework publishes).
 
 ## Architecture
 

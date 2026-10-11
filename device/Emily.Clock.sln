@@ -36,10 +36,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "eng", "eng", "{246148B2-0E0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{2D46B401-1E64-4994-ADB4-E7BD49DE8221}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\build-solution.yml = ..\.github\workflows\build-solution.yml
 		..\.github\config.yml = ..\.github\config.yml
-		..\.github\workflows\pull-request-checks.yml = ..\.github\workflows\pull-request-checks.yml
-		..\.github\workflows\update-dependencies.yml = ..\.github\workflows\update-dependencies.yml
+		..\.github\dependabot.yml = ..\.github\dependabot.yml
+		..\.github\workflows\nanoframework-build-app.yml = ..\.github\workflows\nanoframework-build-app.yml
+		..\.github\workflows\nanoframework-update-dependencies.yml = ..\.github\workflows\nanoframework-update-dependencies.yml
 	EndProjectSection
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Emily.Clock.Device.Led.NeoPixel", "devices\Emily.Clock.Device.Led.NeoPixel\Emily.Clock.Device.Led.NeoPixel.nfproj", "{F2A3B4C5-D6E7-8901-BCDE-F01234567893}"
